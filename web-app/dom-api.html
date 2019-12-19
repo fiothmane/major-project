@@ -1,0 +1,78 @@
+<!-- /var/www/html/sites/emse/dom_api.html -->
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html>
+<head>
+	<title>Room management</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/1bc9d368d4.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<script src="JS/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<!-- <header style="display: flex;">
+		<div id="titre_principal">
+			<div id="logo">
+				<h1>EMSE</h1>
+			</div>
+			<h2>Programmation Web et Web Services - du 26 au 29 novembre 2018 - </h2>
+		</div>
+	</header> -->
+	<div class="container-flex">
+		<!-- <p>
+			<h3>Envoyer une requête XMLHttpRequest</h3>
+		</p> -->
+		<div id="rooms">
+			<table id="table">
+			    <thead id="tableHead">
+			        <tr>
+			            <th colspan="7">Rooms info</th>
+			        </tr>
+			        <tr>
+				        <td v-for="column in columns">
+				        	{{ column.text }}
+				        </td>
+			        </tr>
+			    </thead>
+
+			    <tbody id="tableBody">
+			        <tr v-for="room in rooms">
+			        	<td>
+			        		{{ room.id }}
+			        	</td>
+			        	<td>
+			        		<i v-if="room.light.status == 'ON'" v-bind:id="'lightStatus'+room.id" class="fas fa-lightbulb"></i>
+			        		<i v-else v-bind:id="'lightStatus'+room.id" class="far fa-lightbulb"></i>
+			        	</td>
+			        	<td>
+			        		{{ room.light.level }}
+			        	</td>
+			        	<td>
+			        		<i v-if="room.light.status == 'ON'" v-bind:id="'noiseStatus'+room.id" class="fas fa-volume-up"></i>
+			        		<i v-else v-bind:id="'noiseStatus'+room.id" class="fas fa-volume-off"></i>
+			        	</td>
+			        	<td>
+			        		{{ room.noise.level }}
+			        	</td>
+			        	<td>
+			        		<i v-if="room.light.status == 'ON'" v-bind:id="'lightOnOff'+room.id" class="fas fa-toggle-on" v-on:click="switchLightOnOff(room.id)"></i>
+			        		<i v-else v-bind:id="'lightOnOff'+room.id" class="fas fa-toggle-off" v-on:click="switchLightOnOff(room.id)"></i>
+			        	</td>
+			        	<td>
+			        		<i v-if="room.noise.status == 'ON'" v-bind:id="'noiseOnOff'+room.id" class="fas fa-toggle-on" v-on:click="switchNoiseOnOff(room.id)"></i>
+			        		<i v-else v-bind:id="'noiseOnOff'+room.id" class="fas fa-toggle-off" v-on:click="switchNoiseOnOff(room.id)"></i>
+			        	</td>
+			        </tr>
+			    </tbody>
+
+			</table>
+		</div>
+	</div>
+	<script src="JS/dom-api.js"></script>
+</body>
+</html>
