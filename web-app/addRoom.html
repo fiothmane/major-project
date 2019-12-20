@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rooms Project</title>
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="css/bootstrap-reboot.min.css" rel="stylesheet">
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <script src="JS/vue.js"></script>
+	  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        .fa-toggle-on{
+          color : green;
+        }
+        .fa-toggle-off{
+          color : grey;
+        }
+        .off{
+          color:grey;
+        }
+        .on{
+          color:#FFFF00;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">RoomsProject</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">AddRoom<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+</nav>
+<!--- Contenue -->
+<div class="container col-md-7" style="margin-top: 50px;" id="addroom">
+
+  <form class="text-center border border-light p-5" method="post" @submit.prevent="addRoom">
+
+    <p class="h4 mb-4">Add Room</p>
+
+    <div v-if="success" class="alert alert-danger" role="alert">
+        an error has occured !
+    </div>
+
+    <!-- Room Id -->
+    <input type="text" id="roomid" class="form-control mb-4" v-model="roomid" placeholder="Room Id" required>
+
+    <!-- Light Level -->
+    <input type="number" id="lightlevel" class="form-control mb-4" v-model="lightlevel" placeholder="Light Level" required>
+
+    <!-- Noise Level -->
+    <input type="number" id="noiselevel" class="form-control mb-4" v-model="noiselevel" placeholder="Noise Level" required>
+
+    <!-- Light Status -->
+    <label class="float-left">Light Status</label>
+    <select class="browser-default custom-select mb-4" id="lightstatus" v-model="lightstatus">
+        <option value="" disabled>Choose option</option>
+        <option value="ON" selected>ON</option>
+        <option value="OFF">OFF</option>
+    </select>
+
+    <!-- Noise Status -->
+    <label class="float-left">Noise Status</label>
+    <select class="browser-default custom-select mb-4" id="noisestatus" v-model="noisestatus">
+        <option value="" disabled>Choose option</option>
+        <option value="ON" selected>ON</option>
+        <option value="OFF">OFF</option>
+    </select>
+
+    <!-- Send button -->
+    <button class="btn btn-success btn-block" type="submit">Send</button>
+
+</form>
+</div>
+<script src="js/addroom.js"></script>
+</body>
+</html>
