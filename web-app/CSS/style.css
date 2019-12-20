@@ -1,22 +1,21 @@
-* {
-	font-family: roboto;
-	font-size: 25px;
-	text-align: center;
-}
-table,
-td {
-    border: 1px solid #333;
-}
+/* Required height of parents of the Full Page Intro and Intro itself */
+html,
+body,
+.view {
+  height: 100%; }
 
-table {
-	margin: auto;
-	margin-top: 100px;
-}
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2); }
 
-td {
-	width: 160px;
-}
+.top-nav-collapse {
+  background-color: #1C2331; }
 
-tr {
-	height: 50px;
-}
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1C2331; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #1C2331; }
