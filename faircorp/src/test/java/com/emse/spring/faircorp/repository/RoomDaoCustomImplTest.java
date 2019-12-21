@@ -24,7 +24,6 @@ class RoomDaoCustomImplTest {
     @Autowired
     private RoomDao roomDao;
 
-    /* Find room by name */
     @Test
     public void findRoomByName() {
         Assertions.assertThat(roomDao.findRoomByName("Room1"));
@@ -32,7 +31,6 @@ class RoomDaoCustomImplTest {
         System.out.println("Get room by name: " + roomDao.findRoomByName("Room1").getName());
     }
 
-    /* Find lights of room */
     @Test
     public void findLightsOfRoom() {
         Assertions.assertThat(roomDao.findLightsByRoomId((long) -10));

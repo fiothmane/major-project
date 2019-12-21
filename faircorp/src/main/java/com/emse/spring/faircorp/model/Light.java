@@ -1,7 +1,5 @@
 package com.emse.spring.faircorp.model;
 
-import com.emse.spring.faircorp.DTO.LightDto;
-
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +25,6 @@ public class Light {
         this.level = level;
         this.status = status;
         this.room = room;
-//        room.getLights().add(this);
     }
 
     public Long getId() {

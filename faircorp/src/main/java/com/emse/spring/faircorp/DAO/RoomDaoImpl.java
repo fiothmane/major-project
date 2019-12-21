@@ -11,7 +11,6 @@ public class RoomDaoImpl implements RoomDaoCustom {
     @PersistenceContext
     private EntityManager em;
 
-    /* Find room by name */
     @Override
     public Room findRoomByName(String roomName) {
         String jpql = "select room from Room room where room.name = :value";
@@ -28,7 +27,6 @@ public class RoomDaoImpl implements RoomDaoCustom {
                 .getSingleResult();
     }
 
-    /* Find lights of room */
     @Override
     public List<Light> findLightsByRoomId(Long roomId) {
         String jpql = "select lights from Light lights where lights.room.id = :value";

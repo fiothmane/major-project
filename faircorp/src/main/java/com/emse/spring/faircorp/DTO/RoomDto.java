@@ -1,7 +1,5 @@
 package com.emse.spring.faircorp.DTO;
 
-import com.emse.spring.faircorp.model.Building;
-import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Room;
 
 import java.util.ArrayList;

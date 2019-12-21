@@ -2,9 +2,7 @@ package com.emse.spring.faircorp.repository;
 
 import com.emse.spring.faircorp.DAO.BuildingDao;
 import com.emse.spring.faircorp.model.Light;
-import com.emse.spring.faircorp.model.Status;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

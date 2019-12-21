@@ -1,14 +1,10 @@
 package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.BuildingDao;
-import com.emse.spring.faircorp.DAO.LightDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.BuildingDto;
-import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.model.Building;
-import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Room;
-import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
