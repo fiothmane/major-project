@@ -8,7 +8,8 @@ public class Room {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
+    @Column
     private String name;
 
     @Column(nullable = false)
@@ -24,7 +25,8 @@ public class Room {
 
     }
 
-    public Room(String name, int floor, List<Light> lights, Building building) {
+    public Room(Long id, String name, int floor, List<Light> lights, Building building) {
+        this.id = id;
         this.name = name;
         this.floor = floor;
         this.lights = lights;
@@ -45,6 +47,14 @@ public class Room {
 
     public void setName(String Name) {
         this.name = name;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 
     public List<Light> getLights() {

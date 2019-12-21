@@ -1,7 +1,10 @@
 package com.emse.spring.faircorp.DTO;
 
 import com.emse.spring.faircorp.model.Building;
+import com.emse.spring.faircorp.model.Light;
+import com.emse.spring.faircorp.model.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDto {
@@ -11,19 +14,23 @@ public class RoomDto {
 
     private int floor;
 
-    private List<LightDto> lights;
+    private List<Long> lightsIds;
 
-    private Building building;
+    private Long buildingId;
 
     public RoomDto() {
 
     }
 
-    public RoomDto(String name, int floor, List<LightDto> lights, Building building) {
-        this.name = name;
-        this.floor = floor;
-        this.lights = lights;
-        this.building = building;
+    public RoomDto(Room room) {
+        this.id = room.getId();
+        this.name = room.getName();
+        this.floor = room.getFloor();
+        this.lightsIds = new ArrayList<Long>();
+        for (int i = 0; i < room.getLights().size(); i++) {
+            this.lightsIds.add(room.getLights().get(i).getId());
+        }
+        this.buildingId = room.getBuilding().getId();
     }
 
     public Long getId() {
@@ -42,19 +49,27 @@ public class RoomDto {
         this.name = name;
     }
 
-    public List<LightDto> getLights() {
-        return lights;
+    public int getFloor() {
+        return floor;
     }
 
-    public void setLights(List<LightDto> lights) {
-        this.lights = lights;
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 
-    public Building getBuilding() {
-        return building;
+    public List<Long> getLightsIds() {
+        return lightsIds;
     }
 
-    public void setBuilding(Building building) {
-        this.building = building;
+    public void setLightsIds(List<Long> lightsIds) {
+        this.lightsIds = lightsIds;
+    }
+
+    public Long getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Long buildingId) {
+        this.buildingId = buildingId;
     }
 }

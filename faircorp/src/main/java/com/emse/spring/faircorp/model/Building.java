@@ -11,7 +11,8 @@ public class Building {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
+    @Column
     private String name;
 
     @Column(nullable = false)
@@ -24,8 +25,10 @@ public class Building {
 
     }
 
-    public Building(Long id, List<Room> rooms) {
+    public Building(Long id, String name, int nbOfFloors, List<Room> rooms) {
         this.id = id;
+        this.name = name;
+        this.nbOfFloors = nbOfFloors;
         this.rooms = rooms;
     }
 

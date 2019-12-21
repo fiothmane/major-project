@@ -1,5 +1,8 @@
 package com.emse.spring.faircorp.DTO;
 
+import com.emse.spring.faircorp.model.Building;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuildingDto {
@@ -9,15 +12,20 @@ public class BuildingDto {
 
     private int nbOfFloors;
 
-    private List<RoomDto> rooms;
+    private List<Long> roomsIds;
 
     public BuildingDto() {
 
     }
 
-    public BuildingDto(Long id, List<RoomDto> rooms) {
-        this.id = id;
-        this.rooms = rooms;
+    public BuildingDto(Building building) {
+        this.id = building.getId();
+        this.name = building.getName();
+        this.nbOfFloors = building.getNbOfFloors();
+        this.roomsIds = new ArrayList<Long>();
+        for (int i = 0; i < building.getRooms().size(); i++) {
+            roomsIds.add(building.getRooms().get(i).getId());
+        }
     }
 
     public Long getId() {
@@ -44,11 +52,11 @@ public class BuildingDto {
         this.nbOfFloors = nbOfFloors;
     }
 
-    public List<RoomDto> getRooms() {
-        return rooms;
+    public List<Long> getRoomsIds() {
+        return roomsIds;
     }
 
-    public void setRooms(List<RoomDto> rooms) {
-        this.rooms = rooms;
+    public void setRoomsIds(List<Long> roomsIds) {
+        this.roomsIds = roomsIds;
     }
 }
