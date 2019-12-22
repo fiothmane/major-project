@@ -29,7 +29,7 @@ var addroom = new Vue({
         }
       }).then(response => {
         this.error = false
-        window.location.href = "index.html"
+        window.location.href = "room.html"
       }).catch(error => {
         console.log(error)
         this.error = true

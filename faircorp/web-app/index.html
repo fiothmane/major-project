@@ -12,6 +12,7 @@
 
     <script src="JS/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="JS/building.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,7 +24,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">Home </a>
+                <a class="nav-link" href="room.html">Home </a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">AddRoom<span class="sr-only">(current)</span></a>
@@ -32,37 +33,16 @@
     </div>
 </nav>
 <!--- Contenue -->
-<div class="container col-md-7" style="margin-top: 50px;" id="addroom">
+<div class="container col-md-7" style="margin-top: 50px;" id="getBuildings">
 
     <form class="text-center border border-light p-5" method="post" @submit.prevent="addRoom">
 
-        <p class="h4 mb-4">Add Room</p>
+        <p class="h4 mb-4">List of buildings</p>
 
-        <div v-if="success" class="alert alert-danger" role="alert">
-            an error has occured !
-        </div>
-
-        <!-- Room Id -->
-        <input type="text" id="roomid" class="form-control mb-4" v-model="roomid" placeholder="Room Id" required>
-
-        <!-- Light Level -->
-        <input type="number" id="lightlevel" class="form-control mb-4" v-model="lightlevel" placeholder="Light Level" required>
-
-        <!-- Noise Level -->
-        <input type="number" id="noiselevel" class="form-control mb-4" v-model="noiselevel" placeholder="Noise Level" required>
-
-        <!-- Light Status -->
-        <label class="float-left">Light Status</label>
-        <select class="browser-default custom-select mb-4" id="lightstatus" v-model="lightstatus">
-            <option value="" disabled>Choose option</option>
-            <option value="ON" selected>ON</option>
-            <option value="OFF">OFF</option>
-        </select>
-
-        <!-- Noise Status -->
-        <label class="float-left">Noise Status</label>
-        <select class="browser-default custom-select mb-4" id="noisestatus" v-model="noisestatus">
-            <option value="" disabled>Choose option</option>
+        <!-- Select building -->
+        <label class="float-left">Building</label>
+        <select class="browser-default custom-select mb-4" id="buildings" v-model="buildings">
+            <option value="" disabled>Choose a building</option>
             <option value="ON" selected>ON</option>
             <option value="OFF">OFF</option>
         </select>
@@ -72,6 +52,5 @@
 
     </form>
 </div>
-<script src="js/addroom.js"></script>
 </body>
 </html>
