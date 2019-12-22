@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rooms Project</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <script src="JS/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">RoomsProject</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="addRoom.html">AddRoom</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<!--- Contenue -->
+<div class="container col-md-10 app" style="margin-top: 10px;" id="app">
+    <section v-if="errored">
+        <p>Nous sommes désolés, nous ne sommes pas en mesure de récupérer ces informations pour le moment. Veuillez réessayer ultérieurement.</p>
+    </section>
+
+    <section v-else>
+        <div v-if="loading">Chargement...</div>
+        <div v-else>
+
+            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>
+            <table class="table table-bordered" style="width:100%; margin-top: 30px;">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center"><b>#</b></th>
+                    <th class="text-center"><b>Light Status</b></th>
+                    <th class="text-center"><b>Light Level</b></th>
+                    <th class="text-center"><b>Ringer Status</b></th>
+                    <th class="text-center"><b>Noise Level</b></th>
+                    <th class="text-center"><b>Switch Light</b></th>
+                    <th class="text-center"><b>Switch Ringer</b></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="room in rooms">
+                    <td class="text-center">{{room.id}}</td>
+                    <td v-if="room.light.status === 'ON'" class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x on"></i></td>
+                    <td v-else class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x off"></i></td>
+                    <td class="text-center">{{room.light.level}}</td>
+                    <td class="text-center" :id="'noises'+room.id">{{room.noise.status}}</td>
+                    <td class="text-center">{{room.noise.level}}</td>
+                    <td class="text-center" :id="'switchl'+room.id" v-if="room.light.status === 'ON'" @click="switchLight(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
+
+                    <td class="text-center" :id="'switchl'+room.id" @click="switchLight(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
+
+                    <!-- noise -->
+
+                    <td class="text-center" :id="'switchn'+room.id" v-if="room.noise.status === 'ON'" @click="switchNoise(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
+
+                    <td class="text-center" :id="'switchn'+room.id" @click="switchNoise(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<script src="JS/application.js"></script>
+</body>
+</html>
