@@ -54,8 +54,8 @@
                     <th class="text-center"><b>Room Floor</b></th>
                     <th class="text-center"><b>Number of lights</b></th>
                     <th class="text-center"><b>Switch Light</b></th>
-                    <th class="text-center"><b>Noise Status</b></th>
-                    <th class="text-center"><b>Noise Level</b></th>
+                    <th class="text-center"><b>Ringer Status</b></th>
+                    <th class="text-center"><b>Ringer Level</b></th>
                     <th class="text-center"><b>Switch Ringer</b></th>
                 </tr>
                 </thead>
@@ -70,11 +70,11 @@
 <!--                    <td v-if="room.light.status === 'ON'" class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x on"></i></td>-->
 <!--                    <td v-else class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x off"></i></td>-->
 <!--                    <td class="text-center">{{room.light.level}}</td>-->
-<!--                    <td class="text-center" :id="'noises'+room.id">{{room.noise.status}}</td>-->
-<!--                    <td class="text-center">{{room.noise.level}}</td>-->
-<!--                    <td class="text-center" :id="'switchl'+room.id" v-if="room.light.status === 'ON'" @click="switchLight(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>-->
+                    <td class="text-center" :id="'noises'+room.id">{{room.noise.status}}</td>
+                    <td class="text-center">{{room.noise.level}}</td>
+                    <td class="text-center" :id="'switchl'+room.id" v-if="room.light.status === 'ON'" @click="switchLight(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
 
-<!--                    <td class="text-center" :id="'switchl'+room.id" @click="switchLight(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>-->
+                    <td class="text-center" :id="'switchl'+room.id" @click="switchLight(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
 
 <!--                    &lt;!&ndash; noise &ndash;&gt;-->
 
