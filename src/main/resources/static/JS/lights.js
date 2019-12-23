@@ -35,20 +35,27 @@ var app = new Vue({
             },2000);
         },
         switchLight (id) {
-            var elt = document.getElementById("bulb"+id);
-            if(elt.className === "fas fa-lightbulb fa-2x on"){
-                this.lights[parseInt(id-1)].light.status = "OFF";
-                document.getElementById("bulb"+id).className = "fas fa-lightbulb fa-2x off";
-                document.getElementById("switchl"+id).innerHTML = '<i class="fas fa-toggle-off fa-2x"></i>';
-            }else{
-                this.lights[parseInt(id-1)].light.status = "ON";
-                document.getElementById("bulb"+id).className = "fas fa-lightbulb fa-2x on";
-                document.getElementById("switchl"+id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
+            var elt = document.getElementById("bulb" + id);
+            if (elt.className === "fas fa-lightbulb fa-2x on") {
+                for (var i = 0; i < this.lights.length; i++) {
+                    if (this.lights[i].id === id) {
+                        this.lights[i].status = "OFF";
+                    }
+                }
+                document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x off";
+                document.getElementById("switchl" + id).innerHTML = '<i class="fas fa-toggle-off fa-2x"></i>';
             }
-
-            //put request for updating the light status
-            console.log(this.lights[parseInt(id-1)].light.status);
-            axios.put('https://thawing-journey-78988.herokuapp.com/api/rooms/'+id+'/switch-light-and-list',this.lights)
+            else {
+                for (var i = 0; i < this.lights.length; i++) {
+                    if (this.lights[i].id === id) {
+                        this.lights[i].status = "ON";
+                    }
+                }
+                document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x on";
+                document.getElementById("switchl" + id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
+            }
+            axios
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/switch')
                 .then((response) => {console.log(response.data)});
         },
     }
