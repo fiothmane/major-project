@@ -18,6 +18,10 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<Light> lights;
 
+    @OneToOne(mappedBy = "room")
+    private Ringer ringer;
+
+
     @ManyToOne
     private Building building;
 
@@ -63,6 +67,14 @@ public class Room {
 
     public void setLights(List<Light> lights) {
         this.lights = lights;
+    }
+
+    public Ringer getRinger() {
+        return ringer;
+    }
+
+    public void setRinger(Ringer ringer) {
+        this.ringer = ringer;
     }
 
     public Building getBuilding() {
