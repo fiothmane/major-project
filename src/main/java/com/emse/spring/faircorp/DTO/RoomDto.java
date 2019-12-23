@@ -1,5 +1,6 @@
 package com.emse.spring.faircorp.DTO;
 
+import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Room;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ public class RoomDto {
     private int floor;
 
     private List<Long> lightsIds;
+
+    private Ringer ringer;
 
     private Long buildingId;
 
@@ -61,6 +64,14 @@ public class RoomDto {
 
     public void setLightsIds(List<Long> lightsIds) {
         this.lightsIds = lightsIds;
+    }
+
+    public Ringer getRinger() {
+        return ringer;
+    }
+
+    public void setRinger(Ringer ringer) {
+        this.ringer = ringer;
     }
 
     public Long getBuildingId() {
