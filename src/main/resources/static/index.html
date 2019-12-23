@@ -51,7 +51,6 @@
         <label class="float-left">Building</label>
         <select name="building" class="browser-default custom-select mb-4" id="buildings">
             <option value="" disabled selected>Choose a building</option>
-
             <option v-for="building in buildings" v-bind:value="building.id">{{building.name}}</option>
         </select>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,29 +43,40 @@
         </div>
 
         <!-- Room Id -->
-        <input type="text" id="roomid" class="form-control mb-4" v-model="roomid" placeholder="Room Id" required>
+<!--        <input type="text" id="roomid" class="form-control mb-4" v-model="roomid" placeholder="Room Id" required>-->
 
-        <!-- Light Level -->
-        <input type="number" id="lightlevel" class="form-control mb-4" v-model="lightlevel" placeholder="Light Level" required>
+        <!-- Room Name -->
+        <input type="text" id="roomName" class="form-control mb-4" v-model="roomName" placeholder="Room Name" required>
 
-        <!-- Noise Level -->
-        <input type="number" id="noiselevel" class="form-control mb-4" v-model="noiselevel" placeholder="Noise Level" required>
+<!--        &lt;!&ndash; Light Level &ndash;&gt;-->
+<!--        <input type="number" id="lightlevel" class="form-control mb-4" v-model="lightlevel" placeholder="Light Level" required>-->
 
-        <!-- Light Status -->
-        <label class="float-left">Light Status</label>
-        <select class="browser-default custom-select mb-4" id="lightstatus" v-model="lightstatus">
-            <option value="" disabled>Choose option</option>
-            <option value="ON" selected>ON</option>
-            <option value="OFF">OFF</option>
+<!--        &lt;!&ndash; Noise Level &ndash;&gt;-->
+<!--        <input type="number" id="noiselevel" class="form-control mb-4" v-model="noiselevel" placeholder="Noise Level" required>-->
+
+
+        <!-- Building -->
+        <label class="float-left">Building</label>
+        <select class="browser-default custom-select mb-4" id="building" v-model="buildingId">
+            <option value="" disabled selected>Choose a building</option>
+            <option v-for="building in buildings" v-bind:value="building.id">{{building.name}}</option>
         </select>
 
-        <!-- Noise Status -->
-        <label class="float-left">Noise Status</label>
-        <select class="browser-default custom-select mb-4" id="noisestatus" v-model="noisestatus">
-            <option value="" disabled>Choose option</option>
-            <option value="ON" selected>ON</option>
-            <option value="OFF">OFF</option>
-        </select>
+<!--        &lt;!&ndash; Light Status &ndash;&gt;-->
+<!--        <label class="float-left">Light Status</label>-->
+<!--        <select class="browser-default custom-select mb-4" id="lightstatus" v-model="lightstatus">-->
+<!--            <option value="" disabled>Choose option</option>-->
+<!--            <option value="ON" selected>ON</option>-->
+<!--            <option value="OFF">OFF</option>-->
+<!--        </select>-->
+
+<!--        &lt;!&ndash; Noise Status &ndash;&gt;-->
+<!--        <label class="float-left">Noise Status</label>-->
+<!--        <select class="browser-default custom-select mb-4" id="noisestatus" v-model="noisestatus">-->
+<!--            <option value="" disabled>Choose option</option>-->
+<!--            <option value="ON" selected>ON</option>-->
+<!--            <option value="OFF">OFF</option>-->
+<!--        </select>-->
 
         <!-- Send button -->
         <button class="btn btn-success btn-block" type="submit">Send</button>
