@@ -10,6 +10,7 @@ import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,16 @@ public class RoomController {
     @Autowired
     private BuildingDao buildingDao;
 
+    public void addHeaders (HttpServletResponse response) {
+        response.addHeader("access-control-allow-credentials", "true");
+        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+        response.addHeader("access-control-allow-origin", "*");
+        response.addHeader("content-type", "application/json;charset=UTF-8");
+    }
+
     @GetMapping
-    public List<RoomDto> findAll() {
+    public List<RoomDto> findAll(HttpServletResponse response) {
+        addHeaders(response);
         return roomDao.findAll()
                 .stream()
                 .map(RoomDto::new)
@@ -35,13 +44,15 @@ public class RoomController {
     }
 
     @GetMapping(path = "/{id}")
-    public RoomDto findById(@PathVariable Long id) {
+    public RoomDto findById(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         return new RoomDto(room);
     }
 
     @PutMapping(path = "/{id}/switchLight")
-    public RoomDto switchRoomLights(@PathVariable Long id) {
+    public RoomDto switchRoomLights(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         List<Light> roomLights = room.getLights();
         for (int i = 0; i < roomLights.size(); i++) {
@@ -56,7 +67,8 @@ public class RoomController {
     }
 
     @PostMapping
-    public RoomDto createRoom(@RequestBody RoomDto roomDto) {
+    public RoomDto createRoom(@RequestBody RoomDto roomDto, HttpServletResponse response) {
+        addHeaders(response);
         List<Light> roomLights = new ArrayList<Light>();
         for (int i = 0; i < roomDto.getLightsIds().size(); i++) {
             roomLights.add(lightDao.findById(roomDto.getLightsIds().get(i)));
@@ -68,7 +80,8 @@ public class RoomController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteRoom(@PathVariable Long id) {
+    public void deleteRoom(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         roomDao.delete(room);
     }

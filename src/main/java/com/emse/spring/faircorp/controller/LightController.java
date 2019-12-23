@@ -8,6 +8,7 @@ import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +22,16 @@ public class LightController {
     @Autowired
     private RoomDao roomDao;
 
+    public void addHeaders (HttpServletResponse response) {
+        response.addHeader("access-control-allow-credentials", "true");
+        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+        response.addHeader("access-control-allow-origin", "*");
+        response.addHeader("content-type", "application/json;charset=UTF-8");
+    }
+
     @GetMapping
-    public List<LightDto> findAll() {
+    public List<LightDto> findAll(HttpServletResponse response) {
+        addHeaders(response);
         return lightDao.findAll()
                        .stream()
                        .map(LightDto::new)
@@ -30,13 +39,15 @@ public class LightController {
     }
 
     @GetMapping(path = "/{id}")
-    public LightDto findById(@PathVariable Long id) {
+    public LightDto findById(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         Light light = lightDao.findById(id);
         return new LightDto(light);
     }
 
     @PutMapping(path = "/{id}/switch")
-    public LightDto switchLigh(@PathVariable Long id) {
+    public LightDto switchLigh(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         Light light = lightDao.findById(id);
         Status currentStatus = light.getStatus();
         if (currentStatus.equals(Status.ON)) {
@@ -49,14 +60,16 @@ public class LightController {
     }
 
     @PostMapping
-    public LightDto createLight(@RequestBody LightDto lightDto) {
+    public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
+        addHeaders(response);
         Light light = new Light(lightDto.getId(), lightDto.getLevel(), lightDto.getStatus(), roomDao.findRoomById(lightDto.getRoomId()));
         lightDao.save(light);
         return new LightDto(light);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteLight(@PathVariable Long id) {
+    public void deleteLight(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
         lightDao.delete(lightDao.findById(id));
     }
 }
