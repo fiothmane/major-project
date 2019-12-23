@@ -21,7 +21,9 @@ public class RingerDto {
         this.id = ringer.getId();
         this.level = ringer.getLevel();
         this.status = ringer.getStatus();
-        this.roomId = ringer.getRoom().getId();
+        if (ringer.getRoom() != null) {
+            this.roomId = ringer.getRoom().getId();
+        }
     }
 
     public Long getId() {

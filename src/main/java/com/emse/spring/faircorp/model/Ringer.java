@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Ringer {
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column(nullable = false)

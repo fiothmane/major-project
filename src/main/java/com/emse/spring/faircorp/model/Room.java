@@ -6,6 +6,7 @@ import java.util.List;
 @Entity
 public class Room {
     @Id
+    @GeneratedValue
     private Long id;
 
 //    @Column(nullable = false)

@@ -56,7 +56,7 @@ var app = new Vue({
                 document.getElementById("switchn" + id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
             }
             axios
-                .put('http://localhost:8080/api/ringers/' + id + '/switch')
+                .put('https://walid-ouchtiti.cleverapps.io/api/ringers/' + id + '/switch')
                 .then((response) => {console.log(response.data)});
         },
     }
