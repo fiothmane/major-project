@@ -1,6 +1,7 @@
 package com.emse.spring.faircorp.DTO;
 
 import com.emse.spring.faircorp.model.Light;
+import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Status;
 
 public class RingerDto {
@@ -16,11 +17,11 @@ public class RingerDto {
 
     }
 
-    public RingerDto(Light light) {
-        this.id = light.getId();
-        this.level = light.getLevel();
-        this.status = light.getStatus();
-        this.roomId = light.getRoom().getId();
+    public RingerDto(Ringer ringer) {
+        this.id = ringer.getId();
+        this.level = ringer.getLevel();
+        this.status = ringer.getStatus();
+        this.roomId = ringer.getRoom().getId();
     }
 
     public Long getId() {
