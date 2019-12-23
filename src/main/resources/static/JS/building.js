@@ -34,23 +34,6 @@ var app = new Vue({
             setInterval(() => {
                 this.getFunction();
             },2000);
-        },
-        switchNoise (id) {
-            var elt = document.getElementById("noises"+id);
-            if(elt.innerHTML === "ON"){
-                document.getElementById("noises"+id).innerHTML = "OFF";
-                document.getElementById("switchn"+id).innerHTML = '<i class="fas fa-toggle-off fa-2x"></i>';
-            }else{
-                document.getElementById("noises"+id).innerHTML = "ON";
-                document.getElementById("switchn"+id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
-            }
-
-            //put request for updating the ringer status
-            this.rooms[parseInt(id-1)].noise.status = elt.innerHTML;
-            console.log(this.rooms[parseInt(id-1)].noise.status);
-            axios.put('https://thawing-journey-78988.herokuapp.com/api/rooms/'+id+'/switch-ringer-and-list',this.rooms)
-                .then((response) => {console.log(response.data)});
-
         }
     }
 })

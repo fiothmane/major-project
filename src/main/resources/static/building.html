@@ -68,23 +68,7 @@
 
                     <td v-if="room.ringerId != null" class="text-center"><a v-bind:href="'ringer.html?room='+room.id">Control room ringer</a></td>
                     <td v-else class="text-center" style="color:grey">Control room ringer</td>
-
-
-<!--                    <td v-if="room.light.status === 'ON'" class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x on"></i></td>-->
-<!--                    <td v-else class="text-center"><i :id="'bulb'+room.id" class="fas fa-lightbulb fa-2x off"></i></td>-->
-<!--                    <td class="text-center">{{room.light.level}}</td>-->
-<!--                    <td class="text-center" :id="'noises'+room.id">{{room.noise.status}}</td>-->
-<!--                    <td class="text-center">{{room.noise.level}}</td>-->
-<!--                    <td class="text-center" :id="'switchl'+room.id" v-if="room.light.status === 'ON'" @click="switchLight(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>-->
-
-<!--                    <td class="text-center" :id="'switchl'+room.id" @click="switchLight(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>-->
-
-<!--                    &lt;!&ndash; noise &ndash;&gt;-->
-
-<!--                    <td class="text-center" :id="'switchn'+room.id" v-if="room.noise.status === 'ON'" @click="switchNoise(room.id)"><i class="fas fa-toggle-on fa-2x"></i></td>-->
-
-<!--                    <td class="text-center" :id="'switchn'+room.id" @click="switchNoise(room.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>-->
-                </tr>
+                 </tr>
                 </tbody>
             </table>
         </div>

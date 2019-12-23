@@ -29,7 +29,7 @@ var app = new Vue({
                 })
                 .finally(() => this.loading = false);
         },
-        autoRefresh(){
+        autoRefresh() {
             setInterval(() => {
                 this.getFunction();
             },2000);

@@ -16,7 +16,7 @@ public class RingerDaoImpl implements RingerDaoCustom {
 
     @Override
     public Ringer findById(Long id) {
-        String jpql = "select ringer from Ringer ringer where light.id = :value";
+        String jpql = "select ringer from Ringer ringer where ringer.id = :value";
         return em.createQuery(jpql, Ringer.class)
                 .setParameter("value", id)
                 .getSingleResult();

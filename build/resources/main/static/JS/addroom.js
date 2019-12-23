@@ -11,7 +11,7 @@ var addroom = new Vue({
     }
   },
   methods : {
-  	addRoom(){
+    addRoom(){
 
       const requestBody = {
         id: this.roomid,
@@ -21,13 +21,13 @@ var addroom = new Vue({
         noiseStatus:this.noisestatus,
       };
       axios.post('http://localhost:8080/rooms',
-      requestBody, // the data to post
-      { headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        }
-      }).then(response => {
+          requestBody, // the data to post
+          { headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              'Access-Control-Allow-Origin': 'http://localhost:8080',
+            }
+          }).then(response => {
         this.error = false
         window.location.href = "building.html"
       }).catch(error => {

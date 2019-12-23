@@ -50,30 +50,24 @@
                 <thead class="thead-dark">
                 <tr>
                     <th class="text-center"><b>#</b></th>
-                    <th class="text-center"><b>Room Name</b></th>
-                    <th class="text-center"><b>Room Floor</b></th>
-                    <th class="text-center"><b>Number of lights</b></th>
-                    <th class="text-center"><b>Switch Light</b></th>
+                    <th class="text-center"><b>Ringer Status</b></th>
+                    <th class="text-center"><b>Ringer Level</b></th>
                     <th class="text-center"><b>Switch Ringer</b></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="room in rooms" v-if="room.buildingId == buildingId">
-                    <td class="text-center">{{room.id}}</td>
-                    <td class="text-center">{{room.name}}</td>
-                    <td class="text-center">{{room.floor}}</td>
-                    <td class="text-center">{{room.lightsIds.length}}</td>
-                    <td v-if="room.lightsIds.length > 0" class="text-center"><a v-bind:href="'lights.html?room='+room.id">Control room lights</a></td>
-                    <td v-else class="text-center" style="color:grey">Control room lights</td>
-
-                    <td v-if="room.ringerId != null" class="text-center"><a v-bind:href="'ringer.html?room='+room.id">Control room ringer</a></td>
-                    <td v-else class="text-center" style="color:grey">Control room ringer</td>
-                 </tr>
+                <tr v-for="ringer in ringers" v-if="ringer.roomId == roomId">
+                    <td class="text-center">{{ringer.id}}</td>
+                    <td class="text-center" :id="'ringer'+ringer.id">{{ringer.status}}</td>
+                    <td class="text-center">{{ringer.level}}</td>
+                    <td class="text-center" :id="'switchn'+ringer.id" v-if="ringer.status === 'ON'" @click="switchRinger(ringer.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
+                    <td class="text-center" :id="'switchn'+ringer.id" @click="switchRinger(ringer.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </section>
 </div>
-<script src="JS/building.js"></script>
+<script src="JS/ringer.js"></script>
 </body>
 </html>
