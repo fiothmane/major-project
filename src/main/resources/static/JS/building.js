@@ -4,6 +4,7 @@ var app = new Vue({
         return {
             buildingId: null,
             rooms: null,
+            ringer: null,
             loading: true,
             errored: false
         }

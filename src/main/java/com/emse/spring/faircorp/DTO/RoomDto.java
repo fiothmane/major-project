@@ -28,7 +28,9 @@ public class RoomDto {
         this.name = room.getName();
         this.floor = room.getFloor();
         this.lightsIds = new ArrayList<Long>();
-        this.ringerId = room.getRinger().getId();
+        if (room.getRinger() != null) {
+            this.ringerId = room.getRinger().getId();
+        }
         for (int i = 0; i < room.getLights().size(); i++) {
             this.lightsIds.add(room.getLights().get(i).getId());
         }
