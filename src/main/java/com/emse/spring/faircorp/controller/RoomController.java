@@ -7,6 +7,7 @@ import com.emse.spring.faircorp.DTO.RoomDto;
 import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class RoomController {
     }
 
     @GetMapping
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<RoomDto> findAll(HttpServletResponse response) {
         addHeaders(response);
         return roomDao.findAll()
@@ -44,6 +46,7 @@ public class RoomController {
     }
 
     @GetMapping(path = "/{id}")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public RoomDto findById(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Room room = roomDao.findRoomById(id);
