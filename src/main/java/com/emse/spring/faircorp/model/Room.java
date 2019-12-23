@@ -29,11 +29,12 @@ public class Room {
 
     }
 
-    public Room(Long id, String name, int floor, List<Light> lights, Building building) {
+    public Room(Long id, String name, int floor, List<Light> lights, Ringer ringer, Building building) {
         this.id = id;
         this.name = name;
         this.floor = floor;
         this.lights = lights;
+        this.ringer = ringer;
         this.building = building;
     }
 

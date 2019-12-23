@@ -15,7 +15,7 @@ public class RoomDto {
 
     private List<Long> lightsIds;
 
-    private Ringer ringer;
+    private Long ringerId;
 
     private Long buildingId;
 
@@ -28,8 +28,7 @@ public class RoomDto {
         this.name = room.getName();
         this.floor = room.getFloor();
         this.lightsIds = new ArrayList<Long>();
-        this.ringer = room.getRinger();
-        this.ringer.setRoom(null);
+        this.ringerId = room.getRinger().getId();
         for (int i = 0; i < room.getLights().size(); i++) {
             this.lightsIds.add(room.getLights().get(i).getId());
         }
@@ -68,12 +67,12 @@ public class RoomDto {
         this.lightsIds = lightsIds;
     }
 
-    public Ringer getRinger() {
-        return ringer;
+    public Long getRingerId() {
+        return ringerId;
     }
 
-    public void setRinger(Ringer ringer) {
-        this.ringer = ringer;
+    public void setRingerId(Long ringerId) {
+        this.ringerId = ringerId;
     }
 
     public Long getBuildingId() {

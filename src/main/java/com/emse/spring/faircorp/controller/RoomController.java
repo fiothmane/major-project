@@ -2,6 +2,7 @@ package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.BuildingDao;
 import com.emse.spring.faircorp.DAO.LightDao;
+import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.RoomDto;
 import com.emse.spring.faircorp.model.Light;
@@ -26,6 +27,8 @@ public class RoomController {
     @Autowired
     private LightDao lightDao;
     @Autowired
+    private RingerDao ringerDao;
+    @Autowired
     private BuildingDao buildingDao;
 
     public void addHeaders (HttpServletResponse response) {
@@ -36,7 +39,6 @@ public class RoomController {
     }
 
     @GetMapping
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<RoomDto> findAll(HttpServletResponse response) {
         addHeaders(response);
         return roomDao.findAll()
@@ -46,7 +48,6 @@ public class RoomController {
     }
 
     @GetMapping(path = "/{id}")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public RoomDto findById(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Room room = roomDao.findRoomById(id);
@@ -77,7 +78,7 @@ public class RoomController {
             roomLights.add(lightDao.findById(roomDto.getLightsIds().get(i)));
         }
 
-        Room room = new Room(roomDto.getId(), roomDto.getName(), roomDto.getFloor(), roomLights, buildingDao.findBuildingById(roomDto.getBuildingId()));
+        Room room = new Room(roomDto.getId(), roomDto.getName(), roomDto.getFloor(), roomLights, ringerDao.findById(roomDto.getRingerId()), buildingDao.findBuildingById(roomDto.getBuildingId()));
         roomDao.save(room);
         return new RoomDto(room);
     }
