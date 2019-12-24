@@ -50,12 +50,21 @@ public class BuildingController {
     public BuildingDto createBuilding(@RequestBody BuildingDto buildingDto, HttpServletResponse response) {
         addHeaders(response);
         List<Room> buildingRooms = new ArrayList<Room>();
-        for (int i = 0; i < buildingDto.getRoomsIds().size(); i++) {
-            buildingRooms.add(roomDao.findRoomById(buildingDto.getRoomsIds().get(i)));
+        if (buildingDto.getRoomsIds() != null) {
+            for (int i = 0; i < buildingDto.getRoomsIds().size(); i++) {
+                buildingRooms.add(roomDao.findRoomById(buildingDto.getRoomsIds().get(i)));
+            }
         }
 
         Building building = new Building(buildingDto.getId(), buildingDto.getName(), buildingDto.getNbOfFloors(), buildingRooms);
         buildingDao.save(building);
+
+        if (buildingRooms != null) {
+            for (int i = 0; i < buildingRooms.size(); i++) {
+                buildingRooms.get(i).setBuilding(building);
+                roomDao.updateRoom(buildingRooms.get(i));
+            }
+        }
         return new BuildingDto(building);
     }
 

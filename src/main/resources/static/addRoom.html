@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="building.html">Home </a>
+                <a class="nav-link" href="building.html">Home</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">AddRoom<span class="sr-only">(current)</span></a>
@@ -38,8 +38,17 @@
 
         <p class="h4 mb-4">Add Room</p>
 
+        <div v-if="error === true" class="alert alert-danger" role="alert">
+            Error while adding the data
+        </div>
+
+        <div v-if="error === false" class="alert alert-success" role="alert">
+             Data has been successfully added
+        </div>
+
         <!-- Room Name -->
-        <input type="text" id="roomName" class="form-control mb-4" v-model="roomName" placeholder="Room Name" required>
+        <label class="float-left">Room name</label>
+        <input type="text" id="roomName" class="form-control mb-4" v-model="roomName" required>
 
         <!-- Building -->
         <label class="float-left">Building</label>
@@ -69,7 +78,7 @@
         </select>
 
         <!-- Send button -->
-        <button class="btn btn-success btn-block" type="submit">Send</button>
+        <button class="btn btn-success btn-block" type="submit">Submit</button>
 
     </form>
 </div>

@@ -9,4 +9,5 @@ public interface RoomDaoCustom {
     Room findRoomByName(String roomName);
     Room findRoomById(Long id);
     List<Light> findLightsByRoomId(Long roomId);
+    void updateRoom(Room room);
 }

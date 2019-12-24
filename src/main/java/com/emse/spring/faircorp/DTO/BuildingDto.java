@@ -23,8 +23,10 @@ public class BuildingDto {
         this.name = building.getName();
         this.nbOfFloors = building.getNbOfFloors();
         this.roomsIds = new ArrayList<Long>();
-        for (int i = 0; i < building.getRooms().size(); i++) {
-            roomsIds.add(building.getRooms().get(i).getId());
+        if (building.getRooms() != null) {
+            for (int i = 0; i < building.getRooms().size(); i++) {
+                roomsIds.add(building.getRooms().get(i).getId());
+            }
         }
     }
 

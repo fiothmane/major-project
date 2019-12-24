@@ -12,7 +12,8 @@ var addroom = new Vue({
             buildingId: "",
             lightList: [],
             ringerId: "",
-            error: false
+            /* Error handling */
+            error: null,
         }
     },
     mounted () {
@@ -88,27 +89,6 @@ var addroom = new Vue({
                     console.log(error)
                     this.error = true
                 });
-            // const requestBody = {
-            //     id: this.roomid,
-            //     lightLevel:this.lightlevel,
-            //     noiseLevel:this.noiselevel,
-            //     lightStatus:this.lightstatus,
-            //     noiseStatus:this.noisestatus,
-            // };
-            // axios
-            //     .post('http://localhost:8080/rooms', requestBody, {
-            //       headers: {
-            //           "Accept": "application/json",
-            //           "Content-Type": "application/json",
-            //           'Access-Control-Allow-Origin': 'http://localhost:8080',
-            //       }
-            //     }).then(response => {
-            //     this.error = false
-            //     window.location.href = "building.html"
-            // }).catch(error => {
-            //     console.log(error)
-            //     this.error = true
-            // });
         }
     }
 })

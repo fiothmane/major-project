@@ -34,4 +34,9 @@ public class RoomDaoImpl implements RoomDaoCustom {
                 .setParameter("value", roomId)
                 .getResultList();
     }
+
+    @Override
+    public void updateRoom(Room room) {
+        em.merge(room);
+    }
 }

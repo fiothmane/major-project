@@ -34,47 +34,31 @@
 <!--- Contenue -->
 <div class="container col-md-7" style="margin-top: 50px;" id="addroom">
 
-    <form class="text-center border border-light p-5" method="post" @submit.prevent="addRoom">
+    <form class="text-center border border-light p-5" method="post" @submit.prevent="addBuilding">
 
-        <p class="h4 mb-4">Add Room</p>
+        <p class="h4 mb-4">Add Building</p>
 
         <div v-if="error === true" class="alert alert-danger" role="alert">
             Error while adding the data
         </div>
 
         <div v-if="error === false" class="alert alert-success" role="alert">
-             Data has been successfully added
+            Data has been successfully added
         </div>
 
-        <!-- Room Name -->
-        <label class="float-left">Room name</label>
-        <input type="text" id="roomName" class="form-control mb-4" v-model="roomName" required>
+        <!-- Building Name -->
+        <label class="float-left">Building name</label>
+        <input type="text" id="buildingName" class="form-control mb-4" v-model="buildingName" required>
 
-        <!-- Building -->
-        <label class="float-left">Building</label>
-        <select class="browser-default custom-select mb-4" id="building" v-model="buildingId" v-on:change="getBuildingFloors($event)">
-            <option value="" disabled selected>Choose a building</option>
-            <option v-for="building in buildings" v-bind:value="building.id">{{building.name}}</option>
-        </select>
+        <!-- Number of floors -->
+        <label class="float-left">Number of floors</label>
+        <input type="number" min="0" max="50" id="nbOfFloors" class="form-control mb-4" v-model="nbOfFloors" required>
 
-        <!-- Floor -->
-        <label class="float-left">Floor</label>
-        <select class="browser-default custom-select mb-4" id="floor" v-model="floor" disabled>
-            <option value="" disabled selected>Choose a floor</option>
-        </select>
-
-        <!-- Lights -->
-        <label class="float-left">Lights</label>
-        <select multiple class="browser-default custom-select mb-4" id="lights" v-model="lightList">
-            <option value="" disabled>Choose lights (Use Ctrl to choose multiple values)</option>
-            <option v-for="light in lights" v-bind:value="light.id">{{light.id}}</option>
-        </select>
-
-        <!-- Ringer -->
-        <label class="float-left">Ringer</label>
-        <select class="browser-default custom-select mb-4" id="ringer" v-model="ringerId">
-            <option value="" disabled selected>Choose a ringer</option>
-            <option v-for="ringer in ringers" v-bind:value="ringer.id">{{ringer.id}}</option>
+        <!-- Rooms -->
+        <label class="float-left">Rooms</label>
+        <select multiple class="browser-default custom-select mb-4" id="rooms" v-model="roomsList">
+            <option value="" disabled>Choose rooms (Use Ctrl to choose multiple values)</option>
+            <option v-for="room in rooms" v-bind:value="room.id">{{room.id}}</option>
         </select>
 
         <!-- Send button -->
@@ -82,6 +66,6 @@
 
     </form>
 </div>
-<script src="JS/addroom.js"></script>
+<script src="JS/addBuilding.js"></script>
 </body>
 </html>
