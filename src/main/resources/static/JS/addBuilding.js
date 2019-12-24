@@ -18,7 +18,7 @@ var addroom = new Vue({
     methods : {
         getRooms() {
             axios
-                .get('http://localhost:8080/api/rooms')
+                .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
                 .then(response => (this.rooms = response.data))
         },
         addBuilding() {
@@ -28,7 +28,7 @@ var addroom = new Vue({
                 roomsIds: this.roomsList,
             };
             axios
-                .post('http://localhost:8080/api/buildings', requestBody, {
+                .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",

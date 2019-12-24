@@ -4,6 +4,7 @@ import com.emse.spring.faircorp.DAO.LightDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.model.Light;
+import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -62,8 +63,17 @@ public class LightController {
     @PostMapping
     public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
         addHeaders(response);
-        Light light = new Light(lightDto.getId(), lightDto.getLevel(), lightDto.getStatus(), roomDao.findRoomById(lightDto.getRoomId()));
+        Room room = null;
+        if (lightDto.getRoomId() != null) {
+            room = roomDao.findRoomById(lightDto.getRoomId());
+        }
+
+        Light light = new Light(lightDto.getId(), lightDto.getLevel(), lightDto.getStatus(), room);
         lightDao.save(light);
+
+        if (room != null) {
+            roomDao.updateRoom(room);
+        }
         return new LightDto(light);
     }
 

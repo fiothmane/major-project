@@ -5,9 +5,9 @@ var addroom = new Vue({
             /* HTTP data */
             rooms: null,
             /* Form data (v-model) */
-            nbOfFloors: 0,
-            buildingName: "",
-            roomsList: [],
+            lightLevel: 0,
+            lightStatus: "",
+            roomId: "",
             /* Error handling */
             error: null,
         }
@@ -18,17 +18,17 @@ var addroom = new Vue({
     methods : {
         getRooms() {
             axios
-                .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
+                .get('http://localhost:8080/api/rooms')
                 .then(response => (this.rooms = response.data))
         },
-        addBuilding() {
+        addLight() {
             const requestBody = {
-                name: this.buildingName,
-                nbOfFloors: this.nbOfFloors,
-                roomsIds: this.roomsList,
+                level: this.lightLevel,
+                status: this.lightStatus,
+                roomId: this.roomId,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody, {
+                .post('http://localhost:8080/api/lights', requestBody, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",
