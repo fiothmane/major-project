@@ -56,7 +56,9 @@ var app = new Vue({
             }
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/switch')
-                .then((response) => {console.log(response.data)});
+                .then((response) => {
+                    // console.log(response.data)
+                });
         },
     }
 })

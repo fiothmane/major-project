@@ -72,7 +72,6 @@ public class RingerController {
         Ringer ringer = new Ringer(ringerDto.getId(), ringerDto.getLevel(), ringerDto.getStatus(), room);
         if (room != null) {
             roomDao.updateRoom(room);
-            System.out.println("AVAAAAAAAAAAAAAAAAAAAAANT " + room.getId());
             ringerDao.removeRingerFromPreviousRoom(ringerDao.findByRoomId(room.getId()));
         }
 
