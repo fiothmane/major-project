@@ -1,6 +1,5 @@
 package com.emse.spring.faircorp.DAO;
 
-import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Ringer;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,5 +19,10 @@ public class RingerDaoImpl implements RingerDaoCustom {
         return em.createQuery(jpql, Ringer.class)
                 .setParameter("value", id)
                 .getSingleResult();
+    }
+
+    @Override
+    public void updateRinger(Ringer ringer) {
+        em.merge(ringer);
     }
 }

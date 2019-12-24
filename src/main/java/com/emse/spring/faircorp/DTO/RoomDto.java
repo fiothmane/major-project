@@ -27,14 +27,18 @@ public class RoomDto {
         this.id = room.getId();
         this.name = room.getName();
         this.floor = room.getFloor();
-        this.lightsIds = new ArrayList<Long>();
         if (room.getRinger() != null) {
             this.ringerId = room.getRinger().getId();
         }
-        for (int i = 0; i < room.getLights().size(); i++) {
-            this.lightsIds.add(room.getLights().get(i).getId());
+        this.lightsIds = new ArrayList<Long>();
+        if (room.getLights() != null) {
+            for (int i = 0; i < room.getLights().size(); i++) {
+                this.lightsIds.add(room.getLights().get(i).getId());
+            }
         }
-        this.buildingId = room.getBuilding().getId();
+        if (room.getBuilding() != null) {
+            this.buildingId = room.getBuilding().getId();
+        }
     }
 
     public Long getId() {

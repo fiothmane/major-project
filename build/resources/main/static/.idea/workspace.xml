@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/addroom.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addroom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/addRoom.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,8 @@
       <option name="presentableId" value="Default" />
       <updated>1577036731135</updated>
       <workItem from="1577036732319" duration="2541000" />
-      <workItem from="1577105618698" duration="14550000" />
+      <workItem from="1577105618698" duration="16960000" />
+      <workItem from="1577190262277" duration="13816000" />
     </task>
     <servers />
   </component>
@@ -76,9 +78,13 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="172" y="32" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1577038249196" />
-    <state x="347" y="177" key="run.anything.popup" timestamp="1577112093253">
+    <state x="347" y="177" key="run.anything.popup" timestamp="1577199550080">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="347" y="177" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1577112093253" />
+    <state x="347" y="177" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1577199550080" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577198866990">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1577198866990" />
   </component>
 </project>

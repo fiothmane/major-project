@@ -22,7 +22,6 @@ public class Room {
     @OneToOne(mappedBy = "room")
     private Ringer ringer;
 
-
     @ManyToOne
     private Building building;
 

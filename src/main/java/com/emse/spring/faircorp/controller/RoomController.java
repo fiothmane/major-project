@@ -5,9 +5,7 @@ import com.emse.spring.faircorp.DAO.LightDao;
 import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.RoomDto;
-import com.emse.spring.faircorp.model.Light;
-import com.emse.spring.faircorp.model.Room;
-import com.emse.spring.faircorp.model.Status;
+import com.emse.spring.faircorp.model.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +31,7 @@ public class RoomController {
 
     public void addHeaders (HttpServletResponse response) {
         response.addHeader("access-control-allow-credentials", "true");
-        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
         response.addHeader("access-control-allow-origin", "*");
         response.addHeader("content-type", "application/json;charset=UTF-8");
     }
@@ -74,12 +72,36 @@ public class RoomController {
     public RoomDto createRoom(@RequestBody RoomDto roomDto, HttpServletResponse response) {
         addHeaders(response);
         List<Light> roomLights = new ArrayList<Light>();
-        for (int i = 0; i < roomDto.getLightsIds().size(); i++) {
-            roomLights.add(lightDao.findById(roomDto.getLightsIds().get(i)));
+        if (roomDto.getLightsIds() != null) {
+            for (int i = 0; i < roomDto.getLightsIds().size(); i++) {
+                roomLights.add(lightDao.findById(roomDto.getLightsIds().get(i)));
+            }
+        }
+        Ringer ringer = null;
+        if (roomDto.getRingerId() != null) {
+            ringer = ringerDao.findById(roomDto.getRingerId());
+        }
+        Building building = null;
+        if (roomDto.getBuildingId() != null) {
+            building = buildingDao.findBuildingById(roomDto.getBuildingId());
+        }
+        int floor = -10;
+        if (roomDto.getFloor() != -10) {
+            floor = roomDto.getFloor();
         }
 
-        Room room = new Room(roomDto.getId(), roomDto.getName(), roomDto.getFloor(), roomLights, ringerDao.findById(roomDto.getRingerId()), buildingDao.findBuildingById(roomDto.getBuildingId()));
+        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, roomLights, ringer, building);
         roomDao.save(room);
+        if (ringer != null) {
+            ringer.setRoom(room);
+            ringerDao.updateRinger(ringer);
+        }
+        if (roomLights != null) {
+            for (int i = 0; i < roomLights.size(); i++) {
+                roomLights.get(i).setRoom(room);
+                lightDao.updateLight(roomLights.get(i));
+            }
+        }
         return new RoomDto(room);
     }
 

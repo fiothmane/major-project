@@ -30,4 +30,9 @@ public class LightDaoImpl implements LightDaoCustom {
                 .setParameter("value", id)
                 .getSingleResult();
     }
+
+    @Override
+    public void updateLight(Light light) {
+        em.merge(light);
+    }
 }

@@ -4,4 +4,5 @@ import com.emse.spring.faircorp.model.Ringer;
 
 public interface RingerDaoCustom {
     Ringer findById(Long id);
+    void updateRinger (Ringer ringer);
 }
