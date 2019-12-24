@@ -4,6 +4,7 @@ import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.RingerDto;
 import com.emse.spring.faircorp.model.Ringer;
+import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +64,18 @@ public class RingerController {
     @PostMapping
     public RingerDto createRinger(@RequestBody RingerDto ringerDto, HttpServletResponse response) {
         addHeaders(response);
-        Ringer ringer = new Ringer(ringerDto.getId(), ringerDto.getLevel(), ringerDto.getStatus(), roomDao.findRoomById(ringerDto.getRoomId()));
+        Room room = null;
+        if (ringerDto.getRoomId() != null) {
+            room = roomDao.findRoomById(ringerDto.getRoomId());
+        }
+
+        Ringer ringer = new Ringer(ringerDto.getId(), ringerDto.getLevel(), ringerDto.getStatus(), room);
+        if (room != null) {
+            roomDao.updateRoom(room);
+            System.out.println("AVAAAAAAAAAAAAAAAAAAAAANT " + room.getId());
+            ringerDao.removeRingerFromPreviousRoom(ringerDao.findByRoomId(room.getId()));
+        }
+
         ringerDao.save(ringer);
         return new RingerDto(ringer);
     }

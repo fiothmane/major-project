@@ -4,5 +4,7 @@ import com.emse.spring.faircorp.model.Ringer;
 
 public interface RingerDaoCustom {
     Ringer findById(Long id);
-    void updateRinger (Ringer ringer);
+    Ringer findByRoomId(Long id);
+    void updateRinger(Ringer ringer);
+    void removeRingerFromPreviousRoom(Ringer ringer);
 }

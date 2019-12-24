@@ -48,13 +48,13 @@
 
         <!-- Light level -->
         <label class="float-left">Light level</label>
-        <input type="number" min="0" max="999" id="lightsLevel" class="form-control mb-4" v-model="lightLevel" required>
+        <input type="number" min="0" max="999" id="lightLevel" class="form-control mb-4" v-model="lightLevel" required>
 
         <!-- Light status -->
         <label class="float-left">Light status</label>
         <select class="browser-default custom-select mb-4" id="lightStatus" v-model="lightStatus" required>
-            <option value="" disabled>Choose light status</option>
-            <option value="ON" selected>ON</option>
+            <option value="" disabled selected>Choose light status</option>
+            <option value="ON">ON</option>
             <option value="OFF">OFF</option>
         </select>
 

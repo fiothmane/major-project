@@ -5,8 +5,8 @@ var addroom = new Vue({
             /* HTTP data */
             rooms: null,
             /* Form data (v-model) */
-            lightLevel: 0,
-            lightStatus: "",
+            ringerLevel: 0,
+            ringerStatus: "",
             roomId: "",
             /* Error handling */
             error: null,
@@ -21,14 +21,14 @@ var addroom = new Vue({
                 .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
                 .then(response => (this.rooms = response.data))
         },
-        addLight() {
+        addRinger() {
             const requestBody = {
-                level: this.lightLevel,
-                status: this.lightStatus,
+                level: this.ringerLevel,
+                status: this.ringerStatus,
                 roomId: this.roomId,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/lights', requestBody, {
+                .post('https://walid-ouchtiti.cleverapps.io/api/ringers', requestBody, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",

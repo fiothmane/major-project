@@ -34,9 +34,9 @@
 <!--- Contenue -->
 <div class="container col-md-7" style="margin-top: 50px;" id="addroom">
 
-    <form class="text-center border border-light p-5" method="post" @submit.prevent="addLight">
+    <form class="text-center border border-light p-5" method="post" @submit.prevent="addRinger">
 
-        <p class="h4 mb-4">Add Light</p>
+        <p class="h4 mb-4">Add Ringer</p>
 
         <div v-if="error === true" class="alert alert-danger" role="alert">
             Error while adding the data
@@ -46,14 +46,14 @@
             Data has been successfully added
         </div>
 
-        <!-- Light level -->
-        <label class="float-left">Light level</label>
-        <input type="number" min="0" max="999" id="lightLevel" class="form-control mb-4" v-model="lightLevel" required>
+        <!-- Ringer level -->
+        <label class="float-left">Ringer level</label>
+        <input type="number" min="0" max="999" id="ringerLevel" class="form-control mb-4" v-model="ringerLevel" required>
 
-        <!-- Light status -->
+        <!-- Ringer status -->
         <label class="float-left">Light status</label>
-        <select class="browser-default custom-select mb-4" id="lightStatus" v-model="lightStatus" required>
-            <option value="" disabled selected>Choose light status</option>
+        <select class="browser-default custom-select mb-4" id="ringerStatus" v-model="ringerStatus" required>
+            <option value="" disabled selected>Choose ringer status</option>
             <option value="ON">ON</option>
             <option value="OFF">OFF</option>
         </select>
@@ -70,6 +70,6 @@
 
     </form>
 </div>
-<script src="JS/addLight.js"></script>
+<script src="JS/addRinger.js"></script>
 </body>
 </html>

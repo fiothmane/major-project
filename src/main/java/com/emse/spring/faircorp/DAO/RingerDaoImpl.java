@@ -22,7 +22,22 @@ public class RingerDaoImpl implements RingerDaoCustom {
     }
 
     @Override
+    public Ringer findByRoomId(Long id) {
+        System.out.println("HEEEEEEEEEEEEEEEEEEEERE " + id);
+        String jpql = "select ringer from Ringer ringer where ringer.room.id = :value";
+        return em.createQuery(jpql, Ringer.class)
+                .setParameter("value", id)
+                .getSingleResult();
+    }
+
+    @Override
     public void updateRinger(Ringer ringer) {
+        em.merge(ringer);
+    }
+
+    @Override
+    public void removeRingerFromPreviousRoom(Ringer ringer) {
+        ringer.setRoom(null);
         em.merge(ringer);
     }
 }
