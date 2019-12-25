@@ -54,6 +54,9 @@
         <div v-if="error === false" class="alert alert-success" role="alert">
             Data has been successfully added
         </div>
+        <!-- Light id -->
+        <label class="float-left">Light id</label>
+        <input type="number" id="lightId" class="form-control mb-4" v-model="lightId" required>
 
         <!-- Light level -->
         <label class="float-left">Light level</label>

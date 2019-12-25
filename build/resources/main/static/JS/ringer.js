@@ -35,15 +35,15 @@ var app = new Vue({
             },2000);
         },
         switchRinger(id) {
-            var elt = document.getElementById("ringer" + id);
+            var elt = document.getElementById("ringer");
             if (elt.textContent === "ON") {
                 for (var i = 0; i < this.ringers.length; i++) {
                     if (this.ringers[i].id === id) {
                         this.ringers[i].status = "OFF";
                     }
                 }
-                document.getElementById("ringer" + id).textContent = "";
-                document.getElementById("ringer" + id).appendChild(document.createTextNode("OFF"));
+                document.getElementById("ringer").textContent = "";
+                document.getElementById("ringer").appendChild(document.createTextNode("OFF"));
                 document.getElementById("switchn" + id).innerHTML = '<i class="fas fa-toggle-off fa-2x"></i>';
             }
             else {
@@ -52,12 +52,15 @@ var app = new Vue({
                         this.ringers[i].status = "ON";
                     }
                 }
-                document.getElementById("ringer" + id).appendChild(document.createTextNode("ON"));
+                document.getElementById("ringer").textContent = "";
+                document.getElementById("ringer").appendChild(document.createTextNode("ON"));
                 document.getElementById("switchn" + id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
             }
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/ringers/' + id + '/switch')
-                .then((response) => {console.log(response.data)});
+                .then((response) => {
+                    // console.log(response.data)
+                });
         },
     }
 })

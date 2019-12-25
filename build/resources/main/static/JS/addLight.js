@@ -5,6 +5,7 @@ var addroom = new Vue({
             /* HTTP data */
             rooms: null,
             /* Form data (v-model) */
+            lightId: 0,
             lightLevel: 0,
             lightStatus: "",
             roomId: "",
@@ -23,6 +24,7 @@ var addroom = new Vue({
         },
         addLight() {
             const requestBody = {
+                id: this.lightId,
                 level: this.lightLevel,
                 status: this.lightStatus,
                 roomId: this.roomId,
