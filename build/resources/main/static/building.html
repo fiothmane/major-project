@@ -75,7 +75,16 @@
         </div>
         <div v-else>
 
-            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>
+<!--            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>-->
+            <div id="buildingInfo">
+                <h1 id="buildingName">{{building.name}}</h1>
+            </div>
+
+            <button type="button" class="btn btn-success float-right" v-on:click="editBuilding" id="editBuilding">Edit</button>
+            <br><br>
+            <button type="button" class="btn btn-danger float-right" v-on:click="deleteBuilding">Delete</button>
+            <br><br>
+
             <table class="table table-bordered" style="width:100%; margin-top: 30px;">
                 <thead class="thead-dark">
                 <tr>

@@ -1,6 +1,8 @@
 package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.BuildingDao;
+import com.emse.spring.faircorp.DAO.LightDao;
+import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.BuildingDto;
 import com.emse.spring.faircorp.model.Building;
@@ -22,6 +24,10 @@ public class BuildingController {
     private BuildingDao buildingDao;
     @Autowired
     private RoomDao roomDao;
+    @Autowired
+    private LightDao lightDao;
+    @Autowired
+    private RingerDao ringerDao;
 
     public void addHeaders (HttpServletResponse response) {
         response.addHeader("access-control-allow-credentials", "true");
@@ -71,6 +77,29 @@ public class BuildingController {
     @DeleteMapping(path = "/{id}")
     public void deleteBuilding(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
-        buildingDao.delete(buildingDao.findBuildingById(id));
+        Building building = buildingDao.findBuildingById(id);
+        if (building.getRooms() != null) {
+            /* Delete building's lights and ringers */
+            for (int i = 0; i < building.getRooms().size(); i++) {
+                /* Delete the building's lights */
+                if (building.getRooms().get(i).getLights() != null) {
+                    for (int j = 0; j < building.getRooms().get(i).getLights().size(); j++) {
+                        lightDao.delete(building.getRooms().get(i).getLights().get(j));
+                    }
+                }
+                /* Delete the building's ringers */
+                if (building.getRooms().get(i).getRinger() != null) {
+                    ringerDao.delete(building.getRooms().get(i).getRinger());
+                }
+            }
+
+            /* Delete building's rooms */
+            for (int i = 0; i < building.getRooms().size(); i++) {
+                roomDao.delete(building.getRooms().get(i));
+            }
+        }
+
+        /* Delete the building */
+        buildingDao.delete(building);
     }
 }

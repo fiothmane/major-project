@@ -82,7 +82,7 @@
                     <td class="text-center" id="ringer">{{ringer.status}}</td>
                     <td class="text-center">
                         <input type="number" min="0" max="999" v-bind:value="ringer.level" class="form-control mb-4" v-bind:id="'ringerLevel'+ringer.id">
-                        <button type="button" class="btn btn-success" v-on:click="chnageRingerLevel(ringer.id)">Change ringer level</button>
+                        <button type="button" class="btn btn-success" v-on:click="changeRingerLevel(ringer.id)">Change ringer level</button>
                     </td>
                     <td class="text-center" :id="'switchn'+ringer.id" v-if="ringer.status === 'ON'" @click="switchRinger(ringer.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
                     <td class="text-center" :id="'switchn'+ringer.id" @click="switchRinger(ringer.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>

@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data () {
         return {
+            building: null,
             buildingId: null,
             rooms: null,
             ringer: null,
@@ -13,6 +14,7 @@ var app = new Vue({
     },
     mounted () {
         this.getFunction();
+        this.getBuildingInfo();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -20,6 +22,14 @@ var app = new Vue({
         this.buildingId = urlParams.get("building");
     },
     methods : {
+        getBuildingInfo() {
+            /* Add building name as title in the page once loaded */
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId)
+                .then(response => {
+                    this.building = response.data;
+                })
+        },
         getFunction() {
             axios
                 .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
@@ -75,11 +85,11 @@ var app = new Vue({
         },
         editRoom(roomId) {
             /* Enter edit mode (create input fields) */
-            if (document.getElementById("editMode") === null) {
+            if (document.getElementById("editMode" + roomId) === null) {
                 /* Create hidden input to know we entered edit mode */
                 var hidden = document.createElement('input');
                 hidden.setAttribute("type", "hidden");
-                hidden.setAttribute("id", "editMode");
+                hidden.setAttribute("id", "editMode" + roomId);
                 document.getElementById('app').appendChild(hidden);
 
                 // window.location.href = 'addRoom.html?room=' + roomId;
@@ -138,11 +148,8 @@ var app = new Vue({
                         var room = response.data;
 
                         var roomName = document.getElementById("roomNewName" + roomId).value;
-                        console.log(roomName)
                         var roomFloorList = document.getElementById("roomFloorList" + roomId);
-                        console.log(roomFloorList);
                         var roomFloor = roomFloorList.options[roomFloorList.selectedIndex].value;
-                        console.log(roomFloor);
 
                         const requestBody = {
                             id: room.id,
@@ -152,7 +159,6 @@ var app = new Vue({
                             ringerId: room.ringerId,
                             buildingId: room.buildingId,
                         };
-                        console.log(requestBody)
                         /* Send the http request to change the data */
                         axios
                             .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody, {
@@ -190,6 +196,134 @@ var app = new Vue({
                     })
             }
         },
+        editBuilding() {
+            this.getBuildingInfo();
+            /* Enter edit mode (create input fields) */
+            if (document.getElementById("BuildingEditMode") === null) {
+                /* Create hidden input to know we entered edit mode */
+                var hidden = document.createElement('input');
+                hidden.setAttribute("type", "hidden");
+                hidden.setAttribute("id", "BuildingEditMode");
+                document.getElementById('app').appendChild(hidden);
 
+                // window.location.href = 'addRoom.html?room=' + roomId;
+                var buildingName = document.getElementById('buildingName');
+                var editButton = document.getElementById('editBuilding');
+
+                /* Change button text */
+                editButton.textContent = "Submit changes"
+
+                /* Create text input to edit building */
+                var buildingNameInput = document.createElement('input');
+                buildingNameInput.setAttribute("type", "text");
+                buildingNameInput.setAttribute("id", "buildingNewName");
+                buildingNameInput.required = true;
+                buildingNameInput.setAttribute("class", "form-control mb-4");
+                buildingNameInput.setAttribute("value", this.building.name);
+                buildingName.innerHTML = "";
+                document.getElementById('buildingInfo').appendChild(buildingNameInput);
+
+                /* Create list to choose new number of floors */
+                var nbOfFloors = document.createElement('input');
+                nbOfFloors.setAttribute("type", "number");
+                nbOfFloors.setAttribute("min", "0");
+                nbOfFloors.setAttribute("max", "50");
+                nbOfFloors.setAttribute("id", "buildingNewNbOfFloors");
+                nbOfFloors.required = true;
+                nbOfFloors.setAttribute("class", "form-control mb-4");
+                nbOfFloors.setAttribute("value", this.building.nbOfFloors);
+                document.getElementById('buildingInfo').appendChild(nbOfFloors);
+            }
+
+            /* Apply changes to the room */
+            else {
+                /* Get building previous data */
+                axios
+                    .get('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId)
+                    .then(response => {
+                        var building = response.data;
+
+                        var buildingName = document.getElementById("buildingNewName").value;
+                        var nbOfFloors = document.getElementById("buildingNewNbOfFloors").value;
+
+                        const requestBody = {
+                            id: building.id,
+                            name: buildingName,
+                            nbOfFloors: nbOfFloors,
+                            roomsIds: building.roomsIds,
+                        };
+                        /* Send the http request to change the data */
+                        axios
+                            .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody, {
+                                headers: {
+                                    "Accept": "application/json",
+                                    "Content-Type": "application/json;charset=UTF-8",
+                                    "access-control-allow-origin": "*",
+                                    "access-control-allow-credentials": "true",
+                                    "Access-Control-Allow-Methods": "GET, POST",
+                                    "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                                }
+                            })
+                            .then(response => {this.editMessage = "success";
+
+                                /* Timer before reloading page */
+                                setTimeout(function(){
+                                    document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 2 seconds"
+                                }, 1000),
+                                    setTimeout(function(){
+                                        document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 1 second"
+                                    }, 2000),
+
+                                    /* Reload the page to refresh info */
+                                    setTimeout(function(){
+                                        let uri = window.location.search.substring(1);
+                                        let urlParams = new URLSearchParams(uri);
+                                        this.buildingId = urlParams.get("building");
+                                        window.location.href = 'building.html?building=' + this.buildingId;
+                                    }, 3000)
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                this.editMessage = "problem";
+                            });
+                    })
+            }
+        },
+        deleteBuilding() {
+            axios
+                .delete('http://localhost:8080/api/buildings/' + this.buildingId, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json;charset=UTF-8",
+                        "access-control-allow-origin": "*",
+                        "access-control-allow-credentials": "true",
+                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
+                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                    }
+                })
+                .then(
+                    buildingId = this.buildingId,
+                    document.getElementById('loading').hidden = false,
+                    this.deleteMessage = "success",
+
+                    /* Timer before reloading page */
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 2 seconds"
+                    }, 1000),
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 1 second"
+                    }, 2000),
+
+                    /* Reload the page to refresh info */
+                    setTimeout(function(){
+                        window.location.href = 'index.html';
+                    }, 3000),
+
+                )
+                .catch(error => {
+                    console.log(error)
+                    this.deleteMessage = "problem"
+                })
+        }
     }
 })
