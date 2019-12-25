@@ -5,6 +5,7 @@ var app = new Vue({
             roomId: null,
             ringers: null,
             loading: true,
+            deleteMessage: "",
             errored: false
         }
     },
@@ -62,5 +63,52 @@ var app = new Vue({
                     // console.log(response.data)
                 });
         },
+        changeRingerLevel(ringerId) {
+            var ringerLevel = document.getElementById("ringerLevel" + ringerId).value;
+            const restApiBody = {
+                level: parseInt(ringerLevel),
+            };
+            axios
+                .put('https://walid-ouchtiti.cleverapps.io/api/ringers/' + ringerId + '/level', restApiBody)
+                .then((response) => {
+                    // console.log(response.data)
+                });
+        },
+        deleteRinger(ringerId) {
+            axios
+                .delete('https://walid-ouchtiti.cleverapps.io/api/ringers/' + ringerId, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json;charset=UTF-8",
+                        "access-control-allow-origin": "*",
+                        "access-control-allow-credentials": "true",
+                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
+                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                    }
+                })
+                .then(
+                    roomId = this.roomId,
+                    document.getElementById('loading').hidden = false,
+                    this.deleteMessage = "success",
+
+                    /* Timer before reloading page */
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 2 seconds"
+                    }, 1000),
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 1 second"
+                    }, 2000),
+
+                    /* Reload the page to refresh info */
+                    setTimeout(function(){
+                        window.location.href = 'ringer.html?room=' + roomId;
+                    }, 3000),
+
+                )
+                .catch(error => {
+                    console.log(error)
+                    this.deleteMessage = "problem"
+                })
+        }
     }
 })

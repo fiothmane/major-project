@@ -2,6 +2,7 @@ package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
+import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.DTO.RingerDto;
 import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Room;
@@ -58,6 +59,14 @@ public class RingerController {
         else {
             ringer.setStatus(Status.ON);
         }
+        return new RingerDto(ringer);
+    }
+
+    @PutMapping(path = "/{id}/level")
+    public RingerDto changeLevel(@PathVariable Long id, @RequestBody RingerDto body, HttpServletResponse response) {
+        addHeaders(response);
+        Ringer ringer = ringerDao.findById(id);
+        ringer.setLevel(body.getLevel());
         return new RingerDto(ringer);
     }
 

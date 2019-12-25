@@ -85,7 +85,7 @@ var app = new Vue({
                 level: parseInt(lightLevel),
             };
             axios
-                .put('http://localhost:8080/api/lights/' + lightId + '/level', restApiBody)
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/level', restApiBody)
                 .then((response) => {
                     // console.log(response.data)
                 });

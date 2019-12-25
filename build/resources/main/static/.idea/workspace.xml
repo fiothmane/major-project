@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/lights.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/building.html" beforeDir="false" afterPath="$PROJECT_DIR$/building.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lights.html" beforeDir="false" afterPath="$PROJECT_DIR$/lights.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/ringer.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/ringer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ringer.html" beforeDir="false" afterPath="$PROJECT_DIR$/ringer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +69,7 @@
       <workItem from="1577190262277" duration="13816000" />
       <workItem from="1577221933450" duration="6262000" />
       <workItem from="1577277681846" duration="20520000" />
-      <workItem from="1577308006981" duration="5513000" />
+      <workItem from="1577308006981" duration="6157000" />
     </task>
     <servers />
   </component>
