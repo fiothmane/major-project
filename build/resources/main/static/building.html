@@ -42,12 +42,23 @@
 </nav>
 <!--- Contenue -->
 <div class="container col-md-10 app" style="margin-top: 10px;" id="app">
+<!--    Error / success messages when deleting-->
     <div v-if="deleteMessage == 'problem'" class="alert alert-danger" role="alert">
         Error while deleting the data
     </div>
     <div v-if="deleteMessage == 'success'" id="deleteMessage" class="alert alert-success" role="alert">
-        The data was Successfully deleted, you will be redirected to the page after 3 seconds
+        The data has been successfully deleted, you will be redirected to the page after 3 seconds
     </div>
+
+<!--    Error / success messages when editing-->
+    <div v-if="editMessage == 'problem'" class="alert alert-danger" role="alert">
+        Error while editing the data
+    </div>
+    <div v-if="editMessage == 'success'" id="editMessage" class="alert alert-success" role="alert">
+        The data has been successfully edited, you will be redirected to the page after 3 seconds
+    </div>
+
+<!--    Loading spinner-->
     <div hidden id="loading" class="spinner-border text-success" role="status">
         <span class="sr-only">Loading...</span>
     </div>
@@ -81,15 +92,15 @@
                 <tbody>
                 <tr v-for="room in rooms" v-if="room.buildingId == buildingId">
                     <td class="text-center">{{room.id}}</td>
-                    <td class="text-center">{{room.name}}</td>
-                    <td class="text-center">{{room.floor}}</td>
+                    <td class="text-center" v-bind:id="'roomName'+room.id">{{room.name}}</td>
+                    <td class="text-center" v-bind:id="'roomFloor'+room.id">{{room.floor}}</td>
                     <td class="text-center">{{room.lightsIds.length}}</td>
                     <td v-if="room.lightsIds.length > 0" class="text-center"><a v-bind:href="'lights.html?room='+room.id">Control room lights</a></td>
                     <td v-else class="text-center" style="color:grey">Control room lights</td>
 
                     <td v-if="room.ringerId != null" class="text-center"><a v-bind:href="'ringer.html?room='+room.id">Control room ringer</a></td>
                     <td v-else class="text-center" style="color:grey">Control room ringer</td>
-                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-success">Edit</button></td>
+                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-success" v-bind:id="'edit'+room.id" v-on:click="editRoom(room.id)">Edit</button></td>
                     <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteRoom(room.id)">Delete</button></td>
                  </tr>
                 </tbody>

@@ -41,10 +41,10 @@
     </div>
 </nav>
 <!--- Contenue -->
-<div class="container col-md-7" style="margin-top: 50px;" id="addroom">
-
+<!--Add new Room-->
+<div class="container col-md-7" style="margin-top: 50px;" id="addRoom">
+    <!--    Form to add new room -->
     <form class="text-center border border-light p-5" method="post" @submit.prevent="addRoom">
-
         <p class="h4 mb-4">Add Room</p>
 
         <div v-if="error === true" class="alert alert-danger" role="alert">
@@ -52,7 +52,7 @@
         </div>
 
         <div v-if="error === false" class="alert alert-success" role="alert">
-             Data has been successfully added
+            Data has been successfully added
         </div>
 
         <!-- Room Name -->
@@ -88,9 +88,8 @@
 
         <!-- Send button -->
         <button class="btn btn-success btn-block" type="submit">Submit</button>
-
     </form>
 </div>
-<script src="JS/addroom.js"></script>
+<script src="JS/addRoom.js"></script>
 </body>
 </html>

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/JS/addLight.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addLight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JS/addRinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addRinger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JS/addRoom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/addroom.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/building.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/building.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addRinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/addRinger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/addRoom.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/building.html" beforeDir="false" afterPath="$PROJECT_DIR$/building.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +71,8 @@
       <workItem from="1577105618698" duration="16960000" />
       <workItem from="1577190262277" duration="13816000" />
       <workItem from="1577221933450" duration="6262000" />
-      <workItem from="1577277681846" duration="12247000" />
+      <workItem from="1577277681846" duration="20520000" />
+      <workItem from="1577308006981" duration="2550000" />
     </task>
     <servers />
   </component>
@@ -79,14 +80,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="416" y="146" width="524" height="498" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577298275245">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="416" y="146" width="524" height="498" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.741@0.27.1366.741" timestamp="1577298275245" />
     <state x="172" y="32" key="SettingsEditor" timestamp="1577038249196">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="172" y="32" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1577038249196" />
-    <state x="347" y="177" key="run.anything.popup" timestamp="1577199550080">
+    <state x="347" y="177" key="run.anything.popup" timestamp="1577296739527">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="347" y="177" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1577199550080" />
+    <state x="347" y="177" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1577296739527" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577198866990">
       <screen x="0" y="27" width="1366" height="741" />
     </state>

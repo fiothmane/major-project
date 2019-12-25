@@ -85,8 +85,8 @@ public class RoomController {
         if (roomDto.getBuildingId() != null) {
             building = buildingDao.findBuildingById(roomDto.getBuildingId());
         }
-        int floor = -10;
-        if (roomDto.getFloor() != -10) {
+        int floor = -999;
+        if (roomDto.getFloor() != -999) {
             floor = roomDto.getFloor();
         }
 

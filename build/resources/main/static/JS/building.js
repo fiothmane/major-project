@@ -7,7 +7,8 @@ var app = new Vue({
             ringer: null,
             loading: true,
             errored: false,
-            deleteMessage: ""
+            deleteMessage: "",
+            editMessage: "",
         }
     },
     mounted () {
@@ -21,7 +22,7 @@ var app = new Vue({
     methods : {
         getFunction() {
             axios
-                .get('http://localhost:8080/api/rooms')
+                .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
                 .then(response => {
                     this.rooms = response.data
                 })
@@ -38,7 +39,7 @@ var app = new Vue({
         },
         deleteRoom(roomId) {
             axios
-                .delete('http://localhost:8080/api/rooms/' + roomId, {
+                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",
@@ -55,10 +56,10 @@ var app = new Vue({
 
                     /* Timer before reloading page */
                     setTimeout(function(){
-                        document.getElementById('deleteMessage').innerHTML = "The data was Successfully deleted, you will be redirected to the page after 2 seconds"
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 2 seconds"
                     }, 1000),
                     setTimeout(function(){
-                        document.getElementById('deleteMessage').innerHTML = "The data was Successfully deleted, you will be redirected to the page after 1 second"
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 1 second"
                     }, 2000),
 
                     /* Reload the page to refresh info */
@@ -71,7 +72,124 @@ var app = new Vue({
                     console.log(error)
                     this.deleteMessage = "problem"
                 })
+        },
+        editRoom(roomId) {
+            /* Enter edit mode (create input fields) */
+            if (document.getElementById("editMode") === null) {
+                /* Create hidden input to know we entered edit mode */
+                var hidden = document.createElement('input');
+                hidden.setAttribute("type", "hidden");
+                hidden.setAttribute("id", "editMode");
+                document.getElementById('app').appendChild(hidden);
 
-        }
+                // window.location.href = 'addRoom.html?room=' + roomId;
+                var roomName = document.getElementById('roomName' + roomId);
+                var roomFloor = document.getElementById('roomFloor' + roomId);
+                var editButton = document.getElementById('edit' + roomId);
+
+                /* Change button text */
+                editButton.textContent = "Submit changes"
+
+                /* Create text input to edit room */
+                var roomNameInput = document.createElement('input');
+                roomNameInput.setAttribute("type", "text");
+                roomNameInput.setAttribute("id", "roomNewName" + roomId);
+                roomNameInput.required = true;
+                roomNameInput.setAttribute("class", "form-control mb-4");
+                roomNameInput.setAttribute("value", roomName.textContent);
+                roomName.innerHTML = "";
+                roomName.appendChild(roomNameInput);
+
+                /* Create list to choose new floor */
+                var roomFloorList = document.createElement('select');
+                roomFloorList.setAttribute("id", "roomFloorList" + roomId);
+                roomFloorList.required = true;
+                roomFloorList.setAttribute("class", "class=\"browser-default custom-select mb-4\"")
+                axios
+                    .get('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId)
+                    .then(response => {
+                        var building = response.data;
+                        var nbOfFloors = building.nbOfFloors;
+
+                        var floor = document.createElement('option');
+                        floor.innerHTML = "Choose a floor";
+                        roomFloorList.appendChild(floor);
+
+                        for (var i = 0; i <= nbOfFloors; i++) {
+                            var floor = document.createElement('option');
+                            floor.setAttribute("value", i);
+                            floor.innerHTML = i;
+                            if (i == roomFloor.textContent) {
+                                floor.selected = true;
+                            }
+                            roomFloorList.appendChild(floor);
+                        }
+                        roomFloor.innerHTML = "";
+                        roomFloor.appendChild(roomFloorList);
+                    })
+            }
+
+            /* Apply changes to the room */
+            else {
+                /* Get room previous data */
+                axios
+                    .get('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId)
+                    .then(response => {
+                        var room = response.data;
+
+                        var roomName = document.getElementById("roomNewName" + roomId).value;
+                        console.log(roomName)
+                        var roomFloorList = document.getElementById("roomFloorList" + roomId);
+                        console.log(roomFloorList);
+                        var roomFloor = roomFloorList.options[roomFloorList.selectedIndex].value;
+                        console.log(roomFloor);
+
+                        const requestBody = {
+                            id: room.id,
+                            name: roomName,
+                            floor: roomFloor,
+                            lightsIds: room.lightsIds,
+                            ringerId: room.ringerId,
+                            buildingId: room.buildingId,
+                        };
+                        console.log(requestBody)
+                        /* Send the http request to change the data */
+                        axios
+                            .post('http://localhost:8080/api/rooms', requestBody, {
+                                headers: {
+                                    "Accept": "application/json",
+                                    "Content-Type": "application/json;charset=UTF-8",
+                                    "access-control-allow-origin": "*",
+                                    "access-control-allow-credentials": "true",
+                                    "Access-Control-Allow-Methods": "GET, POST",
+                                    "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                                }
+                            })
+                            // .then(response => {this.editMessage = "success";
+                            //
+                            //     /* Timer before reloading page */
+                            //     setTimeout(function(){
+                            //         document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 2 seconds"
+                            //     }, 1000),
+                            //         setTimeout(function(){
+                            //             document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 1 second"
+                            //         }, 2000),
+                            //
+                            //         /* Reload the page to refresh info */
+                            //         setTimeout(function(){
+                            //             let uri = window.location.search.substring(1);
+                            //             let urlParams = new URLSearchParams(uri);
+                            //             this.buildingId = urlParams.get("building");
+                            //             window.location.href = 'building.html?building=' + this.buildingId;
+                            //         }, 3000)
+                            // })
+                            .catch(error => {
+                                console.log(error)
+                                this.editMessage = "problem";
+                            });
+                    })
+            }
+        },
+
     }
 })

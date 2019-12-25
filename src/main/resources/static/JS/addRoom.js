@@ -1,5 +1,5 @@
-var addroom = new Vue({
-    el: '#addroom',
+var addRoom = new Vue({
+    el: '#addRoom',
     data () {
         return {
             /* HTTP data */
@@ -20,6 +20,11 @@ var addroom = new Vue({
         this.getBuildings();
         this.getLights();
         this.getRingers();
+    },
+    created() {
+        let uri = window.location.search.substring(1);
+        let urlParams = new URLSearchParams(uri);
+        this.roomId = urlParams.get("room");
     },
     methods : {
         getBuildings() {
@@ -89,6 +94,7 @@ var addroom = new Vue({
                     console.log(error)
                     this.error = true
                 });
-        }
+        },
     }
 })
+
