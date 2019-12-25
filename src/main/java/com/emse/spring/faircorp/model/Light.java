@@ -7,7 +7,7 @@ public class Light {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private Integer level;
 
     @Enumerated(EnumType.STRING)

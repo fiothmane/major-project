@@ -47,28 +47,37 @@
 
         <p class="h4 mb-4">Add Light</p>
 
-        <div v-if="error === true" class="alert alert-danger" role="alert">
+        <div v-if="error === 'true'" class="alert alert-danger" role="alert">
             Error while adding the data
         </div>
 
-        <div v-if="error === false" class="alert alert-success" role="alert">
+        <div v-if="error === 'false'" class="alert alert-success" role="alert">
             Data has been successfully added
         </div>
+
+        <div v-if="error === 'lightNotFound'" class="alert alert-danger" role="alert">
+            The light id you gave doesn't exist
+        </div>
+
+        <div v-if="error === 'lightAlreadyExist'" class="alert alert-danger" role="alert">
+            The light id you gave already exists
+        </div>
+
         <!-- Light id -->
         <label class="float-left">Light id</label>
         <input type="number" id="lightId" class="form-control mb-4" v-model="lightId" required>
 
-        <!-- Light level -->
-        <label class="float-left">Light level</label>
-        <input type="number" min="0" max="999" id="lightLevel" class="form-control mb-4" v-model="lightLevel" required>
+<!--        &lt;!&ndash; Light level &ndash;&gt;-->
+<!--        <label class="float-left">Light level</label>-->
+<!--        <input type="number" min="0" max="999" id="lightLevel" class="form-control mb-4" v-model="lightLevel" required>-->
 
-        <!-- Light status -->
-        <label class="float-left">Light status</label>
-        <select class="browser-default custom-select mb-4" id="lightStatus" v-model="lightStatus" required>
-            <option value="" disabled selected>Choose light status</option>
-            <option value="ON">ON</option>
-            <option value="OFF">OFF</option>
-        </select>
+<!--        &lt;!&ndash; Light status &ndash;&gt;-->
+<!--        <label class="float-left">Light status</label>-->
+<!--        <select class="browser-default custom-select mb-4" id="lightStatus" v-model="lightStatus" required>-->
+<!--            <option value="" disabled selected>Choose light status</option>-->
+<!--            <option value="ON">ON</option>-->
+<!--            <option value="OFF">OFF</option>-->
+<!--        </select>-->
 
         <!-- Room -->
         <label class="float-left">Room</label>
