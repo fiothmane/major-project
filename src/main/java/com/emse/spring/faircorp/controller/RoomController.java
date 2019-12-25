@@ -109,6 +109,17 @@ public class RoomController {
     public void deleteRoom(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Room room = roomDao.findRoomById(id);
+        /* Delete the room's lights */
+        if (room.getLights() != null) {
+            for (int i = 0; i < room.getLights().size(); i++) {
+                lightDao.delete(room.getLights().get(i));
+            }
+        }
+        /* Delete the room's ringer */
+        if (room.getRinger() != null) {
+            ringerDao.delete(room.getRinger());
+        }
+        /* Delete the room */
         roomDao.delete(room);
     }
 }

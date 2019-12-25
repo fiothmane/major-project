@@ -5,8 +5,8 @@ var addroom = new Vue({
             /* HTTP data */
             rooms: null,
             /* Form data (v-model) */
-            ringerLevel: 0,
-            ringerStatus: "",
+            // ringerLevel: 0,
+            // ringerStatus: "",
             roomId: "",
             /* Error handling */
             error: null,
@@ -23,12 +23,14 @@ var addroom = new Vue({
         },
         addRinger() {
             const requestBody = {
-                level: this.ringerLevel,
-                status: this.ringerStatus,
+                // level: this.ringerLevel,
+                // status: this.ringerStatus,
+                level: 0,
+                status: "OFF",
                 roomId: this.roomId,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/ringers', requestBody, {
+                .post('http://localhost:8080/api/ringers', requestBody, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",

@@ -25,7 +25,7 @@ var addroom = new Vue({
         },
         addLight() {
             axios
-                .get('http://localhost:8080/api/lights/' + this.lightId)
+                .get('https://walid-ouchtiti.cleverapps.io/api/lights/' + this.lightId)
                 .then(response => {this.error = "lightAlreadyExist"})
                 .catch(error => {
                     console.log(error)
@@ -37,12 +37,12 @@ var addroom = new Vue({
                             /* Request body for the rest api */
                             const requestBody = {
                                 id: this.lightId,
-                                // level: this.lightLevel,
-                                // status: this.lightStatus,
+                                level: 0,
+                                status: "OFF",
                                 roomId: this.roomId,
                             };
                             axios
-                                .post('http://localhost:8080/api/lights', requestBody, {
+                                .post('https://walid-ouchtiti.cleverapps.io/api/lights', requestBody, {
                                     headers: {
                                         "Accept": "application/json",
                                         "Content-Type": "application/json;charset=UTF-8",
