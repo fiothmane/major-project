@@ -23,6 +23,7 @@ var addroom = new Vue({
                 .then(response => (this.rooms = response.data))
         },
         addLight() {
+            /* Request body for the rest api */
             const requestBody = {
                 id: this.lightId,
                 level: this.lightLevel,

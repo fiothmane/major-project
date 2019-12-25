@@ -40,6 +40,14 @@ var app = new Vue({
                 for (var i = 0; i < this.lights.length; i++) {
                     if (this.lights[i].id === id) {
                         this.lights[i].status = "OFF";
+
+                        /* Request to philips hue */
+                        const philipsHueRequestBody = {
+                            on: false,
+                        };
+                        axios
+                            .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                            .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x off";
@@ -49,11 +57,20 @@ var app = new Vue({
                 for (var i = 0; i < this.lights.length; i++) {
                     if (this.lights[i].id === id) {
                         this.lights[i].status = "ON";
+
+                        /* Request to philips hue */
+                        const philipsHueRequestBody = {
+                            on: true,
+                        };
+                        axios
+                            .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                            .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x on";
                 document.getElementById("switchl" + id).innerHTML = '<i class="fas fa-toggle-on fa-2x"></i>';
             }
+            /* Change light state in the rest api */
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/switch')
                 .then((response) => {
