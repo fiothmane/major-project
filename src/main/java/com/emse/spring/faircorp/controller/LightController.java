@@ -60,6 +60,14 @@ public class LightController {
         return new LightDto(light);
     }
 
+    @PutMapping(path = "/{id}/level")
+    public LightDto changeLevel(@PathVariable Long id, @RequestBody LightDto body,  HttpServletResponse response) {
+        addHeaders(response);
+        Light light = lightDao.findById(id);
+        light.setLevel(body.getLevel());
+        return new LightDto(light);
+    }
+
     @PostMapping
     public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
         addHeaders(response);

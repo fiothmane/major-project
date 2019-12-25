@@ -5,6 +5,7 @@ var app = new Vue({
             roomId: null,
             lights: null,
             loading: true,
+            deleteMessage: "",
             errored: false
         }
     },
@@ -77,5 +78,61 @@ var app = new Vue({
                     // console.log(response.data)
                 });
         },
+        changeLightLevel(lightId) {
+            /* Change light level in the rest api */
+            var lightLevel = document.getElementById("lightLevel" + lightId).value;
+            const restApiBody = {
+                level: parseInt(lightLevel),
+            };
+            axios
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/level', restApiBody)
+                .then((response) => {
+                    // console.log(response.data)
+                });
+
+            /* Change philips hue light level */
+            const philipsHueRequestBody = {
+                bri: lightLevel,
+            };
+            axios
+                .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + lightId + '/state', philipsHueRequestBody)
+                .then(response => console.log(response.status))
+        },
+        deleteLight(lightId) {
+            axios
+                .delete('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json;charset=UTF-8",
+                        "access-control-allow-origin": "*",
+                        "access-control-allow-credentials": "true",
+                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
+                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                    }
+                })
+                .then(
+                    roomId = this.roomId,
+                    document.getElementById('loading').hidden = false,
+                    this.deleteMessage = "success",
+
+                    /* Timer before reloading page */
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 2 seconds"
+                    }, 1000),
+                    setTimeout(function(){
+                        document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 1 second"
+                    }, 2000),
+
+                    /* Reload the page to refresh info */
+                    setTimeout(function(){
+                        window.location.href = 'lights.html?room=' + roomId;
+                    }, 3000),
+
+                )
+                .catch(error => {
+                    console.log(error)
+                    this.deleteMessage = "problem"
+                })
+        }
     }
 })

@@ -155,7 +155,7 @@ var app = new Vue({
                         console.log(requestBody)
                         /* Send the http request to change the data */
                         axios
-                            .post('http://localhost:8080/api/rooms', requestBody, {
+                            .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody, {
                                 headers: {
                                     "Accept": "application/json",
                                     "Content-Type": "application/json;charset=UTF-8",
@@ -165,24 +165,24 @@ var app = new Vue({
                                     "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
                                 }
                             })
-                            // .then(response => {this.editMessage = "success";
-                            //
-                            //     /* Timer before reloading page */
-                            //     setTimeout(function(){
-                            //         document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 2 seconds"
-                            //     }, 1000),
-                            //         setTimeout(function(){
-                            //             document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 1 second"
-                            //         }, 2000),
-                            //
-                            //         /* Reload the page to refresh info */
-                            //         setTimeout(function(){
-                            //             let uri = window.location.search.substring(1);
-                            //             let urlParams = new URLSearchParams(uri);
-                            //             this.buildingId = urlParams.get("building");
-                            //             window.location.href = 'building.html?building=' + this.buildingId;
-                            //         }, 3000)
-                            // })
+                            .then(response => {this.editMessage = "success";
+
+                                /* Timer before reloading page */
+                                setTimeout(function(){
+                                    document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 2 seconds"
+                                }, 1000),
+                                    setTimeout(function(){
+                                        document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 1 second"
+                                    }, 2000),
+
+                                    /* Reload the page to refresh info */
+                                    setTimeout(function(){
+                                        let uri = window.location.search.substring(1);
+                                        let urlParams = new URLSearchParams(uri);
+                                        this.buildingId = urlParams.get("building");
+                                        window.location.href = 'building.html?building=' + this.buildingId;
+                                    }, 3000)
+                            })
                             .catch(error => {
                                 console.log(error)
                                 this.editMessage = "problem";

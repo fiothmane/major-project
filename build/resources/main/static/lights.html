@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,12 +42,27 @@
 </nav>
 <!--- Contenue -->
 <div class="container col-md-10 app" style="margin-top: 10px;" id="app">
+    <!--    Error / success messages when deleting-->
+    <div v-if="deleteMessage == 'problem'" class="alert alert-danger" role="alert">
+        Error while deleting the data
+    </div>
+    <div v-if="deleteMessage == 'success'" id="deleteMessage" class="alert alert-success" role="alert">
+        The data has been successfully deleted, you will be redirected to the page after 3 seconds
+    </div>
+
+    <!--    Loading spinner-->
+    <div hidden id="loading" class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+
     <section v-if="errored">
-        <p>Nous sommes désolés, nous ne sommes pas en mesure de récupérer ces informations pour le moment. Veuillez réessayer ultérieurement.</p>
+        <p>We are sorry, we are not able to retrieve this information at this time. Please try again later.</p>
     </section>
 
     <section v-else>
-        <div v-if="loading">Chargement...</div>
+        <div v-if="loading" class="spinner-border text-success">
+            <span class="sr-only">Loading...</span>
+        </div>
         <div v-else>
 
             <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>
@@ -58,6 +73,7 @@
                     <th class="text-center"><b>Light Status</b></th>
                     <th class="text-center"><b>Light Level</b></th>
                     <th class="text-center"><b>Switch Light</b></th>
+                    <th class="text-center"><b>Delete Room</b></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,10 +81,14 @@
                     <td class="text-center">{{light.id}}</td>
                     <td v-if="light.status === 'ON'" class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x on"></i></td>
                     <td v-else class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x off"></i></td>
-                    <td class="text-center">{{light.level}}</td>
+                    <td class="text-center">
+                        <input type="number" min="0" max="999" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
+                        <button type="button" class="btn btn-success" v-on:click="changeLightLevel(light.id)">Change light level</button>
+                    </td>
                     <td class="text-center" :id="'switchl'+light.id" v-if="light.status === 'ON'" @click="switchLight(light.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
                     <td class="text-center" :id="'switchl'+light.id" @click="switchLight(light.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
-                 </tr>
+                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteLight(light.id)">Delete</button></td>
+                </tr>
                 </tbody>
             </table>
         </div>
