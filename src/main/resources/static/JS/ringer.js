@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data () {
         return {
+            room: null,
             roomId: null,
             ringers: null,
             loading: true,
@@ -11,6 +12,7 @@ var app = new Vue({
     },
     mounted () {
         this.getFunction();
+        this.getRoomInfo();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -18,6 +20,14 @@ var app = new Vue({
         this.roomId = urlParams.get("room");
     },
     methods : {
+        getRoomInfo() {
+            /* Add room name as title in the page once loaded */
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/rooms/' + this.roomId)
+                .then(response => {
+                    this.room = response.data;
+                })
+        },
         getFunction(){
             axios
                 .get('https://walid-ouchtiti.cleverapps.io/api/ringers')
