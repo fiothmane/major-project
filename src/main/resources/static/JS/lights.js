@@ -167,7 +167,7 @@ var app = new Vue({
         controlWithArduino (lightId) {
             /* Publish light id in topic in order for arduino to control the light */
             axios
-                .put('http://localhost:8080/api/lights/' + lightId + '/arduino')
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/arduino')
                 .then(response => console.log(response.status))
         }
     }
