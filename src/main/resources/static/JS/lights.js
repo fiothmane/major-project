@@ -163,6 +163,12 @@ var app = new Vue({
                     console.log(error)
                     this.deleteMessage = "problem"
                 })
+        },
+        controlWithArduino (lightId) {
+            /* Publish light id in topic in order for arduino to control the light */
+            axios
+                .put('http://localhost:8080/api/lights/' + lightId + '/arduino')
+                .then(response => console.log(response.status))
         }
     }
 })

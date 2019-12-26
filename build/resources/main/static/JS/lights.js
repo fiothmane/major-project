@@ -30,7 +30,7 @@ var app = new Vue({
         },
         getFunction(){
             axios
-                .get('http://localhost:8080/api/lights')
+                .get('https://walid-ouchtiti.cleverapps.io/api/lights')
                 .then(response => {
                     this.lights = response.data
                 })
@@ -112,10 +112,10 @@ var app = new Vue({
             /* Change light color in the rest api */
             var lightColor = document.getElementById("lightColor" + lightId).value;
             const restApiBody = {
-                level: parseInt(lightColor),
+                color: parseInt(lightColor),
             };
             axios
-                .put('http://localhost:8080/api/lights/' + lightId + '/color', restApiBody)
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/color', restApiBody)
                 .then((response) => {
                     // console.log(response.data)
                 });
@@ -163,6 +163,12 @@ var app = new Vue({
                     console.log(error)
                     this.deleteMessage = "problem"
                 })
+        },
+        controlWithArduino (lightId) {
+            /* Publish light id in topic in order for arduino to control the light */
+            axios
+                .put('http://localhost:8080/api/lights/' + lightId + '/arduino')
+                .then(response => console.log(response.status))
         }
     }
 })

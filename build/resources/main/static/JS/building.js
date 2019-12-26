@@ -226,7 +226,7 @@ var app = new Vue({
                 /* Create list to choose new number of floors */
                 var nbOfFloors = document.createElement('input');
                 nbOfFloors.setAttribute("type", "number");
-                nbOfFloors.setAttribute("min", "0");
+                nbOfFloors.setAttribute("min", "1");
                 nbOfFloors.setAttribute("max", "50");
                 nbOfFloors.setAttribute("id", "buildingNewNbOfFloors");
                 nbOfFloors.required = true;
@@ -245,6 +245,39 @@ var app = new Vue({
 
                         var buildingName = document.getElementById("buildingNewName").value;
                         var nbOfFloors = document.getElementById("buildingNewNbOfFloors").value;
+
+                        /* If the new number of floors is lower than the previous one delete all the rooms in the removed floors */
+                        if (nbOfFloors < building.nbOfFloors) {
+                            /* Get all the rooms in the no more existing floors */
+                            axios
+                                .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
+                                .then(response => {
+                                    var rooms = response.data;
+
+                                    for (var i = 0; i < rooms.length; i++) {
+                                        if (rooms[i].floor > nbOfFloors) {
+                                            /* Delete the rooms */
+                                            axios
+                                                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + rooms[i].id, {
+                                                    headers: {
+                                                        "Accept": "application/json",
+                                                        "Content-Type": "application/json;charset=UTF-8",
+                                                        "access-control-allow-origin": "*",
+                                                        "access-control-allow-credentials": "true",
+                                                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
+                                                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.log(error)
+                                                })
+                                        }
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                                })
+                        }
 
                         const requestBody = {
                             id: building.id,

@@ -6,6 +6,7 @@ import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
+import com.emse.spring.faircorp.mqtt.Mqtt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,7 +62,7 @@ public class LightController {
     }
 
     @PutMapping(path = "/{id}/level")
-    public LightDto changeLevel(@PathVariable Long id, @RequestBody LightDto body,  HttpServletResponse response) {
+    public LightDto changeLevel(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
         addHeaders(response);
         Light light = lightDao.findById(id);
         light.setLevel(body.getLevel());
@@ -69,11 +70,19 @@ public class LightController {
     }
 
     @PutMapping(path = "/{id}/color")
-    public LightDto changeColor(@PathVariable Long id, @RequestBody LightDto body,  HttpServletResponse response) {
+    public LightDto changeColor(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
         addHeaders(response);
         Light light = lightDao.findById(id);
         light.setColor(body.getColor());
         return new LightDto(light);
+    }
+
+    @PutMapping(path = "/{id}/arduino")
+    public void controlWithArduino(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Mqtt mqtt = new Mqtt();
+        String publishMessage = String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
     }
 
     @PostMapping

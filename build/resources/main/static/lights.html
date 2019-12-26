@@ -76,6 +76,7 @@
                     <th class="text-center"><b>Light Level</b></th>
                     <th class="text-center"><b>Light Color</b></th>
                     <th class="text-center"><b>Switch Light</b></th>
+                    <th class="text-center"><b>Control With Arduino</b></th>
                     <th class="text-center"><b>Delete Room</b></th>
                 </tr>
                 </thead>
@@ -94,6 +95,7 @@
                     </td>
                     <td class="text-center" :id="'switchl'+light.id" v-if="light.status === 'ON'" @click="switchLight(light.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
                     <td class="text-center" :id="'switchl'+light.id" @click="switchLight(light.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
+                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-primary" v-on:click="controlWithArduino(light.id)">Control Light</button></td>
                     <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteLight(light.id)">Delete</button></td>
                 </tr>
                 </tbody>
