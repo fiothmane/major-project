@@ -9,6 +9,8 @@ public class LightDto {
 
     private Integer level;
 
+    private Integer color;
+
     private Status status;
 
     private Long roomId;
@@ -20,6 +22,7 @@ public class LightDto {
     public LightDto(Light light) {
         this.id = light.getId();
         this.level = light.getLevel();
+        this.color = light.getColor();
         this.status = light.getStatus();
         if (light.getRoom() != null) {
             this.roomId = light.getRoom().getId();
@@ -40,6 +43,14 @@ public class LightDto {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public void setColor(Integer color) {
+        this.color = color;
     }
 
     public Status getStatus() {

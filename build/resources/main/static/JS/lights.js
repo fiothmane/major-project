@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data () {
         return {
+            room: null,
             roomId: null,
             lights: null,
             loading: true,
@@ -11,6 +12,7 @@ var app = new Vue({
     },
     mounted () {
         this.getFunction();
+        this.getRoomInfo();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -18,9 +20,17 @@ var app = new Vue({
         this.roomId = urlParams.get("room");
     },
     methods : {
+        getRoomInfo() {
+            /* Add room name as title in the page once loaded */
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/rooms/' + this.roomId)
+                .then(response => {
+                    this.room = response.data;
+                })
+        },
         getFunction(){
             axios
-                .get('https://walid-ouchtiti.cleverapps.io/api/lights')
+                .get('http://localhost:8080/api/lights')
                 .then(response => {
                     this.lights = response.data
                 })
@@ -92,7 +102,27 @@ var app = new Vue({
 
             /* Change philips hue light level */
             const philipsHueRequestBody = {
-                bri: lightLevel,
+                bri: parseInt(lightLevel),
+            };
+            axios
+                .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + lightId + '/state', philipsHueRequestBody)
+                .then(response => console.log(response.status))
+        },
+        changeLightColor(lightId) {
+            /* Change light color in the rest api */
+            var lightColor = document.getElementById("lightColor" + lightId).value;
+            const restApiBody = {
+                level: parseInt(lightColor),
+            };
+            axios
+                .put('http://localhost:8080/api/lights/' + lightId + '/color', restApiBody)
+                .then((response) => {
+                    // console.log(response.data)
+                });
+
+            /* Change philips hue light color */
+            const philipsHueRequestBody = {
+                hue: parseInt(lightColor),
             };
             axios
                 .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + lightId + '/state', philipsHueRequestBody)

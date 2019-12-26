@@ -65,13 +65,16 @@
         </div>
         <div v-else>
 
-            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>
+<!--            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>-->
+            <h1>{{room.name}}</h1>
+            <br>
             <table class="table table-bordered" style="width:100%; margin-top: 30px;">
                 <thead class="thead-dark">
                 <tr>
                     <th class="text-center"><b>#</b></th>
                     <th class="text-center"><b>Light Status</b></th>
                     <th class="text-center"><b>Light Level</b></th>
+                    <th class="text-center"><b>Light Color</b></th>
                     <th class="text-center"><b>Switch Light</b></th>
                     <th class="text-center"><b>Delete Room</b></th>
                 </tr>
@@ -84,6 +87,10 @@
                     <td class="text-center">
                         <input type="number" min="0" max="999" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
                         <button type="button" class="btn btn-success" v-on:click="changeLightLevel(light.id)">Change light level</button>
+                    </td>
+                    <td class="text-center">
+                        <input type="range" min="0" max="65535" v-bind:value="light.color" class="form-control mb-4" v-bind:id="'lightColor'+light.id">
+                        <button type="button" class="btn btn-success" v-on:click="changeLightColor(light.id)">Change light color</button>
                     </td>
                     <td class="text-center" :id="'switchl'+light.id" v-if="light.status === 'ON'" @click="switchLight(light.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
                     <td class="text-center" :id="'switchl'+light.id" @click="switchLight(light.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>

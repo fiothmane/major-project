@@ -291,7 +291,7 @@ var app = new Vue({
         },
         deleteBuilding() {
             axios
-                .delete('http://localhost:8080/api/buildings/' + this.buildingId, {
+                .delete('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",

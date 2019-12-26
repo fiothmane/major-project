@@ -68,6 +68,14 @@ public class LightController {
         return new LightDto(light);
     }
 
+    @PutMapping(path = "/{id}/color")
+    public LightDto changeColor(@PathVariable Long id, @RequestBody LightDto body,  HttpServletResponse response) {
+        addHeaders(response);
+        Light light = lightDao.findById(id);
+        light.setColor(body.getColor());
+        return new LightDto(light);
+    }
+
     @PostMapping
     public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
         addHeaders(response);
@@ -76,7 +84,7 @@ public class LightController {
             room = roomDao.findRoomById(lightDto.getRoomId());
         }
 
-        Light light = new Light(lightDto.getId(), lightDto.getLevel(), lightDto.getStatus(), room);
+        Light light = new Light(lightDto.getId(), lightDto.getLevel(), lightDto.getColor(), lightDto.getStatus(), room);
         lightDao.save(light);
 
         if (room != null) {

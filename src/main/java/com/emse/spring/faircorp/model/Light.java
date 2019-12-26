@@ -10,6 +10,9 @@ public class Light {
     @Column
     private Integer level;
 
+    @Column
+    private Integer color;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -20,9 +23,10 @@ public class Light {
 
     }
 
-    public Light(Long id, Integer level, Status status, Room room) {
+    public Light(Long id, Integer level, Integer color, Status status, Room room) {
         this.id = id;
         this.level = level;
+        this.color = color;
         this.status = status;
         this.room = room;
     }
@@ -41,6 +45,14 @@ public class Light {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public void setColor(Integer color) {
+        this.color = color;
     }
 
     public Status getStatus() {
