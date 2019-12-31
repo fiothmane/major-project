@@ -2,20 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/building.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/building.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/lights.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/addBuilding.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/addBuilding.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/mqtt/PhilipsHueMqttClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/mqtt/Mqtt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/lights.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lights.html" beforeDir="false" afterPath="$PROJECT_DIR$/lights.html" afterDir="false" />
     </list>
@@ -85,7 +71,9 @@
       <workItem from="1577277681846" duration="20520000" />
       <workItem from="1577308006981" duration="10516000" />
       <workItem from="1577377409898" duration="5950000" />
-      <workItem from="1577395320228" duration="3285000" />
+      <workItem from="1577395320228" duration="3787000" />
+      <workItem from="1577403393960" duration="101000" />
+      <workItem from="1577826393176" duration="3706000" />
     </task>
     <servers />
   </component>
@@ -105,9 +93,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="347" y="177" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1577296739527" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577198866990">
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577403457261">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1577198866990" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1577403457261" />
   </component>
 </project>

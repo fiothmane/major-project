@@ -48,7 +48,7 @@ public class LightController {
     }
 
     @PutMapping(path = "/{id}/switch")
-    public LightDto switchLigh(@PathVariable Long id, HttpServletResponse response) {
+    public LightDto switchLight(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Light light = lightDao.findById(id);
         Status currentStatus = light.getStatus();

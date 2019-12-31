@@ -2,6 +2,7 @@ package com.emse.spring.faircorp.DTO;
 
 import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Room;
+import com.emse.spring.faircorp.model.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class RoomDto {
     private String name;
 
     private int floor;
+
+    private Status autoLightControl;
 
     private List<Long> lightsIds;
 
@@ -27,6 +30,9 @@ public class RoomDto {
         this.id = room.getId();
         this.name = room.getName();
         this.floor = room.getFloor();
+        if (room.getAutoLightControl() != null) {
+            this.autoLightControl = room.getAutoLightControl();
+        }
         if (room.getRinger() != null) {
             this.ringerId = room.getRinger().getId();
         }
@@ -63,6 +69,14 @@ public class RoomDto {
 
     public void setFloor(int floor) {
         this.floor = floor;
+    }
+
+    public Status getAutoLightControl() {
+        return autoLightControl;
+    }
+
+    public void setAutoLightControl(Status autoLightControl) {
+        this.autoLightControl = autoLightControl;
     }
 
     public List<Long> getLightsIds() {

@@ -164,11 +164,28 @@ var app = new Vue({
                     this.deleteMessage = "problem"
                 })
         },
-        controlWithArduino (lightId) {
+        controlWithArduino(lightId) {
             /* Publish light id in topic in order for arduino to control the light */
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/arduino')
                 .then(response => console.log(response.status))
+        },
+        switchAutoLightControl(roomId) {
+            var elt = document.getElementById("auto" + roomId);
+            if (elt.className === "fas fa-toggle-on fa-2x") {
+                this.room.autoLightControl = "OFF"
+                elt.className = "fas fa-toggle-off fa-2x";
+            }
+            else {
+                this.room.autoLightControl = "ON";
+                elt.className = "fas fa-toggle-on fa-2x";
+            }
+            /* Change auto light control state in the rest api */
+            axios
+                .put('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId + '/auto-light-control')
+                .then((response) => {
+                    // console.log(response.data)
+                });
         }
     }
 })
