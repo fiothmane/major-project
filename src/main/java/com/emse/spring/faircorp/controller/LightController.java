@@ -61,6 +61,22 @@ public class LightController {
         return new LightDto(light);
     }
 
+    @PutMapping(path = "/{id}/switchOn")
+    public LightDto turnOnLight(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Light light = lightDao.findById(id);
+        light.setStatus(Status.ON);
+        return new LightDto(light);
+    }
+
+    @PutMapping(path = "/{id}/switchOff")
+    public LightDto turnOffLight(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Light light = lightDao.findById(id);
+        light.setStatus(Status.OFF);
+        return new LightDto(light);
+    }
+
     @PutMapping(path = "/{id}/level")
     public LightDto changeLevel(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
         addHeaders(response);

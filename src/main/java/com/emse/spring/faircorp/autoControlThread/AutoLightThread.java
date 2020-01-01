@@ -1,7 +1,6 @@
 package com.emse.spring.faircorp.autoControlThread;
 
 import com.emse.spring.faircorp.DTO.AutoLightDto;
-import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.model.Status;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -30,84 +30,203 @@ public class AutoLightThread extends Thread {
         this.roomId = roomId;
     }
 
+    public String getAutoLightControllers() {
+        try {
+            URL urlForGetRequest = new URL("https://walid-ouchtiti.cleverapps.io/api/autoLightControllers");
+            String readLine = null;
+            HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+            conection.setRequestMethod("GET");
+            int responseCode = conection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conection.getInputStream()));
+                StringBuffer response = new StringBuffer();
+                while ((readLine = in.readLine()) != null) {
+                    response.append(readLine);
+                }
+                in.close();
+
+                /* Return string result */
+                return response.toString();
+            }
+            else {
+                System.out.println("HTTP GET Error");
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getRoomLights(Long roomId) {
+        try {
+            URL urlForGetRequest = new URL("https://walid-ouchtiti.cleverapps.io/api/rooms/" + roomId);
+            String readLine = null;
+            HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+            conection.setRequestMethod("GET");
+            int responseCode = conection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(conection.getInputStream()));
+                StringBuffer response = new StringBuffer();
+                while ((readLine = in.readLine()) != null) {
+                    response.append(readLine);
+                }
+                in.close();
+
+                /* Return string result */
+                return response.toString();
+            }
+            else {
+                System.out.println("HTTP GET Error");
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void turnOffLight(Long lightId) {
+        try {
+            /* Rest Api */
+            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOff");
+            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+            httpCon.setDoOutput(true);
+            httpCon.setRequestMethod("PUT");
+            OutputStreamWriter out = new OutputStreamWriter(
+                    httpCon.getOutputStream());
+            out.write("");
+            out.close();
+            httpCon.getInputStream();
+
+            /* Philips hue */
+            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
+            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+            httpCon1.setDoOutput(true);
+            httpCon1.setRequestMethod("PUT");
+            OutputStreamWriter out1 = new OutputStreamWriter(
+                    httpCon1.getOutputStream());
+            out1.write("{\"on\": false}");
+            out1.close();
+            httpCon1.getInputStream();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnOnLight(Long lightId) {
+        try {
+            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOn");
+            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+            httpCon.setDoOutput(true);
+            httpCon.setRequestMethod("PUT");
+            OutputStreamWriter out = new OutputStreamWriter(
+                    httpCon.getOutputStream());
+            out.write("");
+            out.close();
+            httpCon.getInputStream();
+
+            /* Philips hue */
+            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
+            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+            httpCon1.setDoOutput(true);
+            httpCon1.setRequestMethod("PUT");
+            OutputStreamWriter out1 = new OutputStreamWriter(
+                    httpCon1.getOutputStream());
+            out1.write("{\"on\": true}");
+            out1.close();
+            httpCon1.getInputStream();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void run() {
         while(true) {
             try {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                URL urlForGetRequest = new URL("http://localhost:8080/api/autoLightControllers");
-                String readLine = null;
-                HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
-                conection.setRequestMethod("GET");
-                int responseCode = conection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(conection.getInputStream()));
-                    StringBuffer response = new StringBuffer();
-                    while ((readLine = in .readLine()) != null) {
-                        response.append(readLine);
-                    } in .close();
-                    // print result
-                    System.out.println("JSON String Result " + response.toString());
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+            try {
+                /* Get all auto light controllers */
+                String autoLights = this.getAutoLightControllers();
+
+                JSONParser parser = new JSONParser();
+                JSONArray obj = (JSONArray) parser.parse(autoLights.toString());
+
+                for (int i = 0; i < obj.size(); i++) {
+                    /* Retrieve the auto light controller and create object */
+                    JSONObject lightController = (JSONObject) obj.get(i);
+                    AutoLightDto autoLight = new AutoLightDto();
+                    autoLight.setRoomId((Long) lightController.get("roomId"));
+                    if (lightController.get("autoLightControlState") == "ON") {
+                        autoLight.setAutoLightControlState(Status.ON);
+                    }
+                    else {
+                        autoLight.setAutoLightControlState(Status.OFF);
+                    }
+                    autoLight.setId((Long) lightController.get("id"));
+                    autoLight.setSunriseTime(lightController.get("sunriseTime").toString());
+                    autoLight.setSunsetTime(lightController.get("sunsetTime").toString());
+
+                    /* Get current time */
+                    DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
+                    Date date = new Date();
+                    String currentDate = dateFormat.format(date).toString();
+
+                    /* Compare current time to given time */
                     try {
-                        JSONParser parser = new JSONParser();
-                        JSONArray obj = (JSONArray) parser.parse(response.toString());
+                        /* Get the rooms lights */
+                        String lights = this.getRoomLights(autoLight.getRoomId());
+                        JSONObject jsonObject = (JSONObject) parser.parse(lights);
+                        JSONArray allRoomLights = (JSONArray) jsonObject.get("lightsIds");
 
-                        for (int i = 0; i < obj.size(); i++) {
-                            /* Retrieve the auto light controller and create object */
-                            JSONObject lightController = (JSONObject) obj.get(i);
-                            AutoLightDto autoLight = new AutoLightDto();
-                            autoLight.setRoomId((Long) lightController.get("roomId"));
-                            if (lightController.get("autoLightControlState") == "ON") {
-                                autoLight.setAutoLightControlState(Status.ON);
+                        /* If it's day time (lights off) */
+                        if ((dateFormat.parse(currentDate).after(dateFormat.parse(autoLight.getSunriseTime()))) &&
+                                (dateFormat.parse(currentDate).before(dateFormat.parse(autoLight.getSunsetTime())))) {
+                            /* Turn off the lights of the room */
+                            for (int j = 0; j < allRoomLights.size(); j++) {
+                                this.turnOffLight((Long) allRoomLights.get(j));
                             }
-                            else {
-                                autoLight.setAutoLightControlState(Status.OFF);
+                        }
+                        /* If it's night time (lights on) */
+                        else {
+                            /* Turn on the lights of the room */
+                            for (int j = 0; j < allRoomLights.size(); j++) {
+                                this.turnOnLight((Long) allRoomLights.get(j));
                             }
-                            autoLight.setId((Long) lightController.get("id"));
-                            System.out.println("HEEEEEEEEEEERE " + lightController.get("sunriseTime"));
-                            autoLight.setSunriseTime(lightController.get("sunriseTime").toString());
-                            autoLight.setSunsetTime(lightController.get("sunsetTime").toString());
-
-                            /* Get current time */
-                            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
-                            Date date = new Date();
-                            System.out.println(dateFormat.format(date));
-                            String currentDate = dateFormat.format(date).toString();
-                            System.out.println(currentDate);
-                            System.out.println("here " + autoLight.getSunriseTime());
-
-
-//                            try {
-//                                System.out.println((dateFormat.parse(currentDate).before(dateFormat.parse(autoLight.getSunriseTime()))));
-//
-//                            } catch (java.text.ParseException e) {
-//                                e.printStackTrace();
-//                            }
-
                         }
 
-                    } catch (ParseException e) {
+                    } catch (java.text.ParseException e) {
                         e.printStackTrace();
                     }
 
-
-                    //GetAndPost.POSTRequest(response.toString());
-                }
-                else {
-                    System.out.println("GET NOT WORKED");
                 }
 
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }

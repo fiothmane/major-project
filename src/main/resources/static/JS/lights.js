@@ -24,7 +24,7 @@ var app = new Vue({
     methods : {
         getRoomAutoLightControllerInfo() {
             axios
-                .get('http://localhost:8080/api/autoLightControllers/')
+                .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
                 .then(response => {
                     var autoLightControllers = response.data;
                     for (var i = 0; i < autoLightControllers.length; i++) {
@@ -206,14 +206,14 @@ var app = new Vue({
                         var sunTimes = response.data;
                         /* Get the room's auto light controller id */
                         axios
-                            .get('http://localhost:8080/api/autoLightControllers/')
+                            .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
                             .then(response => {
                                 var autoLightControlers = response.data;
                                 for (var i = 0; i < autoLightControlers.length; i++) {
                                     if (autoLightControlers[i].roomId == roomId) {
                                         /* Switch the state of the auto controller */
                                         axios
-                                            .put('http://localhost:8080/api/autoLightControllers/' + autoLightControlers[i].id + '/switch')
+                                            .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/switch')
                                             .then((response) => {
                                                 // console.log(response.data)
                                             });
@@ -224,7 +224,7 @@ var app = new Vue({
                                             sunsetTime: sunTimes.results.sunset,
                                         };
                                         axios
-                                            .put('http://localhost:8080/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
+                                            .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
                                             .then((response) => {
                                                 // console.log(response.data)
                                             });
