@@ -3,12 +3,18 @@ package com.emse.spring.faircorp.DTO;
 import com.emse.spring.faircorp.model.AutoLight;
 import com.emse.spring.faircorp.model.Status;
 
+import javax.persistence.Column;
+
 public class AutoLightDto {
     private Long id;
 
     private String sunriseTime;
 
     private String sunsetTime;
+
+    private String latitude;
+
+    private String longitude;
 
     private Status autoLightControlState;
 
@@ -25,6 +31,12 @@ public class AutoLightDto {
         }
         if (autoLight.getSunsetTime() != null) {
             this.sunsetTime = autoLight.getSunsetTime();
+        }
+        if (autoLight.getLatitude() != null) {
+            this.latitude = autoLight.getLatitude();
+        }
+        if (autoLight.getLongitude() != null) {
+            this.longitude = autoLight.getLongitude();
         }
         this.autoLightControlState = autoLight.getAutoLightControlState();
         if (autoLight.getRoom() != null) {
@@ -54,6 +66,22 @@ public class AutoLightDto {
 
     public void setSunsetTime(String sunsetTime) {
         this.sunsetTime = sunsetTime;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public Status getAutoLightControlState() {

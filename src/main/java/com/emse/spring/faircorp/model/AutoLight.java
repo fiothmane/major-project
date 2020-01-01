@@ -14,6 +14,12 @@ public class AutoLight {
     @Column
     private String sunsetTime;
 
+    @Column
+    private String latitude;
+
+    @Column
+    private String longitude;
+
     @Enumerated(EnumType.STRING)
     private Status autoLightControlState;
 
@@ -24,10 +30,12 @@ public class AutoLight {
 
     }
 
-    public AutoLight(Long id, String sunriseTime, String sunsetTime, Status autoLightControlState, Room room) {
+    public AutoLight(Long id, String sunriseTime, String sunsetTime, String latitude, String longitude, Status autoLightControlState, Room room) {
         this.id = id;
         this.sunriseTime = sunriseTime;
         this.sunsetTime = sunsetTime;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.autoLightControlState = autoLightControlState;
         this.room = room;
     }
@@ -54,6 +62,22 @@ public class AutoLight {
 
     public void setSunsetTime(String sunsetTime) {
         this.sunsetTime = sunsetTime;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public Status getAutoLightControlState() {

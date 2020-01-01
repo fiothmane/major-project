@@ -222,6 +222,8 @@ var app = new Vue({
                                         const requestBody = {
                                             sunriseTime: sunTimes.results.sunrise,
                                             sunsetTime: sunTimes.results.sunset,
+                                            latitude: position.coords.latitude,
+                                            longitude: position.coords.longitude,
                                         };
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
