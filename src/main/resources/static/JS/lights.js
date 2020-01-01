@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data () {
         return {
+            roomController: null,
             room: null,
             roomId: null,
             lights: null,
@@ -13,6 +14,7 @@ var app = new Vue({
     mounted () {
         this.getFunction();
         this.getRoomInfo();
+        this.getRoomAutoLightControllerInfo();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -20,6 +22,19 @@ var app = new Vue({
         this.roomId = urlParams.get("room");
     },
     methods : {
+        getRoomAutoLightControllerInfo() {
+            axios
+                .get('http://localhost:8080/api/autoLightControllers/')
+                .then(response => {
+                    var autoLightControllers = response.data;
+                    for (var i = 0; i < autoLightControllers.length; i++) {
+                        if (autoLightControllers[i].roomId == this.roomId) {
+                            this.roomController = autoLightControllers[i];
+                            break;
+                        }
+                    }
+                })
+        },
         getRoomInfo() {
             /* Add room name as title in the page once loaded */
             axios
@@ -171,21 +186,55 @@ var app = new Vue({
                 .then(response => console.log(response.status))
         },
         switchAutoLightControl(roomId) {
+            /* Change the page icons */
             var elt = document.getElementById("auto" + roomId);
             if (elt.className === "fas fa-toggle-on fa-2x") {
-                this.room.autoLightControl = "OFF"
+                this.roomController.autoLightControlState = "OFF"
                 elt.className = "fas fa-toggle-off fa-2x";
             }
             else {
-                this.room.autoLightControl = "ON";
+                this.roomController.autoLightControlState = "ON";
                 elt.className = "fas fa-toggle-on fa-2x";
             }
-            /* Change auto light control state in the rest api */
-            axios
-                .put('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId + '/auto-light-control')
-                .then((response) => {
-                    // console.log(response.data)
-                });
+
+            /* Get user position */
+            navigator.geolocation.getCurrentPosition(function(position) {
+                /* Get sunset and sunrise hours */
+                axios
+                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today' + '&date=today')
+                    .then(response => {
+                        var sunTimes = response.data;
+                        /* Get the room's auto light controller id */
+                        axios
+                            .get('http://localhost:8080/api/autoLightControllers/')
+                            .then(response => {
+                                var autoLightControlers = response.data;
+                                for (var i = 0; i < autoLightControlers.length; i++) {
+                                    if (autoLightControlers[i].roomId == roomId) {
+                                        /* Switch the state of the auto controller */
+                                        axios
+                                            .put('http://localhost:8080/api/autoLightControllers/' + autoLightControlers[i].id + '/switch')
+                                            .then((response) => {
+                                                // console.log(response.data)
+                                            });
+
+                                        /* Change sunset and sunrise info */
+                                        const requestBody = {
+                                            sunriseTime: sunTimes.results.sunrise,
+                                            sunsetTime: sunTimes.results.sunset,
+                                        };
+                                        axios
+                                            .put('http://localhost:8080/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
+                                            .then((response) => {
+                                                // console.log(response.data)
+                                            });
+                                    }
+                                }
+                            })
+
+                    })
+
+            });
         }
     }
 })

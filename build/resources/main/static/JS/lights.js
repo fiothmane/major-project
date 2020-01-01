@@ -171,21 +171,41 @@ var app = new Vue({
                 .then(response => console.log(response.status))
         },
         switchAutoLightControl(roomId) {
-            var elt = document.getElementById("auto" + roomId);
-            if (elt.className === "fas fa-toggle-on fa-2x") {
-                this.room.autoLightControl = "OFF"
-                elt.className = "fas fa-toggle-off fa-2x";
-            }
-            else {
-                this.room.autoLightControl = "ON";
-                elt.className = "fas fa-toggle-on fa-2x";
-            }
-            /* Change auto light control state in the rest api */
-            axios
-                .put('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId + '/auto-light-control')
-                .then((response) => {
-                    // console.log(response.data)
-                });
+            /* Get user position */
+            navigator.geolocation.getCurrentPosition(function(position) {
+                /* Get sunset and sunrise hours */
+                axios
+                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today' + '&date=today')
+                    .then(response => {
+                        var sunTimes = response.data;
+                        console.log(sunTimes.results.sunrise + " " + sunTimes.results.sunset)
+
+                        /* Get the room's auto light controller id */
+                        axios
+                            .get('https://walid-ouchtiti.cleverapps.io/api/rooms/')
+                            .then(response => {
+                                var sunTimes = response.data;
+                            })
+
+                    })
+
+            });
+
+            // var elt = document.getElementById("auto" + roomId);
+            // if (elt.className === "fas fa-toggle-on fa-2x") {
+            //     this.room.autoLightControl = "OFF"
+            //     elt.className = "fas fa-toggle-off fa-2x";
+            // }
+            // else {
+            //     this.room.autoLightControl = "ON";
+            //     elt.className = "fas fa-toggle-on fa-2x";
+            // }
+            // /* Change auto light control state in the rest api */
+            // axios
+            //     .put('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId + '/auto-light-control')
+            //     .then((response) => {
+            //         // console.log(response.data)
+            //     });
         }
     }
 })

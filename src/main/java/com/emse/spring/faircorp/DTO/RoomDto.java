@@ -14,11 +14,11 @@ public class RoomDto {
 
     private int floor;
 
-    private Status autoLightControl;
-
     private List<Long> lightsIds;
 
     private Long ringerId;
+
+    private Long autoLightControlId;
 
     private Long buildingId;
 
@@ -31,7 +31,7 @@ public class RoomDto {
         this.name = room.getName();
         this.floor = room.getFloor();
         if (room.getAutoLightControl() != null) {
-            this.autoLightControl = room.getAutoLightControl();
+            this.autoLightControlId = room.getAutoLightControl().getId();
         }
         if (room.getRinger() != null) {
             this.ringerId = room.getRinger().getId();
@@ -71,14 +71,6 @@ public class RoomDto {
         this.floor = floor;
     }
 
-    public Status getAutoLightControl() {
-        return autoLightControl;
-    }
-
-    public void setAutoLightControl(Status autoLightControl) {
-        this.autoLightControl = autoLightControl;
-    }
-
     public List<Long> getLightsIds() {
         return lightsIds;
     }
@@ -93,6 +85,14 @@ public class RoomDto {
 
     public void setRingerId(Long ringerId) {
         this.ringerId = ringerId;
+    }
+
+    public Long getAutoLightControlId() {
+        return autoLightControlId;
+    }
+
+    public void setAutoLightControlId(Long autoLightControlId) {
+        this.autoLightControlId = autoLightControlId;
     }
 
     public Long getBuildingId() {

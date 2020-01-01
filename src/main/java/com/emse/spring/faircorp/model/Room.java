@@ -16,14 +16,14 @@ public class Room {
     @Column(nullable = false)
     private int floor;
 
-    @Enumerated(EnumType.STRING)
-    private Status autoLightControl;
-
     @OneToMany(mappedBy = "room")
     private List<Light> lights;
 
     @OneToOne(mappedBy = "room")
     private Ringer ringer;
+
+    @OneToOne(mappedBy = "room")
+    private AutoLight autoLightControl;
 
     @ManyToOne
     private Building building;
@@ -32,7 +32,7 @@ public class Room {
 
     }
 
-    public Room(Long id, String name, int floor, Status autoLightControl, List<Light> lights, Ringer ringer, Building building) {
+    public Room(Long id, String name, int floor, AutoLight autoLightControl, List<Light> lights, Ringer ringer, Building building) {
         this.id = id;
         this.name = name;
         this.floor = floor;
@@ -66,14 +66,6 @@ public class Room {
         this.floor = floor;
     }
 
-    public Status getAutoLightControl() {
-        return autoLightControl;
-    }
-
-    public void setAutoLightControl(Status autoLightControl) {
-        this.autoLightControl = autoLightControl;
-    }
-
     public List<Light> getLights() {
         return lights;
     }
@@ -88,6 +80,14 @@ public class Room {
 
     public void setRinger(Ringer ringer) {
         this.ringer = ringer;
+    }
+
+    public AutoLight getAutoLightControl() {
+        return autoLightControl;
+    }
+
+    public void setAutoLightControl(AutoLight autoLightControl) {
+        this.autoLightControl = autoLightControl;
     }
 
     public Building getBuilding() {

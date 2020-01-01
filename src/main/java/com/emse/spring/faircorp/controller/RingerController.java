@@ -51,7 +51,6 @@ public class RingerController {
     public RingerDto switchRinger(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Ringer ringer = ringerDao.findById(id);
-        System.out.println("ICIIIII : " + ringer.getStatus());
         Status currentStatus = ringer.getStatus();
         if (currentStatus.equals(Status.ON)) {
             ringer.setStatus(Status.OFF);

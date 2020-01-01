@@ -1,9 +1,6 @@
 package com.emse.spring.faircorp.controller;
 
-import com.emse.spring.faircorp.DAO.BuildingDao;
-import com.emse.spring.faircorp.DAO.LightDao;
-import com.emse.spring.faircorp.DAO.RingerDao;
-import com.emse.spring.faircorp.DAO.RoomDao;
+import com.emse.spring.faircorp.DAO.*;
 import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.DTO.RoomDto;
 import com.emse.spring.faircorp.model.*;
@@ -29,6 +26,8 @@ public class RoomController {
     private RingerDao ringerDao;
     @Autowired
     private BuildingDao buildingDao;
+    @Autowired
+    private AutoLightDao autoLightDao;
 
     public void addHeaders (HttpServletResponse response) {
         response.addHeader("access-control-allow-credentials", "true");
@@ -69,20 +68,6 @@ public class RoomController {
         return new RoomDto(room);
     }
 
-    @PutMapping(path = "/{id}/auto-light-control")
-    public RoomDto switchAutoLightControl(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
-        Room room = roomDao.findRoomById(id);
-        Status currentStatus = room.getAutoLightControl();
-        if (currentStatus.equals(Status.ON)) {
-            room.setAutoLightControl(Status.OFF);
-        }
-        else {
-            room.setAutoLightControl(Status.ON);
-        }
-        return new RoomDto(room);
-    }
-
     @PostMapping
     public RoomDto createRoom(@RequestBody RoomDto roomDto, HttpServletResponse response) {
         addHeaders(response);
@@ -104,9 +89,12 @@ public class RoomController {
         if (roomDto.getFloor() != -999) {
             floor = roomDto.getFloor();
         }
-        Status autoLightControl = Status.ON;
+        AutoLight autoLight = null;
+        if (roomDto.getAutoLightControlId() != null) {
+            autoLight = autoLightDao.findAutoLightById(roomDto.getAutoLightControlId());
+        }
 
-        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoLightControl, roomLights, ringer, building);
+        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoLight, roomLights, ringer, building);
         roomDao.save(room);
         if (ringer != null) {
             ringer.setRoom(room);
