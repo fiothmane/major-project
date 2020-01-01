@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/autoControlThread/AutoLightThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/autoControlThread/AutoLightThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/autoControlThread/AutoLightThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/autoControlThread/AutoLightThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/lights.js" afterDir="false" />
@@ -85,7 +84,7 @@
       <workItem from="1577403393960" duration="101000" />
       <workItem from="1577826393176" duration="4635000" />
       <workItem from="1577902072039" duration="3686000" />
-      <workItem from="1577911389965" duration="2307000" />
+      <workItem from="1577911389965" duration="3772000" />
     </task>
     <servers />
   </component>

@@ -15,12 +15,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-public class AutoLightThread extends Thread {
-    public AutoLightThread() {
+public class SunriseSunsetAutoRefresh extends Thread {
+    public SunriseSunsetAutoRefresh() {
 
     }
 
@@ -57,9 +55,9 @@ public class AutoLightThread extends Thread {
         return null;
     }
 
-    public String getRoomLights(Long roomId) {
+    public String getSunriseAndSunsetTimes(String latitude, String longitude) {
         try {
-            URL urlForGetRequest = new URL("https://walid-ouchtiti.cleverapps.io/api/rooms/" + roomId);
+            URL urlForGetRequest = new URL("https://api.sunrise-sunset.org/json?lat=" + latitude + "&lng=" + longitude + "&date=today");
             String readLine = null;
             HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
             conection.setRequestMethod("GET");
@@ -90,63 +88,19 @@ public class AutoLightThread extends Thread {
         return null;
     }
 
-    public void turnOffLight(Long lightId) {
+    public void updateSunriseSunsetTimes(Long lightControllerId, String sunriseTime, String sunsetTime) {
         try {
             /* Rest Api */
-            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOff");
+            URL url = new URL("https://walid-ouchtiti.cleverapps.io/autoLightControllers/" + lightControllerId + "/sunset-sunrise");
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+            httpCon.setRequestProperty("Content-Type", "application/json; charset=utf8");
             httpCon.setDoOutput(true);
             httpCon.setRequestMethod("PUT");
             OutputStreamWriter out = new OutputStreamWriter(
                     httpCon.getOutputStream());
-            out.write("");
+            out.write("{\"sunriseTime\": \"" + sunriseTime + "\", \"sunsetTime\": \"" + sunsetTime + "\"}");
             out.close();
             httpCon.getInputStream();
-
-            /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
-            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-            httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-            httpCon1.setDoOutput(true);
-            httpCon1.setRequestMethod("PUT");
-            OutputStreamWriter out1 = new OutputStreamWriter(
-                    httpCon1.getOutputStream());
-            out1.write("{\"on\": false}");
-            out1.close();
-            httpCon1.getInputStream();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void turnOnLight(Long lightId) {
-        try {
-            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOn");
-            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-            httpCon.setDoOutput(true);
-            httpCon.setRequestMethod("PUT");
-            OutputStreamWriter out = new OutputStreamWriter(
-                    httpCon.getOutputStream());
-            out.write("");
-            out.close();
-            httpCon.getInputStream();
-
-            /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
-            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-            httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-            httpCon1.setDoOutput(true);
-            httpCon1.setRequestMethod("PUT");
-            OutputStreamWriter out1 = new OutputStreamWriter(
-                    httpCon1.getOutputStream());
-            out1.write("{\"on\": true}");
-            out1.close();
-            httpCon1.getInputStream();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -160,8 +114,9 @@ public class AutoLightThread extends Thread {
     @Override
     public void run() {
         while(true) {
+            /* Refresh every 24 hours */
             try {
-                Thread.sleep(60000);
+                TimeUnit.HOURS.sleep(24);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -190,37 +145,14 @@ public class AutoLightThread extends Thread {
                     autoLight.setLatitude(lightController.get("latitude").toString());
                     autoLight.setLongitude(lightController.get("longitude").toString());
 
-                    /* Get current time */
-                    DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
-                    Date date = new Date();
-                    String currentDate = dateFormat.format(date).toString();
+                    /* Get new sunrise and sunset times */
+                    String sunriseSunset = this.getSunriseAndSunsetTimes(autoLight.getLatitude(), autoLight.getLongitude());
+                    JSONObject object = (JSONObject) parser.parse(sunriseSunset);
+                    JSONObject info = (JSONObject) object.get("results");
 
-                    /* Compare current time to given time */
-                    try {
-                        /* Get the rooms lights */
-                        String lights = this.getRoomLights(autoLight.getRoomId());
-                        JSONObject jsonObject = (JSONObject) parser.parse(lights);
-                        JSONArray allRoomLights = (JSONArray) jsonObject.get("lightsIds");
 
-                        /* If it's day time (lights off) */
-                        if ((dateFormat.parse(currentDate).after(dateFormat.parse(autoLight.getSunriseTime()))) &&
-                                (dateFormat.parse(currentDate).before(dateFormat.parse(autoLight.getSunsetTime())))) {
-                            /* Turn off the lights of the room */
-                            for (int j = 0; j < allRoomLights.size(); j++) {
-                                this.turnOffLight((Long) allRoomLights.get(j));
-                            }
-                        }
-                        /* If it's night time (lights on) */
-                        else {
-                            /* Turn on the lights of the room */
-                            for (int j = 0; j < allRoomLights.size(); j++) {
-                                this.turnOnLight((Long) allRoomLights.get(j));
-                            }
-                        }
-
-                    } catch (java.text.ParseException e) {
-                        e.printStackTrace();
-                    }
+                    /* Change sunset and sunrise times */
+                    this.updateSunriseSunsetTimes(autoLight.getId(), info.get("sunrise").toString(), info.get("sunset").toString());
 
                 }
 

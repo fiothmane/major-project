@@ -201,7 +201,7 @@ var app = new Vue({
             navigator.geolocation.getCurrentPosition(function(position) {
                 /* Get sunset and sunrise hours */
                 axios
-                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today' + '&date=today')
+                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today')
                     .then(response => {
                         var sunTimes = response.data;
                         /* Get the room's auto light controller id */

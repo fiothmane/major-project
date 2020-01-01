@@ -201,7 +201,7 @@ var app = new Vue({
             navigator.geolocation.getCurrentPosition(function(position) {
                 /* Get sunset and sunrise hours */
                 axios
-                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today' + '&date=today')
+                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today')
                     .then(response => {
                         var sunTimes = response.data;
                         /* Get the room's auto light controller id */
@@ -225,9 +225,8 @@ var app = new Vue({
                                             latitude: position.coords.latitude,
                                             longitude: position.coords.longitude,
                                         };
-                                        console.log(position.coords.latitude)
                                         axios
-                                            .put('http://localhost:8080/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
+                                            .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
                                             .then((response) => {
                                                 // console.log(response.data)
                                             });
