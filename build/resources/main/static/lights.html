@@ -71,12 +71,12 @@
             <table class="table table-bordered" style="width:30%; margin-top: 30px;">
                 <thead class="thead-dark">
                 <tr>
-                    <th class="text-center"><b>Auto Light Control: Sunset - Sunrise</b></th>
+                    <th class="text-center"><b>Auto Light Control: Sunrise - Sunset</b></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="text-center" v-if="room.autoLightControl === 'ON'" @click="switchAutoLightControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-off fa-2x"></i></td>
+                    <td class="text-center" v-if="roomController.autoLightControlState === 'OFF'" @click="switchAutoLightControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-off fa-2x"></i></td>
                     <td class="text-center" v-else @click="switchAutoLightControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-on fa-2x"></i></td>
                 </tr>
                 </tbody>

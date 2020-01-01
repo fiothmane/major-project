@@ -92,7 +92,7 @@ var addRoom = new Vue({
                     // window.location.href = "building.html"
                     this.room = response.data;
 
-                    /* Add the auto light controler for the room */
+                    /* Add the auto light controller for the room */
                     const requestBody2 = {
                         sunriseTime: "07:00:00",
                         sunsetTime: "20:00:00",
@@ -100,7 +100,7 @@ var addRoom = new Vue({
                         roomId: this.room.id,
                     };
                     axios
-                        .post('https://walid-ouchtiti.cleverapps.io/api/autoLightControlers', requestBody2, {
+                        .post('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers', requestBody2, {
                             headers: {
                                 "Accept": "application/json",
                                 "Content-Type": "application/json;charset=UTF-8",

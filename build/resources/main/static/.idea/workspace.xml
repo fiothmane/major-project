@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/DTO/RoomDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/DTO/RoomDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/FaircorpApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/FaircorpApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RingerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RingerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RoomController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/model/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/model/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/DTO/RoomDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/DTO/RoomDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/FaircorpApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/FaircorpApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RingerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RingerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JS/addRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addRoom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/lights.js" afterDir="false" />
-    </list>
+    <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +71,7 @@
       <workItem from="1577395320228" duration="3787000" />
       <workItem from="1577403393960" duration="101000" />
       <workItem from="1577826393176" duration="4635000" />
-      <workItem from="1577902072039" duration="1730000" />
+      <workItem from="1577902072039" duration="3686000" />
     </task>
     <servers />
   </component>
