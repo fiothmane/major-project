@@ -1,8 +1,6 @@
 package com.emse.spring.faircorp.DTO;
 
-import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Room;
-import com.emse.spring.faircorp.model.Status;
 
 import java.util.ArrayList;
 import java.util.List;
