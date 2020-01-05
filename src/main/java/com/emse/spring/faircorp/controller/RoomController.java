@@ -106,6 +106,10 @@ public class RoomController {
             ringer.setRoom(room);
             ringerDao.updateRinger(ringer);
         }
+        if (thermostat != null) {
+            thermostat.setRoom(room);
+            thermostatDao.updateThermostat(thermostat);
+        }
         if (roomLights != null) {
             for (int i = 0; i < roomLights.size(); i++) {
                 roomLights.get(i).setRoom(room);

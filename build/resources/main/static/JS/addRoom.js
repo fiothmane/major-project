@@ -7,12 +7,14 @@ var addRoom = new Vue({
             buildings: null,
             lights: null,
             ringers: null,
+            thermostats: null,
             /* Form data (v-model) */
             floor: 0,
             roomName: "",
             buildingId: "",
             lightList: [],
             ringerId: "",
+            thermostatId: "",
             /* Error handling */
             error: null,
         }
@@ -21,6 +23,7 @@ var addRoom = new Vue({
         this.getBuildings();
         this.getLights();
         this.getRingers();
+        this.getThermostats();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -66,6 +69,11 @@ var addRoom = new Vue({
                 .get('https://walid-ouchtiti.cleverapps.io/api/ringers')
                 .then(response => (this.ringers = response.data))
         },
+        getThermostats() {
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/thermostats')
+                .then(response => (this.thermostats = response.data))
+        },
         addRoom() {
             if (document.getElementById("floor").disabled === true) {
                 this.floor = -10;
@@ -75,6 +83,7 @@ var addRoom = new Vue({
                 floor: this.floor,
                 lightsIds: this.lightList,
                 ringerId: this.ringerId,
+                thermostatId: this.thermostatId,
                 buildingId: this.buildingId,
             };
             axios

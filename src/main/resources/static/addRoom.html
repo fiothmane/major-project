@@ -86,6 +86,13 @@
             <option v-for="ringer in ringers" v-bind:value="ringer.id">{{ringer.id}}</option>
         </select>
 
+        <!-- Thermostat -->
+        <label class="float-left">Thermostat</label>
+        <select class="browser-default custom-select mb-4" id="thermostat" v-model="thermostatId">
+            <option value="" disabled selected>Choose a thermostat</option>
+            <option v-for="thermostat in thermostats" v-bind:value="thermostat.id">{{thermostat.id}}</option>
+        </select>
+
         <!-- Send button -->
         <button class="btn btn-success btn-block" type="submit">Submit</button>
     </form>
