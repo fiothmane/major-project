@@ -74,11 +74,20 @@
             <table class="table table-bordered" style="width:30%; margin-top: 30px;">
                 <thead class="thead-dark">
                 <tr>
-                    <th class="text-center"><b>Auto Light Control: Sunrise - Sunset</b></th>
+                    <th class="text-center" colspan="2"><b>Auto Thermostat Control: Minimum temperature</b></th>
+                </tr>
+                <tr>
+                    <th class="text-center"><b>Minimum Temperature</b></th>
+                    <th class="text-center"><b>Switch Auto Control</b></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <td class="text-center">
+                        <input type="number" min="0" max="20" v-bind:value="roomController.minTemperature" class="form-control mb-4" v-bind:id="'minTemperature'+room.id">
+                        <button type="button" class="btn btn-success" v-on:click="changeThermostatLevel(thermostat.id)">Change temperature</button>
+                    </td>
+
                     <td class="text-center" v-if="roomController.autoThermostatControlState === 'OFF'" @click="switchAutoThermostatControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-off fa-2x"></i></td>
                     <td class="text-center" v-else @click="switchAutoThermostatControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-on fa-2x"></i></td>
                 </tr>

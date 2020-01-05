@@ -30,8 +30,8 @@ public class RoomDto {
         this.id = room.getId();
         this.name = room.getName();
         this.floor = room.getFloor();
-        if (room.getAutoLightControl() != null) {
-            this.autoLightControlId = room.getAutoLightControl().getId();
+        if (room.getAutoControllerControl() != null) {
+            this.autoLightControlId = room.getAutoControllerControl().getId();
         }
         if (room.getRinger() != null) {
             this.ringerId = room.getRinger().getId();

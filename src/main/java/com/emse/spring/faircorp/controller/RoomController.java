@@ -1,10 +1,8 @@
 package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.*;
-import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.DTO.RoomDto;
 import com.emse.spring.faircorp.model.*;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +27,7 @@ public class RoomController {
     @Autowired
     private BuildingDao buildingDao;
     @Autowired
-    private AutoLightDao autoLightDao;
+    private AutoControllerDao autoControllerDao;
 
     public void addHeaders (HttpServletResponse response) {
         response.addHeader("access-control-allow-credentials", "true");
@@ -95,12 +93,12 @@ public class RoomController {
         if (roomDto.getFloor() != -999) {
             floor = roomDto.getFloor();
         }
-        AutoLight autoLight = null;
+        AutoController autoController = null;
         if (roomDto.getAutoLightControlId() != null) {
-            autoLight = autoLightDao.findAutoLightById(roomDto.getAutoLightControlId());
+            autoController = autoControllerDao.findAutoLightById(roomDto.getAutoLightControlId());
         }
 
-        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoLight, roomLights, ringer, thermostat, building);
+        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoController, roomLights, ringer, thermostat, building);
         roomDao.save(room);
         if (ringer != null) {
             ringer.setRoom(room);

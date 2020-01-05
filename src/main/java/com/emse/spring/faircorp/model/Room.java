@@ -26,7 +26,7 @@ public class Room {
     private Thermostat thermostat;
 
     @OneToOne(mappedBy = "room")
-    private AutoLight autoLightControl;
+    private AutoController autoControllerControl;
 
     @ManyToOne
     private Building building;
@@ -35,11 +35,11 @@ public class Room {
 
     }
 
-    public Room(Long id, String name, int floor, AutoLight autoLightControl, List<Light> lights, Ringer ringer, Thermostat thermostat, Building building) {
+    public Room(Long id, String name, int floor, AutoController autoControllerControl, List<Light> lights, Ringer ringer, Thermostat thermostat, Building building) {
         this.id = id;
         this.name = name;
         this.floor = floor;
-        this.autoLightControl = autoLightControl;
+        this.autoControllerControl = autoControllerControl;
         this.lights = lights;
         this.ringer = ringer;
         this.thermostat = thermostat;
@@ -94,12 +94,12 @@ public class Room {
         this.thermostat = thermostat;
     }
 
-    public AutoLight getAutoLightControl() {
-        return autoLightControl;
+    public AutoController getAutoControllerControl() {
+        return autoControllerControl;
     }
 
-    public void setAutoLightControl(AutoLight autoLightControl) {
-        this.autoLightControl = autoLightControl;
+    public void setAutoControllerControl(AutoController autoControllerControl) {
+        this.autoControllerControl = autoControllerControl;
     }
 
     public Building getBuilding() {

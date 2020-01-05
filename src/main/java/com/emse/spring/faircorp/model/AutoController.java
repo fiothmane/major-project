@@ -1,48 +1,51 @@
-package com.emse.spring.faircorp.DTO;
+package com.emse.spring.faircorp.model;
 
-import com.emse.spring.faircorp.model.AutoLight;
-import com.emse.spring.faircorp.model.Status;
+import javax.persistence.*;
 
-public class AutoLightDto {
+@Entity
+public class AutoController {
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column
     private String sunriseTime;
 
+    @Column
     private String sunsetTime;
 
+    @Column
+    private String minTemperature;
+
+    @Column
     private String latitude;
 
+    @Column
     private String longitude;
 
+    @Enumerated(EnumType.STRING)
     private Status autoLightControlState;
 
+    @Enumerated(EnumType.STRING)
     private Status autoThermostatControlState;
 
-    private Long roomId;
+    @OneToOne
+    private Room room;
 
-    public AutoLightDto() {
+    public AutoController() {
 
     }
 
-    public AutoLightDto(AutoLight autoLight) {
-        this.id = autoLight.getId();
-        if (autoLight.getSunriseTime() != null) {
-            this.sunriseTime = autoLight.getSunriseTime();
-        }
-        if (autoLight.getSunsetTime() != null) {
-            this.sunsetTime = autoLight.getSunsetTime();
-        }
-        if (autoLight.getLatitude() != null) {
-            this.latitude = autoLight.getLatitude();
-        }
-        if (autoLight.getLongitude() != null) {
-            this.longitude = autoLight.getLongitude();
-        }
-        this.autoLightControlState = autoLight.getAutoLightControlState();
-        this.autoThermostatControlState = autoLight.getAutoThermostatControlState();
-        if (autoLight.getRoom() != null) {
-            this.roomId = autoLight.getRoom().getId();
-        }
+    public AutoController(Long id, String sunriseTime, String sunsetTime, String minTemperature, String latitude, String longitude, Status autoLightControlState, Status autoThermostatControlState, Room room) {
+        this.id = id;
+        this.sunriseTime = sunriseTime;
+        this.sunsetTime = sunsetTime;
+        this.minTemperature = minTemperature;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.autoLightControlState = autoLightControlState;
+        this.autoThermostatControlState = autoThermostatControlState;
+        this.room = room;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class AutoLightDto {
 
     public void setSunsetTime(String sunsetTime) {
         this.sunsetTime = sunsetTime;
+    }
+
+    public String getMinTemperature() {
+        return minTemperature;
+    }
+
+    public void setMinTemperature(String minTemperature) {
+        this.minTemperature = minTemperature;
     }
 
     public String getLatitude() {
@@ -101,11 +112,11 @@ public class AutoLightDto {
         this.autoThermostatControlState = autoThermostatControlState;
     }
 
-    public Long getRoomId() {
-        return roomId;
+    public com.emse.spring.faircorp.model.Room getRoom() {
+        return room;
     }
 
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
+    public void setRoom(com.emse.spring.faircorp.model.Room room) {
+        room = room;
     }
 }
