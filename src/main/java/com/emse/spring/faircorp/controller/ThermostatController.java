@@ -2,7 +2,9 @@ package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DAO.ThermostatDao;
+import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.DTO.ThermostatDto;
+import com.emse.spring.faircorp.model.Light;
 import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
 import com.emse.spring.faircorp.model.Thermostat;
@@ -57,6 +59,22 @@ public class ThermostatController {
         else {
             thermostat.setStatus(Status.ON);
         }
+        return new ThermostatDto(thermostat);
+    }
+
+    @PutMapping(path = "/{id}/switchOn")
+    public ThermostatDto turnOnThermostat(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Thermostat thermostat = thermostatDao.findById(id);
+        thermostat.setStatus(Status.ON);
+        return new ThermostatDto(thermostat);
+    }
+
+    @PutMapping(path = "/{id}/switchOff")
+    public ThermostatDto turnOffThermostat(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Thermostat thermostat = thermostatDao.findById(id);
+        thermostat.setStatus(Status.OFF);
         return new ThermostatDto(thermostat);
     }
 

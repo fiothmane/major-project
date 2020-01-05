@@ -18,13 +18,14 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
-public class AutoLightThread extends Thread {
-    public AutoLightThread() {
+public class AutoThermostatThread extends Thread {
+    public AutoThermostatThread() {
 
     }
 
-    public String getAutoLightControllers() {
+    public String getAutoThermostatControllers() {
         try {
             URL urlForGetRequest = new URL("https://walid-ouchtiti.cleverapps.io/api/autoLightControllers");
             String readLine = null;
@@ -57,7 +58,7 @@ public class AutoLightThread extends Thread {
         return null;
     }
 
-    public String getRoomLights(Long roomId) {
+    public String getRoomThermostat(Long roomId) {
         try {
             URL urlForGetRequest = new URL("https://walid-ouchtiti.cleverapps.io/api/rooms/" + roomId);
             String readLine = null;
@@ -90,10 +91,9 @@ public class AutoLightThread extends Thread {
         return null;
     }
 
-    public void turnOffLight(Long lightId) {
+    public void turnOnThermostat(Long thermostatId) {
         try {
-            /* Rest Api */
-            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOff");
+            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/thermostats/" + thermostatId + "/switchOn");
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
             httpCon.setDoOutput(true);
             httpCon.setRequestMethod("PUT");
@@ -102,18 +102,6 @@ public class AutoLightThread extends Thread {
             out.write("");
             out.close();
             httpCon.getInputStream();
-
-            /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
-            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-            httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-            httpCon1.setDoOutput(true);
-            httpCon1.setRequestMethod("PUT");
-            OutputStreamWriter out1 = new OutputStreamWriter(
-                    httpCon1.getOutputStream());
-            out1.write("{\"on\": false}");
-            out1.close();
-            httpCon1.getInputStream();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -124,9 +112,9 @@ public class AutoLightThread extends Thread {
         }
     }
 
-    public void turnOnLight(Long lightId) {
+    public void turnOffThermostat(Long thermostatId) {
         try {
-            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/switchOn");
+            URL url = new URL("https://walid-ouchtiti.cleverapps.io/api/thermostats/" + thermostatId + "/switchOff");
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
             httpCon.setDoOutput(true);
             httpCon.setRequestMethod("PUT");
@@ -135,18 +123,6 @@ public class AutoLightThread extends Thread {
             out.write("");
             out.close();
             httpCon.getInputStream();
-
-            /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
-            HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-            httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-            httpCon1.setDoOutput(true);
-            httpCon1.setRequestMethod("PUT");
-            OutputStreamWriter out1 = new OutputStreamWriter(
-                    httpCon1.getOutputStream());
-            out1.write("{\"on\": true}");
-            out1.close();
-            httpCon1.getInputStream();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -161,20 +137,20 @@ public class AutoLightThread extends Thread {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(60000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             try {
-                /* Get all auto light controllers */
-                String autoLights = this.getAutoLightControllers();
+                /* Get all auto thermostat controllers */
+                String autoLights = this.getAutoThermostatControllers();
 
                 JSONParser parser = new JSONParser();
                 JSONArray obj = (JSONArray) parser.parse(autoLights.toString());
 
                 for (int i = 0; i < obj.size(); i++) {
-                    /* Retrieve the auto light controller and create object */
+                    /* Retrieve the auto thermostat controller and create object */
                     JSONObject lightController = (JSONObject) obj.get(i);
                     AutoControllerDto autoLight = new AutoControllerDto();
                     autoLight.setRoomId((Long) lightController.get("roomId"));
@@ -197,36 +173,30 @@ public class AutoLightThread extends Thread {
                     autoLight.setLongitude(lightController.get("longitude").toString());
                     autoLight.setMinTemperature(lightController.get("minTemperature").toString());
 
-                    /* Get current time */
-                    DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
-                    Date date = new Date();
-                    String currentDate = dateFormat.format(date).toString();
+                    /* Get the current temperature from the latitude and longitude */
+                    /* Generate random temperature */
+                    Random random = new Random();
+                    int randomTmp =  random.nextInt(30 - (-10) + 1) + (-10);
+                    int minTmp = Integer.parseInt(autoLight.getMinTemperature());
 
-                    /* Compare current time to given time */
-                    try {
-                        /* Get the rooms lights */
-                        String lights = this.getRoomLights(autoLight.getRoomId());
-                        JSONObject jsonObject = (JSONObject) parser.parse(lights);
-                        JSONArray allRoomLights = (JSONArray) jsonObject.get("lightsIds");
+                    /* Get the thermostat auto controller */
+                    String lights = this.getRoomThermostat(autoLight.getRoomId());
+                    JSONObject jsonObject = (JSONObject) parser.parse(lights);
+                    String thermostat = jsonObject.get("thermostatId").toString();
 
-                        /* If it's day time (lights off) */
-                        if ((dateFormat.parse(currentDate).after(dateFormat.parse(autoLight.getSunriseTime()))) &&
-                                (dateFormat.parse(currentDate).before(dateFormat.parse(autoLight.getSunsetTime())))) {
-                            /* Turn off the lights of the room */
-                            for (int j = 0; j < allRoomLights.size(); j++) {
-                                this.turnOffLight((Long) allRoomLights.get(j));
-                            }
-                        }
-                        /* If it's night time (lights on) */
-                        else {
-                            /* Turn on the lights of the room */
-                            for (int j = 0; j < allRoomLights.size(); j++) {
-                                this.turnOnLight((Long) allRoomLights.get(j));
-                            }
-                        }
-
-                    } catch (java.text.ParseException e) {
-                        e.printStackTrace();
+                    if (randomTmp < minTmp) {
+                        /* Turn on thermostat */
+                        System.out.println("Switching on thermostat");
+                        System.out.println("Outside temperature: " + randomTmp);
+                        System.out.println("User minimum temperature: " + minTmp);
+                        this.turnOnThermostat(Long.valueOf(thermostat));
+                    }
+                    else {
+                        /* Turn off thermostat */
+                        System.out.println("Switching off thermostat");
+                        System.out.println("Outside temperature: " + randomTmp);
+                        System.out.println("User minimum temperature: " + minTmp);
+                        this.turnOffThermostat(Long.valueOf(thermostat));
                     }
 
                 }

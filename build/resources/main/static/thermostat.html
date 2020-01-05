@@ -84,7 +84,6 @@
                 <tbody>
                 <tr>
                     <td class="text-center">
-                        <h1>here {{roomController.minTemperature}}</h1>
                         <input type="number" min="0" max="20" v-bind:value="roomController.minTemperature" class="form-control mb-4" v-bind:id="'minTemperature'+room.id">
                         <button type="button" class="btn btn-success" v-on:click="changeMinTemperature(room.id)">Change temperature</button>
                     </td>

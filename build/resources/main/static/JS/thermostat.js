@@ -189,6 +189,24 @@ var app = new Vue({
             });
         },
         changeMinTemperature(roomId) {
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
+                .then(response => {
+                    var autoLightControlers = response.data;
+                    for (var i = 0; i < autoLightControlers.length; i++) {
+                        if (autoLightControlers[i].roomId == roomId) {
+                            var tmp = document.getElementById('minTemperature' + roomId).value;
+                            const requestBody = {
+                                minTemperature: tmp,
+                            };
+                            axios
+                                .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/minTemperature', requestBody)
+                                .then((response) => {
+                                    // console.log(response.data)
+                                });
+                        }
+                    }
+                })
 
         }
     }

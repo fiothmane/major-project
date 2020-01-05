@@ -2,6 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/autoControlThread/AutoThermostatThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/thermostat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/thermostat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/thermostat.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/thermostat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/autoControlThread/AutoLightThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/autoControlThread/AutoLightThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/thermostat.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/thermostat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thermostat.html" beforeDir="false" afterPath="$PROJECT_DIR$/thermostat.html" afterDir="false" />
     </list>
@@ -79,7 +89,7 @@
       <workItem from="1577979501079" duration="2701000" />
       <workItem from="1578064427445" duration="1923000" />
       <workItem from="1578245206935" duration="4090000" />
-      <workItem from="1578256621398" duration="4294000" />
+      <workItem from="1578256621398" duration="6506000" />
     </task>
     <servers />
   </component>
