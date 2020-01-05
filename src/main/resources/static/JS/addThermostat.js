@@ -21,16 +21,18 @@ var addroom = new Vue({
                 .get('https://walid-ouchtiti.cleverapps.io/api/rooms')
                 .then(response => (this.rooms = response.data))
         },
-        addRinger() {
+        addThermostat() {
             const requestBody = {
                 // level: this.ringerLevel,
                 // status: this.ringerStatus,
                 level: 0,
                 status: "OFF",
+                onTemperature: "10",
+                offTemperature: "18",
                 roomId: this.roomId,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/ringers', requestBody, {
+                .post('https://walid-ouchtiti.cleverapps.io/api/thermostats', requestBody, {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json;charset=UTF-8",
