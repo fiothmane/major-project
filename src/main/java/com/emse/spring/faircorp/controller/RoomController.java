@@ -25,6 +25,8 @@ public class RoomController {
     @Autowired
     private RingerDao ringerDao;
     @Autowired
+    private ThermostatDao thermostatDao;
+    @Autowired
     private BuildingDao buildingDao;
     @Autowired
     private AutoLightDao autoLightDao;
@@ -81,6 +83,10 @@ public class RoomController {
         if (roomDto.getRingerId() != null) {
             ringer = ringerDao.findById(roomDto.getRingerId());
         }
+        Thermostat thermostat = null;
+        if (roomDto.getThermostatId() != null) {
+            thermostat = thermostatDao.findById(roomDto.getThermostatId());
+        }
         Building building = null;
         if (roomDto.getBuildingId() != null) {
             building = buildingDao.findBuildingById(roomDto.getBuildingId());
@@ -94,7 +100,7 @@ public class RoomController {
             autoLight = autoLightDao.findAutoLightById(roomDto.getAutoLightControlId());
         }
 
-        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoLight, roomLights, ringer, building);
+        Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoLight, roomLights, ringer, thermostat, building);
         roomDao.save(room);
         if (ringer != null) {
             ringer.setRoom(room);
@@ -122,6 +128,10 @@ public class RoomController {
         /* Delete the room's ringer */
         if (room.getRinger() != null) {
             ringerDao.delete(room.getRinger());
+        }
+        /* Delete the room's thermostat */
+        if (room.getThermostat() != null) {
+            thermostatDao.delete(room.getThermostat());
         }
         /* Delete the room */
         roomDao.delete(room);

@@ -1,9 +1,6 @@
 package com.emse.spring.faircorp.controller;
 
-import com.emse.spring.faircorp.DAO.BuildingDao;
-import com.emse.spring.faircorp.DAO.LightDao;
-import com.emse.spring.faircorp.DAO.RingerDao;
-import com.emse.spring.faircorp.DAO.RoomDao;
+import com.emse.spring.faircorp.DAO.*;
 import com.emse.spring.faircorp.DTO.BuildingDto;
 import com.emse.spring.faircorp.model.Building;
 import com.emse.spring.faircorp.model.Room;
@@ -28,6 +25,8 @@ public class BuildingController {
     private LightDao lightDao;
     @Autowired
     private RingerDao ringerDao;
+    @Autowired
+    private ThermostatDao thermostatDao;
 
     public void addHeaders (HttpServletResponse response) {
         response.addHeader("access-control-allow-credentials", "true");
@@ -79,7 +78,7 @@ public class BuildingController {
         addHeaders(response);
         Building building = buildingDao.findBuildingById(id);
         if (building.getRooms() != null) {
-            /* Delete building's lights and ringers */
+            /* Delete building's lights, ringers and thermostats */
             for (int i = 0; i < building.getRooms().size(); i++) {
                 /* Delete the building's lights */
                 if (building.getRooms().get(i).getLights() != null) {
@@ -90,6 +89,10 @@ public class BuildingController {
                 /* Delete the building's ringers */
                 if (building.getRooms().get(i).getRinger() != null) {
                     ringerDao.delete(building.getRooms().get(i).getRinger());
+                }
+                /* Delete the building's thermostats */
+                if (building.getRooms().get(i).getThermostat() != null) {
+                    thermostatDao.delete(building.getRooms().get(i).getThermostat());
                 }
             }
 

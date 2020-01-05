@@ -16,6 +16,8 @@ public class RoomDto {
 
     private Long ringerId;
 
+    private Long thermostatId;
+
     private Long autoLightControlId;
 
     private Long buildingId;
@@ -33,6 +35,9 @@ public class RoomDto {
         }
         if (room.getRinger() != null) {
             this.ringerId = room.getRinger().getId();
+        }
+        if (room.getThermostat() != null) {
+            this.thermostatId = room.getThermostat().getId();
         }
         this.lightsIds = new ArrayList<Long>();
         if (room.getLights() != null) {
@@ -83,6 +88,14 @@ public class RoomDto {
 
     public void setRingerId(Long ringerId) {
         this.ringerId = ringerId;
+    }
+
+    public Long getThermostatId() {
+        return thermostatId;
+    }
+
+    public void setThermostatId(Long thermostatId) {
+        this.thermostatId = thermostatId;
     }
 
     public Long getAutoLightControlId() {

@@ -23,7 +23,6 @@ public class RingerDaoImpl implements RingerDaoCustom {
 
     @Override
     public Ringer findByRoomId(Long id) {
-        System.out.println("HEEEEEEEEEEEEEEEEEEEERE " + id);
         String jpql = "select ringer from Ringer ringer where ringer.room.id = :value";
         return em.createQuery(jpql, Ringer.class)
                 .setParameter("value", id)
