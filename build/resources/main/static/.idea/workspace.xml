@@ -2,8 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38dd0641-0370-442e-b160-edf8a7d5cf23" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/addRinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/addRinger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/addBuilding.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/addBuilding.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/addLight.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/addLight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/addRinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/addRinger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/addRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/addRoom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/building.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/building.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/lights.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/lights.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/ringer.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/ringer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/DTO/AutoLightDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/DTO/AutoLightDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/AutoLightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/AutoLightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/model/AutoLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/model/AutoLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/addRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addRoom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/addRoom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thermostat.html" beforeDir="false" afterPath="$PROJECT_DIR$/thermostat.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +96,8 @@
       <workItem from="1577911389965" duration="4255000" />
       <workItem from="1577979501079" duration="2701000" />
       <workItem from="1578064427445" duration="1923000" />
-      <workItem from="1578245206935" duration="1820000" />
+      <workItem from="1578245206935" duration="4090000" />
+      <workItem from="1578256621398" duration="1197000" />
     </task>
     <servers />
   </component>

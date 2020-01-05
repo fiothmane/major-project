@@ -106,6 +106,7 @@ var addRoom = new Vue({
                         sunriseTime: "07:00:00",
                         sunsetTime: "20:00:00",
                         autoLightControlState: "OFF",
+                        autoThermostatControlState: "OFF",
                         roomId: this.room.id,
                     };
                     axios

@@ -37,6 +37,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="addRinger.html">Add ringer<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="addThermostat.html">Add thermostat<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -94,6 +97,7 @@
                     <th class="text-center"><b>Number Of Lights</b></th>
                     <th class="text-center"><b>Lights</b></th>
                     <th class="text-center"><b>Ringer</b></th>
+                    <th class="text-center"><b>Thermostat</b></th>
                     <th class="text-center"><b>Edit Room</b></th>
                     <th class="text-center"><b>Delete Room</b></th>
                 </tr>
@@ -109,6 +113,10 @@
 
                     <td v-if="room.ringerId != null" class="text-center"><a v-bind:href="'ringer.html?room='+room.id">Control ringer</a></td>
                     <td v-else class="text-center" style="color:grey">Control ringer</td>
+
+                    <td v-if="room.thermostatId != null" class="text-center"><a v-bind:href="'thermostat.html?room='+room.id">Control thermostat</a></td>
+                    <td v-else class="text-center" style="color:grey">Control thermostat</td>
+
                     <td class="text-center" style="color:grey"><button type="button" class="btn btn-success" v-bind:id="'edit'+room.id" v-on:click="editRoom(room.id)">Edit</button></td>
                     <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteRoom(room.id)">Delete</button></td>
                  </tr>

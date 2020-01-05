@@ -3,8 +3,6 @@ package com.emse.spring.faircorp.DTO;
 import com.emse.spring.faircorp.model.AutoLight;
 import com.emse.spring.faircorp.model.Status;
 
-import javax.persistence.Column;
-
 public class AutoLightDto {
     private Long id;
 
@@ -17,6 +15,8 @@ public class AutoLightDto {
     private String longitude;
 
     private Status autoLightControlState;
+
+    private Status autoThermostatControlState;
 
     private Long roomId;
 
@@ -39,6 +39,7 @@ public class AutoLightDto {
             this.longitude = autoLight.getLongitude();
         }
         this.autoLightControlState = autoLight.getAutoLightControlState();
+        this.autoThermostatControlState = autoLight.getAutoThermostatControlState();
         if (autoLight.getRoom() != null) {
             this.roomId = autoLight.getRoom().getId();
         }
@@ -90,6 +91,14 @@ public class AutoLightDto {
 
     public void setAutoLightControlState(Status autoLightControlState) {
         this.autoLightControlState = autoLightControlState;
+    }
+
+    public Status getAutoThermostatControlState() {
+        return autoThermostatControlState;
+    }
+
+    public void setAutoThermostatControlState(Status autoThermostatControlState) {
+        this.autoThermostatControlState = autoThermostatControlState;
     }
 
     public Long getRoomId() {

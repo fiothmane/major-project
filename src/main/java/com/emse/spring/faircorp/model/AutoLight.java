@@ -23,6 +23,9 @@ public class AutoLight {
     @Enumerated(EnumType.STRING)
     private Status autoLightControlState;
 
+    @Enumerated(EnumType.STRING)
+    private Status autoThermostatControlState;
+
     @OneToOne
     private Room room;
 
@@ -30,13 +33,14 @@ public class AutoLight {
 
     }
 
-    public AutoLight(Long id, String sunriseTime, String sunsetTime, String latitude, String longitude, Status autoLightControlState, Room room) {
+    public AutoLight(Long id, String sunriseTime, String sunsetTime, String latitude, String longitude, Status autoLightControlState, Status autoThermostatControlState, Room room) {
         this.id = id;
         this.sunriseTime = sunriseTime;
         this.sunsetTime = sunsetTime;
         this.latitude = latitude;
         this.longitude = longitude;
         this.autoLightControlState = autoLightControlState;
+        this.autoThermostatControlState = autoThermostatControlState;
         this.room = room;
     }
 
@@ -86,6 +90,14 @@ public class AutoLight {
 
     public void setAutoLightControlState(Status autoLightControlState) {
         this.autoLightControlState = autoLightControlState;
+    }
+
+    public Status getAutoThermostatControlState() {
+        return autoThermostatControlState;
+    }
+
+    public void setAutoThermostatControlState(Status autoThermostatControlState) {
+        this.autoThermostatControlState = autoThermostatControlState;
     }
 
     public com.emse.spring.faircorp.model.Room getRoom() {

@@ -82,7 +82,7 @@ public class AutoLightController {
         if (autoLightDto.getRoomId() != null) {
             room = roomDao.findRoomById(autoLightDto.getRoomId());
         }
-        AutoLight autoLight = new AutoLight(autoLightDto.getId(), autoLightDto.getSunriseTime(), autoLightDto.getSunsetTime(), autoLightDto.getLatitude(), autoLightDto.getLongitude(), autoLightDto.getAutoLightControlState(), room);
+        AutoLight autoLight = new AutoLight(autoLightDto.getId(), autoLightDto.getSunriseTime(), autoLightDto.getSunsetTime(), autoLightDto.getLatitude(), autoLightDto.getLongitude(), autoLightDto.getAutoLightControlState(), autoLightDto.getAutoThermostatControlState(), room);
 
         if (room != null) {
             roomDao.updateRoom(room);
