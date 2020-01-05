@@ -42,7 +42,7 @@
 </nav>
 <!--- Contenue -->
 <div class="container col-md-10 app" style="margin-top: 10px;" id="app">
-<!--    Error / success messages when deleting-->
+    <!--    Error / success messages when deleting-->
     <div v-if="deleteMessage == 'problem'" class="alert alert-danger" role="alert">
         Error while deleting the data
     </div>
@@ -50,23 +50,13 @@
         The data has been successfully deleted, you will be redirected to the page after 3 seconds
     </div>
 
-<!--    Error / success messages when editing-->
-    <div v-if="editMessage == 'problem'" class="alert alert-danger" role="alert">
-        Error while editing the data
-    </div>
-    <div v-if="editMessage == 'success'" id="editMessage" class="alert alert-success" role="alert">
-        The data has been successfully edited, you will be redirected to the page after 3 seconds
-    </div>
-
-<!--    Loading spinner-->
+    <!--    Loading spinner-->
     <div hidden id="loading" class="spinner-border text-success" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 
     <section v-if="errored">
-        <div class="alert alert-danger" role="alert">
-            We are sorry, we are not able to retrieve this information at this time. Please try again later.
-        </div>
+        <p>We are sorry, we are not able to retrieve this information at this time. Please try again later.</p>
     </section>
 
     <section v-else>
@@ -75,53 +65,36 @@
         </div>
         <div v-else>
 
-<!--            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>-->
-            <div id="buildingInfo">
-                <h1 id="buildingName">{{building.name}}</h1>
-            </div>
-
-            <button type="button" class="btn btn-success float-right" v-on:click="editBuilding" id="editBuilding">Edit</button>
-            <br><br>
-            <button type="button" class="btn btn-danger float-right" v-on:click="deleteBuilding">Delete</button>
-            <br><br>
-
+            <!--            <a href="addRoom.html" class="btn btn-outline-dark float-right" style="margin-bottom:20px; margin-top:80px;">Add Room</a>-->
+            <h1>{{room.name}}</h1>
+            <br>
             <table class="table table-bordered" style="width:100%; margin-top: 30px;">
                 <thead class="thead-dark">
                 <tr>
                     <th class="text-center"><b>#</b></th>
-                    <th class="text-center"><b>Room Name</b></th>
-                    <th class="text-center"><b>Floor</b></th>
-                    <th class="text-center"><b>Number Of Lights</b></th>
-                    <th class="text-center"><b>Lights</b></th>
-                    <th class="text-center"><b>Ringer</b></th>
-                    <th class="text-center"><b>Thermostat</b></th>
-                    <th class="text-center"><b>Edit Room</b></th>
-                    <th class="text-center"><b>Delete Room</b></th>
+                    <th class="text-center"><b>Thermostat Status</b></th>
+                    <th class="text-center"><b>Thermostat Level</b></th>
+                    <th class="text-center"><b>Switch Thermostat</b></th>
+                    <th class="text-center"><b>Delete Thermostat</b></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="room in rooms" v-if="room.buildingId == buildingId">
-                    <td class="text-center">{{room.id}}</td>
-                    <td class="text-center" v-bind:id="'roomName'+room.id">{{room.name}}</td>
-                    <td class="text-center" v-bind:id="'roomFloor'+room.id">{{room.floor}}</td>
-                    <td class="text-center">{{room.lightsIds.length}}</td>
-                    <td v-if="room.lightsIds.length > 0" class="text-center"><a v-bind:href="'lights.html?room='+room.id">Control lights</a></td>
-                    <td v-else class="text-center" style="color:grey">Control lights</td>
-
-                    <td v-if="room.ringerId != null" class="text-center"><a v-bind:href="'ringer.html?room='+room.id">Control ringer</a></td>
-                    <td v-else class="text-center" style="color:grey">Control ringer</td>
-
-                    <td v-if="room.thermostatId != null" class="text-center"><a v-bind:href="'thermostat.html?room='+room.id">Control thermostat</a></td>
-                    <td v-else class="text-center" style="color:grey">Control thermostat</td>
-
-                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-success" v-bind:id="'edit'+room.id" v-on:click="editRoom(room.id)">Edit</button></td>
-                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteRoom(room.id)">Delete</button></td>
-                 </tr>
+                <tr v-for="thermostat in thermostats" v-if="thermostat.roomId == roomId">
+                    <td class="text-center">{{thermostat.id}}</td>
+                    <td class="text-center" id="thermostat">{{thermostat.status}}</td>
+                    <td class="text-center">
+                        <input type="number" min="20" max="35" v-bind:value="thermostat.level" class="form-control mb-4" v-bind:id="'thermostatLevel'+thermostat.id">
+                        <button type="button" class="btn btn-success" v-on:click="changeThermostatLevel(thermostat.id)">Change thermostat level</button>
+                    </td>
+                    <td class="text-center" :id="'switchn'+thermostat.id" v-if="thermostat.status === 'ON'" @click="switchThermostat(thermostat.id)"><i class="fas fa-toggle-on fa-2x"></i></td>
+                    <td class="text-center" :id="'switchn'+thermostat.id" @click="switchThermostat(thermostat.id)" v-else><i class="fas fa-toggle-off fa-2x"></i></td>
+                    <td class="text-center" style="color:grey"><button type="button" class="btn btn-danger" v-on:click="deleteThermostat(thermostat.id)">Delete</button></td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </section>
 </div>
-<script src="JS/building.js"></script>
+<script src="JS/thermostat.js"></script>
 </body>
 </html>
