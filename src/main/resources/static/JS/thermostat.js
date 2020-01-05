@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data () {
         return {
+            roomController: null,
             room: null,
             roomId: null,
             thermostats: null,
@@ -13,6 +14,7 @@ var app = new Vue({
     mounted () {
         this.getFunction();
         this.getRoomInfo();
+        this.getRoomAutoThermostatControllerInfo();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -20,6 +22,19 @@ var app = new Vue({
         this.roomId = urlParams.get("room");
     },
     methods : {
+        getRoomAutoThermostatControllerInfo() {
+            axios
+                .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
+                .then(response => {
+                    var autoLightControllers = response.data;
+                    for (var i = 0; i < autoLightControllers.length; i++) {
+                        if (autoLightControllers[i].roomId == this.roomId) {
+                            this.roomController = autoLightControllers[i];
+                            break;
+                        }
+                    }
+                })
+        },
         getRoomInfo() {
             /* Add room name as title in the page once loaded */
             axios
@@ -119,6 +134,59 @@ var app = new Vue({
                     console.log(error)
                     this.deleteMessage = "problem"
                 })
+        },
+        switchAutoThermostatControl(roomId) {
+            /* Change the page icons */
+            var elt = document.getElementById("auto" + roomId);
+            if (elt.className === "fas fa-toggle-on fa-2x") {
+                this.roomController.autoThermostatControlState = "OFF"
+                elt.className = "fas fa-toggle-off fa-2x";
+            }
+            else {
+                this.roomController.autoThermostatControlState = "ON";
+                elt.className = "fas fa-toggle-on fa-2x";
+            }
+
+            /* Get user position */
+            navigator.geolocation.getCurrentPosition(function(position) {
+                /* Get sunset and sunrise hours */
+                axios
+                    .get('https://api.sunrise-sunset.org/json?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude + '&date=today')
+                    .then(response => {
+                        var sunTimes = response.data;
+                        /* Get the room's auto light controller id */
+                        axios
+                            .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
+                            .then(response => {
+                                var autoLightControlers = response.data;
+                                for (var i = 0; i < autoLightControlers.length; i++) {
+                                    if (autoLightControlers[i].roomId == roomId) {
+                                        /* Switch the state of the auto controller */
+                                        axios
+                                            .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/switchThermostat')
+                                            .then((response) => {
+                                                // console.log(response.data)
+                                            });
+
+                                        /* Change sunset and sunrise info */
+                                        const requestBody = {
+                                            sunriseTime: sunTimes.results.sunrise,
+                                            sunsetTime: sunTimes.results.sunset,
+                                            latitude: position.coords.latitude,
+                                            longitude: position.coords.longitude,
+                                        };
+                                        axios
+                                            .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
+                                            .then((response) => {
+                                                // console.log(response.data)
+                                            });
+                                    }
+                                }
+                            })
+
+                    })
+
+            });
         }
     }
 })

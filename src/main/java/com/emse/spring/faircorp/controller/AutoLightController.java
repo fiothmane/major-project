@@ -60,6 +60,20 @@ public class AutoLightController {
         return new AutoLightDto(autoLight);
     }
 
+    @PutMapping(path = "/{id}/switchThermostat")
+    public AutoLightDto switchAutoThermostatController(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        AutoLight autoLight = autoLightDao.findAutoLightById(id);
+        Status currentStatus = autoLight.getAutoThermostatControlState();
+        if (currentStatus.equals(Status.ON)) {
+            autoLight.setAutoThermostatControlState(Status.OFF);
+        }
+        else {
+            autoLight.setAutoThermostatControlState(Status.ON);
+        }
+        return new AutoLightDto(autoLight);
+    }
+
     @PutMapping(path = "/{id}/sunset-sunrise")
     public AutoLightDto changeSunsetSunrise(@PathVariable Long id, @RequestBody AutoLightDto body, HttpServletResponse response) {
         addHeaders(response);

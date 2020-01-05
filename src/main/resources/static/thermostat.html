@@ -79,8 +79,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="text-center" v-if="roomController.autoLightControlState === 'OFF'" @click="switchAutoLightControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-off fa-2x"></i></td>
-                    <td class="text-center" v-else @click="switchAutoLightControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-on fa-2x"></i></td>
+                    <td class="text-center" v-if="roomController.autoThermostatControlState === 'OFF'" @click="switchAutoThermostatControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-off fa-2x"></i></td>
+                    <td class="text-center" v-else @click="switchAutoThermostatControl(room.id)"><i :id="'auto'+room.id" class="fas fa-toggle-on fa-2x"></i></td>
                 </tr>
                 </tbody>
             </table>
