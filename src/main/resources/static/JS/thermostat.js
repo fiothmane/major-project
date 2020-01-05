@@ -187,6 +187,9 @@ var app = new Vue({
                     })
 
             });
+        },
+        changeMinTemperature(roomId) {
+
         }
     }
 })

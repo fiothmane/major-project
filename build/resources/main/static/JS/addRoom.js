@@ -105,6 +105,7 @@ var addRoom = new Vue({
                     const requestBody2 = {
                         sunriseTime: "07:00:00",
                         sunsetTime: "20:00:00",
+                        minTemperature: "10",
                         autoLightControlState: "OFF",
                         autoThermostatControlState: "OFF",
                         roomId: this.room.id,

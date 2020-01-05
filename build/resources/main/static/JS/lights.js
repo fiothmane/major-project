@@ -15,6 +15,7 @@ var app = new Vue({
         this.getFunction();
         this.getRoomInfo();
         this.getRoomAutoLightControllerInfo();
+        this.initializeCity();
     },
     created() {
         let uri = window.location.search.substring(1);
@@ -22,6 +23,13 @@ var app = new Vue({
         this.roomId = urlParams.get("room");
     },
     methods : {
+        initializeCity() {
+            var input = document.getElementById('city');
+            var options = {
+                types: ['geocode']
+            };
+            new google.maps.places.Autocomplete(input, options);
+        },
         getRoomAutoLightControllerInfo() {
             axios
                 .get('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/')
