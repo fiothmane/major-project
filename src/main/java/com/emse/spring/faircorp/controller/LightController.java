@@ -93,11 +93,27 @@ public class LightController {
         return new LightDto(light);
     }
 
+    @PutMapping(path = "/{id}/lightOnMqtt")
+    public void lightOnMqtt(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Mqtt mqtt = new Mqtt();
+        String publishMessage = "on::" + String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
+    }
+
+    @PutMapping(path = "/{id}/lightOffMqtt")
+    public void lightOffMqtt(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Mqtt mqtt = new Mqtt();
+        String publishMessage = "off::" + String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
+    }
+
     @PutMapping(path = "/{id}/arduino")
     public void controlWithArduino(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
         Mqtt mqtt = new Mqtt();
-        String publishMessage = String.valueOf(id);
+        String publishMessage = "arduino" + String.valueOf(id);
         mqtt.mqttClient(publishMessage);
     }
 

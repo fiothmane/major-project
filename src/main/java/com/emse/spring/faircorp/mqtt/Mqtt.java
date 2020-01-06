@@ -2,6 +2,13 @@ package com.emse.spring.faircorp.mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 /* Inspired from: https://gist.github.com/m2mIO-gister/5275324 */
 public class Mqtt implements MqttCallback {
     private String broker = "tcp://tailor.cloudmqtt.com:12491";
@@ -19,6 +26,55 @@ public class Mqtt implements MqttCallback {
         System.out.println("Message arrived");
         System.out.println("Topic: " + topic);
         System.out.println("Message: " + message.toString());
+
+//        /* Switch philips hue light */
+//        String[] topicSplit = topic.split("::");
+//        /* Philips hue on */
+//        if (topicSplit[0].equals("on")) {
+//            try {
+//                /* Philips hue */
+//                URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state");
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"on\": true}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        /* Philips hue off */
+//        else if (topicSplit[0].equals("off")) {
+//            try {
+//                /* Philips hue */
+//                URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state");
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"on\": false}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
@@ -111,6 +167,7 @@ public class Mqtt implements MqttCallback {
         try {
             int subQos = 0;
             mqttClient.subscribe("hue/control", subQos);
+
         } catch (MqttException e) {
             e.printStackTrace();
         }

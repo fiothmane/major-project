@@ -76,12 +76,15 @@ var app = new Vue({
                         this.lights[i].status = "OFF";
 
                         /* Request to philips hue */
-                        const philipsHueRequestBody = {
-                            on: false,
-                        };
                         axios
-                            .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                            .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOnMqtt')
                             .then(response => console.log(response.status))
+                        // const philipsHueRequestBody = {
+                        //     on: false,
+                        // };
+                        // axios
+                        //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                        //     .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x off";
