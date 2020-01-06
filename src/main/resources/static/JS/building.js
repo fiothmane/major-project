@@ -49,16 +49,7 @@ var app = new Vue({
         },
         deleteRoom(roomId) {
             axios
-                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + roomId)
                 .then(
                     buildingId = this.buildingId,
                     document.getElementById('loading').hidden = false,
@@ -161,16 +152,7 @@ var app = new Vue({
                         };
                         /* Send the http request to change the data */
                         axios
-                            .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody, {
-                                headers: {
-                                    "Accept": "application/json",
-                                    "Content-Type": "application/json;charset=UTF-8",
-                                    "access-control-allow-origin": "*",
-                                    "access-control-allow-credentials": "true",
-                                    "Access-Control-Allow-Methods": "GET, POST",
-                                    "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                                }
-                            })
+                            .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody)
                             .then(response => {this.editMessage = "success";
 
                                 /* Timer before reloading page */
@@ -258,16 +240,7 @@ var app = new Vue({
                                         if (rooms[i].floor > nbOfFloors) {
                                             /* Delete the rooms */
                                             axios
-                                                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + rooms[i].id, {
-                                                    headers: {
-                                                        "Accept": "application/json",
-                                                        "Content-Type": "application/json;charset=UTF-8",
-                                                        "access-control-allow-origin": "*",
-                                                        "access-control-allow-credentials": "true",
-                                                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                                                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                                                    }
-                                                })
+                                                .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + rooms[i].id)
                                                 .catch(error => {
                                                     console.log(error)
                                                 })
@@ -287,16 +260,7 @@ var app = new Vue({
                         };
                         /* Send the http request to change the data */
                         axios
-                            .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody, {
-                                headers: {
-                                    "Accept": "application/json",
-                                    "Content-Type": "application/json;charset=UTF-8",
-                                    "access-control-allow-origin": "*",
-                                    "access-control-allow-credentials": "true",
-                                    "Access-Control-Allow-Methods": "GET, POST",
-                                    "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                                }
-                            })
+                            .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody)
                             .then(response => {this.editMessage = "success";
 
                                 /* Timer before reloading page */
@@ -324,16 +288,7 @@ var app = new Vue({
         },
         deleteBuilding() {
             axios
-                .delete('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .delete('https://walid-ouchtiti.cleverapps.io/api/buildings/' + this.buildingId)
                 .then(
                     buildingId = this.buildingId,
                     document.getElementById('loading').hidden = false,

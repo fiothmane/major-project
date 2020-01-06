@@ -79,12 +79,6 @@ var app = new Vue({
                         axios
                             .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOffMqtt')
                             .then(response => console.log(response.status))
-                        // const philipsHueRequestBody = {
-                        //     on: false,
-                        // };
-                        // axios
-                        //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
-                        //     .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x off";
@@ -99,12 +93,6 @@ var app = new Vue({
                         axios
                             .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOnMqtt')
                             .then(response => console.log(response.status))
-                        // const philipsHueRequestBody = {
-                        //     on: true,
-                        // };
-                        // axios
-                        //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
-                        //     .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x on";
@@ -113,9 +101,7 @@ var app = new Vue({
             /* Change light state in the rest api */
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/switch')
-                .then((response) => {
-                    // console.log(response.data)
-                });
+                .then((response) => {});
         },
         changeLightLevel(lightId) {
             /* Change light level in the rest api */
@@ -125,9 +111,7 @@ var app = new Vue({
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/level', restApiBody)
-                .then((response) => {
-                    // console.log(response.data)
-                });
+                .then((response) => {});
 
             /* Change philips hue light level */
             const philipsHueRequestBody = {
@@ -136,10 +120,6 @@ var app = new Vue({
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightLevelMqtt', philipsHueRequestBody)
                 .then(response => console.log(response.status))
-
-            // axios
-            //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + lightId + '/state', philipsHueRequestBody)
-            //     .then(response => console.log(response.status))
         },
         changeLightColor(lightId) {
             /* Change light color in the rest api */
@@ -149,9 +129,7 @@ var app = new Vue({
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/color', restApiBody)
-                .then((response) => {
-                    // console.log(response.data)
-                });
+                .then((response) => {});
 
             /* Change philips hue light color */
             const philipsHueRequestBody = {
@@ -161,24 +139,10 @@ var app = new Vue({
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightColorMqtt', philipsHueRequestBody)
                 .then(response => console.log(response.status))
-
-
-            // axios
-            //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + lightId + '/state', philipsHueRequestBody)
-            //     .then(response => console.log(response.status))
         },
         deleteLight(lightId) {
             axios
-                .delete('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .delete('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId)
                 .then(
                     roomId = this.roomId,
                     document.getElementById('loading').hidden = false,
@@ -257,9 +221,7 @@ var app = new Vue({
                                     }
                                 }
                             })
-
                     })
-
             });
         }
     }

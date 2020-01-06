@@ -95,22 +95,11 @@ var app = new Vue({
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId + '/level', restApiBody)
-                .then((response) => {
-                    // console.log(response.data)
-                });
+                .then((response) => {});
         },
         deleteThermostat(thermostatId) {
             axios
-                .delete('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .delete('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId)
                 .then(
                     roomId = this.roomId,
                     document.getElementById('loading').hidden = false,
@@ -177,9 +166,7 @@ var app = new Vue({
                                         };
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
+                                            .then((response) => {});
                                     }
                                 }
                             })
@@ -201,13 +188,10 @@ var app = new Vue({
                             };
                             axios
                                 .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/minTemperature', requestBody)
-                                .then((response) => {
-                                    // console.log(response.data)
-                                });
+                                .then((response) => {});
                         }
                     }
                 })
-
         }
     }
 })
