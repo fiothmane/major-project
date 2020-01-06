@@ -15,8 +15,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 @RequestMapping("/api/lights")
 @Transactional
 public class LightController {
@@ -176,7 +176,7 @@ public class LightController {
 
     @PostMapping
     public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
-        addHeaders(response);
+//        addHeaders(response);
         Room room = null;
         if (lightDto.getRoomId() != null) {
             room = roomDao.findRoomById(lightDto.getRoomId());
