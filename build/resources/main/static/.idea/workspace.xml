@@ -6,9 +6,24 @@
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/AutoControllerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/AutoControllerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/BuildingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/BuildingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RingerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RingerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/RoomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/ThermostatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/ThermostatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/mqtt/Mqtt.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/mqtt/Mqtt.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/mqtt/Mqtt.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/mqtt/Mqtt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/JS/lights.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/AutoControllerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/AutoControllerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/BuildingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/BuildingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/LightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/LightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RingerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RingerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/ThermostatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/emse/spring/faircorp/controller/ThermostatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JS/lights.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/lights.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +101,7 @@
       <workItem from="1578064427445" duration="1923000" />
       <workItem from="1578245206935" duration="4090000" />
       <workItem from="1578256621398" duration="7011000" />
-      <workItem from="1578294774268" duration="4423000" />
+      <workItem from="1578294774268" duration="6279000" />
     </task>
     <servers />
   </component>
