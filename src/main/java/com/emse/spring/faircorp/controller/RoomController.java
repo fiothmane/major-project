@@ -30,16 +30,8 @@ public class RoomController {
     @Autowired
     private AutoControllerDao autoControllerDao;
 
-    public void addHeaders (HttpServletResponse response) {
-        response.addHeader("access-control-allow-credentials", "true");
-        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-        response.addHeader("access-control-allow-origin", "*");
-        response.addHeader("content-type", "application/json;charset=UTF-8");
-    }
-
     @GetMapping
     public List<RoomDto> findAll(HttpServletResponse response) {
-        addHeaders(response);
         return roomDao.findAll()
                 .stream()
                 .map(RoomDto::new)
@@ -48,14 +40,12 @@ public class RoomController {
 
     @GetMapping(path = "/{id}")
     public RoomDto findById(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         return new RoomDto(room);
     }
 
     @PutMapping(path = "/{id}/switchLight")
     public RoomDto switchRoomLights(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         List<Light> roomLights = room.getLights();
         for (int i = 0; i < roomLights.size(); i++) {
@@ -71,7 +61,6 @@ public class RoomController {
 
     @PostMapping
     public RoomDto createRoom(@RequestBody RoomDto roomDto, HttpServletResponse response) {
-        addHeaders(response);
         List<Light> roomLights = new ArrayList<Light>();
         if (roomDto.getLightsIds() != null) {
             for (int i = 0; i < roomDto.getLightsIds().size(); i++) {
@@ -120,7 +109,6 @@ public class RoomController {
 
     @DeleteMapping(path = "/{id}")
     public void deleteRoom(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Room room = roomDao.findRoomById(id);
         /* Delete the room's lights */
         if (room.getLights() != null) {

@@ -36,17 +36,4 @@ public class FaircorpApplication {
 		SunriseSunsetAutoRefresh sunriseSunsetAutoRefresh = new SunriseSunsetAutoRefresh();
 		sunriseSunsetAutoRefresh.start();
 	}
-
-	@Bean
-	public CorsFilter corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");  // TODO: lock down before deploying
-		config.addAllowedHeader("*");
-		config.addExposedHeader(HttpHeaders.AUTHORIZATION);
-		config.addAllowedMethod("*");
-		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
-	}
 }

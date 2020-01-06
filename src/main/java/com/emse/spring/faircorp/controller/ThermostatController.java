@@ -26,16 +26,8 @@ public class ThermostatController {
     @Autowired
     private RoomDao roomDao;
 
-    public void addHeaders (HttpServletResponse response) {
-        response.addHeader("access-control-allow-credentials", "true");
-        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-        response.addHeader("access-control-allow-origin", "*");
-        response.addHeader("content-type", "application/json;charset=UTF-8");
-    }
-
     @GetMapping
     public List<ThermostatDto> findAll(HttpServletResponse response) {
-        addHeaders(response);
         return thermostatDao.findAll()
                 .stream()
                 .map(ThermostatDto::new)
@@ -44,14 +36,12 @@ public class ThermostatController {
 
     @GetMapping(path = "/{id}")
     public ThermostatDto findById(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         return new ThermostatDto(thermostat);
     }
 
     @PutMapping(path = "/{id}/switch")
     public ThermostatDto switchThermostat(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         Status currentStatus = thermostat.getStatus();
         if (currentStatus.equals(Status.ON)) {
@@ -65,7 +55,6 @@ public class ThermostatController {
 
     @PutMapping(path = "/{id}/switchOn")
     public ThermostatDto turnOnThermostat(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         thermostat.setStatus(Status.ON);
         return new ThermostatDto(thermostat);
@@ -73,7 +62,6 @@ public class ThermostatController {
 
     @PutMapping(path = "/{id}/switchOff")
     public ThermostatDto turnOffThermostat(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         thermostat.setStatus(Status.OFF);
         return new ThermostatDto(thermostat);
@@ -81,7 +69,6 @@ public class ThermostatController {
 
     @PutMapping(path = "/{id}/level")
     public ThermostatDto changeLevel(@PathVariable Long id, @RequestBody ThermostatDto body, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         thermostat.setLevel(body.getLevel());
         return new ThermostatDto(thermostat);
@@ -89,7 +76,6 @@ public class ThermostatController {
 
     @PutMapping(path = "/{id}/temperatures")
     public ThermostatDto changeFunctioningTemperatures(@PathVariable Long id, @RequestBody ThermostatDto body, HttpServletResponse response) {
-        addHeaders(response);
         Thermostat thermostat = thermostatDao.findById(id);
         thermostat.setOnTemperature(body.getOnTemperature());
         thermostat.setOffTemperature(body.getOffTemperature());
@@ -98,7 +84,6 @@ public class ThermostatController {
 
     @PostMapping
     public ThermostatDto createThermostat(@RequestBody ThermostatDto thermostatDto, HttpServletResponse response) {
-        addHeaders(response);
         Room room = null;
         if (thermostatDto.getRoomId() != null) {
             room = roomDao.findRoomById(thermostatDto.getRoomId());
@@ -116,7 +101,6 @@ public class ThermostatController {
 
     @DeleteMapping(path = "/{id}")
     public void deleteThermostat(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         thermostatDao.delete(thermostatDao.findById(id));
     }
 }

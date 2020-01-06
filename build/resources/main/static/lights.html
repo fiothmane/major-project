@@ -103,7 +103,7 @@
                     <td v-if="light.status === 'ON'" class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x on"></i></td>
                     <td v-else class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x off"></i></td>
                     <td class="text-center">
-                        <input type="number" min="0" max="999" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
+                        <input type="number" min="1" max="254" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
                         <button type="button" class="btn btn-success" v-on:click="changeLightLevel(light.id)">Change light level</button>
                     </td>
                     <td class="text-center">

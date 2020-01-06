@@ -29,16 +29,8 @@ public class BuildingController {
     @Autowired
     private ThermostatDao thermostatDao;
 
-    public void addHeaders (HttpServletResponse response) {
-        response.addHeader("access-control-allow-credentials", "true");
-        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-        response.addHeader("access-control-allow-origin", "*");
-        response.addHeader("content-type", "application/json;charset=UTF-8");
-    }
-
     @GetMapping
     public List<BuildingDto> findAll(HttpServletResponse response) {
-        addHeaders(response);
         return buildingDao.findAll()
                 .stream()
                 .map(BuildingDto::new)
@@ -47,14 +39,12 @@ public class BuildingController {
 
     @GetMapping(path = "/{id}")
     public BuildingDto findById(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Building building = buildingDao.findBuildingById(id);
         return new BuildingDto(building);
     }
 
     @PostMapping
     public BuildingDto createBuilding(@RequestBody BuildingDto buildingDto, HttpServletResponse response) {
-        addHeaders(response);
         List<Room> buildingRooms = new ArrayList<Room>();
         if (buildingDto.getRoomsIds() != null) {
             for (int i = 0; i < buildingDto.getRoomsIds().size(); i++) {
@@ -76,7 +66,6 @@ public class BuildingController {
 
     @DeleteMapping(path = "/{id}")
     public void deleteBuilding(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         Building building = buildingDao.findBuildingById(id);
         if (building.getRooms() != null) {
             /* Delete building's lights, ringers and thermostats */

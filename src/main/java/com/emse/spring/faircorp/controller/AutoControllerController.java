@@ -22,16 +22,8 @@ public class AutoControllerController {
     @Autowired
     private RoomDao roomDao;
 
-    public void addHeaders (HttpServletResponse response) {
-        response.addHeader("access-control-allow-credentials", "true");
-        response.addHeader("access-control-allow-headers", "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-        response.addHeader("access-control-allow-origin", "*");
-        response.addHeader("content-type", "application/json;charset=UTF-8");
-    }
-
     @GetMapping
     public List<AutoControllerDto> findAll(HttpServletResponse response) {
-        addHeaders(response);
         return autoControllerDao.findAll()
                 .stream()
                 .map(AutoControllerDto::new)
@@ -40,14 +32,12 @@ public class AutoControllerController {
 
     @GetMapping(path = "/{id}")
     public AutoControllerDto findById(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         AutoController autoController = autoControllerDao.findAutoLightById(id);
         return new AutoControllerDto(autoController);
     }
 
     @PutMapping(path = "/{id}/switch")
     public AutoControllerDto switchAutoLightController(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         AutoController autoController = autoControllerDao.findAutoLightById(id);
         Status currentStatus = autoController.getAutoLightControlState();
         if (currentStatus.equals(Status.ON)) {
@@ -61,7 +51,6 @@ public class AutoControllerController {
 
     @PutMapping(path = "/{id}/switchThermostat")
     public AutoControllerDto switchAutoThermostatController(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         AutoController autoController = autoControllerDao.findAutoLightById(id);
         Status currentStatus = autoController.getAutoThermostatControlState();
         if (currentStatus.equals(Status.ON)) {
@@ -75,7 +64,6 @@ public class AutoControllerController {
 
     @PutMapping(path = "/{id}/sunset-sunrise")
     public AutoControllerDto changeSunsetSunrise(@PathVariable Long id, @RequestBody AutoControllerDto body, HttpServletResponse response) {
-        addHeaders(response);
         AutoController autoController = autoControllerDao.findAutoLightById(id);
         autoController.setSunriseTime(body.getSunriseTime());
         autoController.setSunsetTime(body.getSunsetTime());
@@ -90,7 +78,6 @@ public class AutoControllerController {
 
     @PutMapping(path = "/{id}/minTemperature")
     public AutoControllerDto changeMinMaxTemperatures(@PathVariable Long id, @RequestBody AutoControllerDto body, HttpServletResponse response) {
-        addHeaders(response);
         AutoController autoController = autoControllerDao.findAutoLightById(id);
         autoController.setMinTemperature(body.getMinTemperature());
         if (body.getLatitude() != null) {
@@ -104,7 +91,6 @@ public class AutoControllerController {
 
     @PostMapping
     public AutoControllerDto createAutoLightController(@RequestBody AutoControllerDto autoControllerDto, HttpServletResponse response) {
-        addHeaders(response);
         Room room = null;
         if (autoControllerDto.getRoomId() != null) {
             room = roomDao.findRoomById(autoControllerDto.getRoomId());
@@ -121,7 +107,6 @@ public class AutoControllerController {
 
     @DeleteMapping(path = "/{id}")
     public void deleteAutoLightController(@PathVariable Long id, HttpServletResponse response) {
-        addHeaders(response);
         autoControllerDao.delete(autoControllerDao.findAutoLightById(id));
     }
 }
