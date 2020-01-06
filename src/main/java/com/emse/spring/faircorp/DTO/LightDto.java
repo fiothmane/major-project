@@ -1,7 +1,6 @@
 package com.emse.spring.faircorp.DTO;
 
 import com.emse.spring.faircorp.model.Light;
-import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Status;
 
 public class LightDto {

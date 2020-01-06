@@ -3,8 +3,6 @@ package com.emse.spring.faircorp.DTO;
 import com.emse.spring.faircorp.model.AutoController;
 import com.emse.spring.faircorp.model.Status;
 
-import javax.persistence.Column;
-
 public class AutoControllerDto {
     private Long id;
 

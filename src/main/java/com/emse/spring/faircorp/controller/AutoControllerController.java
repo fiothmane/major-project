@@ -3,7 +3,9 @@ package com.emse.spring.faircorp.controller;
 import com.emse.spring.faircorp.DAO.AutoControllerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
 import com.emse.spring.faircorp.DTO.AutoControllerDto;
-import com.emse.spring.faircorp.model.*;
+import com.emse.spring.faircorp.model.AutoController;
+import com.emse.spring.faircorp.model.Room;
+import com.emse.spring.faircorp.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

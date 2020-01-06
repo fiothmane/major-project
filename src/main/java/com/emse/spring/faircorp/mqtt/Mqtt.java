@@ -1,8 +1,6 @@
 package com.emse.spring.faircorp.mqtt;
 
-import com.google.common.net.MediaType;
 import org.eclipse.paho.client.mqttv3.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

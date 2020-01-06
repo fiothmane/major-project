@@ -2,7 +2,6 @@ package com.emse.spring.faircorp.controller;
 
 import com.emse.spring.faircorp.DAO.RingerDao;
 import com.emse.spring.faircorp.DAO.RoomDao;
-import com.emse.spring.faircorp.DTO.LightDto;
 import com.emse.spring.faircorp.DTO.RingerDto;
 import com.emse.spring.faircorp.model.Ringer;
 import com.emse.spring.faircorp.model.Room;
