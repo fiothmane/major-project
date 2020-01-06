@@ -76,8 +76,9 @@ var app = new Vue({
                         this.lights[i].status = "OFF";
 
                         /* Request to philips hue */
+                        console.log("send request off");
                         axios
-                            .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/lightOnMqtt')
+                            .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOffMqtt')
                             .then(response => console.log(response.status))
                         // const philipsHueRequestBody = {
                         //     on: false,
@@ -96,12 +97,16 @@ var app = new Vue({
                         this.lights[i].status = "ON";
 
                         /* Request to philips hue */
-                        const philipsHueRequestBody = {
-                            on: true,
-                        };
+                        console.log("send request on");
                         axios
-                            .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                            .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOnMqtt')
                             .then(response => console.log(response.status))
+                        // const philipsHueRequestBody = {
+                        //     on: true,
+                        // };
+                        // axios
+                        //     .put('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + id + '/state', philipsHueRequestBody)
+                        //     .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x on";

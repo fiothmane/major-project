@@ -109,6 +109,24 @@ public class LightController {
         mqtt.mqttClient(publishMessage);
     }
 
+    @PutMapping(path = "/{id}/lightLevelMqtt")
+    public void lightLevelMqtt(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
+        addHeaders(response);
+        Mqtt mqtt = new Mqtt();
+        String level = String.valueOf(body.getLevel());
+        String publishMessage = "level::" + level + "::" + String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
+    }
+
+    @PutMapping(path = "/{id}/lightColorMqtt")
+    public void lightColorMqtt(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
+        addHeaders(response);
+        Mqtt mqtt = new Mqtt();
+        String color = String.valueOf(body.getColor());
+        String publishMessage = "color::" + color + "::" + String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
+    }
+
     @PutMapping(path = "/{id}/arduino")
     public void controlWithArduino(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
