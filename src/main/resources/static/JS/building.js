@@ -37,7 +37,6 @@ var app = new Vue({
                     this.rooms = response.data
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
                 .finally(() => this.loading = false);
@@ -70,7 +69,6 @@ var app = new Vue({
 
                 )
                 .catch(error => {
-                    console.log(error)
                     this.deleteMessage = "problem"
                 })
         },
@@ -172,7 +170,6 @@ var app = new Vue({
                                     }, 3000)
                             })
                             .catch(error => {
-                                console.log(error)
                                 this.editMessage = "problem";
                             });
                     })
@@ -242,13 +239,11 @@ var app = new Vue({
                                             axios
                                                 .delete('https://walid-ouchtiti.cleverapps.io/api/rooms/' + rooms[i].id)
                                                 .catch(error => {
-                                                    console.log(error)
                                                 })
                                         }
                                     }
                                 })
                                 .catch(error => {
-                                    console.log(error)
                                 })
                         }
 
@@ -280,7 +275,6 @@ var app = new Vue({
                                     }, 3000)
                             })
                             .catch(error => {
-                                console.log(error)
                                 this.editMessage = "problem";
                             });
                     })
@@ -309,7 +303,6 @@ var app = new Vue({
 
                 )
                 .catch(error => {
-                    console.log(error)
                     this.deleteMessage = "problem"
                 })
         }

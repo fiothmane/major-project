@@ -31,7 +31,6 @@ var addroom = new Vue({
                 .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody)
                 .then(response => {this.error = false})
                 .catch(error => {
-                    console.log(error)
                     this.error = true
                 });
         }

@@ -50,7 +50,6 @@ var app = new Vue({
                     this.thermostats = response.data
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
                 .finally(() => this.loading = false);
@@ -84,9 +83,6 @@ var app = new Vue({
             }
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + id + '/switch')
-                .then((response) => {
-                    // console.log(response.data)
-                });
         },
         changeThermostatLevel(thermostatId) {
             var thermostatLevel = document.getElementById("thermostatLevel" + thermostatId).value;
@@ -120,7 +116,6 @@ var app = new Vue({
 
                 )
                 .catch(error => {
-                    console.log(error)
                     this.deleteMessage = "problem"
                 })
         },
@@ -153,9 +148,6 @@ var app = new Vue({
                                         /* Switch the state of the auto controller */
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/switchThermostat')
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
 
                                         /* Change sunset and sunrise info */
                                         const requestBody = {

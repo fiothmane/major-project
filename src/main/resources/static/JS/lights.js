@@ -58,7 +58,6 @@ var app = new Vue({
                     this.lights = response.data
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
                 .finally(() => this.loading = false);
@@ -78,7 +77,6 @@ var app = new Vue({
                         /* Request to philips hue */
                         axios
                             .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOffMqtt')
-                            .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x off";
@@ -92,7 +90,6 @@ var app = new Vue({
                         /* Request to philips hue */
                         axios
                             .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + id + '/lightOnMqtt')
-                            .then(response => console.log(response.status))
                     }
                 }
                 document.getElementById("bulb" + id).className = "fas fa-lightbulb fa-2x on";
@@ -119,7 +116,6 @@ var app = new Vue({
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightLevelMqtt', philipsHueRequestBody)
-                .then(response => console.log(response.status))
         },
         changeLightColor(lightId) {
             /* Change light color in the rest api */
@@ -135,10 +131,8 @@ var app = new Vue({
             const philipsHueRequestBody = {
                 color: parseInt(lightColor),
             };
-            console.log(philipsHueRequestBody)
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightColorMqtt', philipsHueRequestBody)
-                .then(response => console.log(response.status))
         },
         deleteLight(lightId) {
             axios
@@ -163,7 +157,6 @@ var app = new Vue({
 
                 )
                 .catch(error => {
-                    console.log(error)
                     this.deleteMessage = "problem"
                 })
         },
@@ -171,7 +164,6 @@ var app = new Vue({
             /* Publish light id in topic in order for arduino to control the light */
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/arduino')
-                .then(response => console.log(response.status))
         },
         switchAutoLightControl(roomId) {
             /* Change the page icons */
@@ -202,9 +194,7 @@ var app = new Vue({
                                         /* Switch the state of the auto controller */
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/switch')
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
+                                            .then((response) => {});
 
                                         /* Change sunset and sunrise info */
                                         const requestBody = {
@@ -215,9 +205,7 @@ var app = new Vue({
                                         };
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
+                                            .then((response) => {});
                                     }
                                 }
                             })

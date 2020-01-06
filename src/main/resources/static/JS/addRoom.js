@@ -105,13 +105,11 @@ var addRoom = new Vue({
                         .post('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers', requestBody2)
                         .then(response => {this.error = false})
                         .catch(error => {
-                            console.log(error)
                             this.error = true
                         });
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.error = true
                 });
         },

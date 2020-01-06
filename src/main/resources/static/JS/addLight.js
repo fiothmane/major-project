@@ -25,7 +25,6 @@ var addroom = new Vue({
                 .get('https://walid-ouchtiti.cleverapps.io/api/lights/' + this.lightId)
                 .then(response => {this.error = "lightAlreadyExist"})
                 .catch(error => {
-                    console.log(error)
                             /* Request body for the rest api */
                             const requestBody = {
                                 id: this.lightId,
@@ -40,7 +39,6 @@ var addroom = new Vue({
                                     // window.location.href = "building.html"
                                 })
                                 .catch(error => {
-                                    console.log(error)
                                     this.error = "true"
                                 });
                 });
