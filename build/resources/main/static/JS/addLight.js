@@ -42,7 +42,7 @@ var addroom = new Vue({
                                 roomId: this.roomId,
                             };
                             axios
-                                .post('http://localhost:8080/api/lights', requestBody, {
+                                .post('https://walid-ouchtiti.cleverapps.io/api/lights', requestBody, {
                                     headers: {
                                         "Accept": "application/json",
                                         "Content-Type": "application/json;charset=UTF-8",

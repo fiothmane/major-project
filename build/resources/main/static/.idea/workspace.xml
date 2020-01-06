@@ -7,12 +7,8 @@
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/classes/java/main/com/emse/spring/faircorp/controller/LightController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build/resources/main/static/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JS/addLight.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/addLight.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +87,7 @@
       <workItem from="1578256621398" duration="7011000" />
       <workItem from="1578294774268" duration="6987000" />
       <workItem from="1578306264490" duration="235000" />
-      <workItem from="1578315405801" duration="3699000" />
+      <workItem from="1578315405801" duration="4579000" />
     </task>
     <servers />
   </component>

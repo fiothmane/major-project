@@ -7,10 +7,7 @@ var addroom = new Vue({
             light: null,
             /* Form data (v-model) */
             lightId: 0,
-            // lightLevel: 0,
-            // lightStatus: "",
             roomId: "",
-            /* Error handling */
             error: "",
         }
     },
@@ -29,11 +26,6 @@ var addroom = new Vue({
                 .then(response => {this.error = "lightAlreadyExist"})
                 .catch(error => {
                     console.log(error)
-                    /* Verify if the given philips hue id exists */
-                    // axios
-                    //     .get('192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/' + this.lightId)
-                    //     .then(response => {
-
                             /* Request body for the rest api */
                             const requestBody = {
                                 id: this.lightId,
@@ -60,11 +52,6 @@ var addroom = new Vue({
                                     console.log(error)
                                     this.error = "true"
                                 });
-                        // })
-                        // .catch(error => {
-                        //     console.log(error)
-                        //     this.error = "lightNotFound"
-                        // });
                 });
         }
     }

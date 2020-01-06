@@ -60,7 +60,6 @@ public class LightController {
 
     @PutMapping(path = "/{id}/switchLightArduino")
     public LightDto switchLightArduino(@PathVariable Long id, HttpServletResponse response) {
-//        addHeaders(response);
         Light light = lightDao.findById(id);
         Status currentStatus = light.getStatus();
         if (currentStatus.equals(Status.ON)) {

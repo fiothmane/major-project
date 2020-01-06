@@ -5,8 +5,6 @@ var addroom = new Vue({
             /* HTTP data */
             rooms: null,
             /* Form data (v-model) */
-            // ringerLevel: 0,
-            // ringerStatus: "",
             roomId: "",
             /* Error handling */
             error: null,
@@ -23,8 +21,6 @@ var addroom = new Vue({
         },
         addRinger() {
             const requestBody = {
-                // level: this.ringerLevel,
-                // status: this.ringerStatus,
                 level: 0,
                 status: "OFF",
                 roomId: this.roomId,
@@ -40,9 +36,7 @@ var addroom = new Vue({
                         "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
                     }
                 })
-                .then(response => {this.error = false
-                    // window.location.href = "building.html"
-                })
+                .then(response => {this.error = false})
                 .catch(error => {
                     console.log(error)
                     this.error = true
