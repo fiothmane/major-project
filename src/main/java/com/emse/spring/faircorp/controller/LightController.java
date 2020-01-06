@@ -68,17 +68,35 @@ public class LightController {
         Light light = lightDao.findById(id);
         Status currentStatus = light.getStatus();
         if (currentStatus.equals(Status.ON)) {
+            /* REST Api */
             light.setStatus(Status.OFF);
+            /* Philips hue */
             Mqtt mqtt = new Mqtt();
             String publishMessage = "off::" + String.valueOf(id);
             mqtt.mqttClient(publishMessage);
         }
         else {
+            /* REST Api */
             light.setStatus(Status.ON);
+            /* Philips hue */
             Mqtt mqtt = new Mqtt();
             String publishMessage = "on::" + String.valueOf(id);
             mqtt.mqttClient(publishMessage);
         }
+        return new LightDto(light);
+    }
+
+    @PutMapping(path = "/{id}/changeLevelArduino")
+    public LightDto changeLevelArduino(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
+        addHeaders(response);
+        /* REST Api */
+        Light light = lightDao.findById(id);
+        light.setLevel(body.getLevel());
+        /* Philips hue */
+        Mqtt mqtt = new Mqtt();
+        String level = String.valueOf(body.getLevel());
+        String publishMessage = "level::" + level + "::" + String.valueOf(id);
+        mqtt.mqttClient(publishMessage);
         return new LightDto(light);
     }
 
