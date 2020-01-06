@@ -88,8 +88,10 @@ public class RoomController {
             autoController = autoControllerDao.findAutoLightById(roomDto.getAutoLightControlId());
         }
 
+        System.out.println("HEEEEEERE " + roomDto.getName());
         Room room = new Room(roomDto.getId(), roomDto.getName(), floor, autoController, roomLights, ringer, thermostat, building);
         roomDao.save(room);
+
         if (ringer != null) {
             ringer.setRoom(room);
             ringerDao.updateRinger(ringer);

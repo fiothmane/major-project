@@ -259,15 +259,15 @@ var app = new Vue({
                             .then(response => {this.editMessage = "success";
 
                                 /* Timer before reloading page */
-                                setTimeout(function(){
+                                setTimeout(function() {
                                     document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 2 seconds"
                                 }, 1000),
-                                    setTimeout(function(){
+                                    setTimeout(function() {
                                         document.getElementById('editMessage').innerHTML = "The data has been successfully edited, you will be redirected to the page after 1 second"
                                     }, 2000),
 
                                     /* Reload the page to refresh info */
-                                    setTimeout(function(){
+                                    setTimeout(function() {
                                         let uri = window.location.search.substring(1);
                                         let urlParams = new URLSearchParams(uri);
                                         this.buildingId = urlParams.get("building");
@@ -289,15 +289,15 @@ var app = new Vue({
                     this.deleteMessage = "success",
 
                     /* Timer before reloading page */
-                    setTimeout(function(){
+                    setTimeout(function() {
                         document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 2 seconds"
                     }, 1000),
-                    setTimeout(function(){
+                    setTimeout(function() {
                         document.getElementById('deleteMessage').innerHTML = "The data has been successfully deleted, you will be redirected to the page after 1 second"
                     }, 2000),
 
                     /* Reload the page to refresh info */
-                    setTimeout(function(){
+                    setTimeout(function() {
                         window.location.href = 'index.html';
                     }, 3000),
 

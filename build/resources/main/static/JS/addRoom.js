@@ -87,16 +87,7 @@ var addRoom = new Vue({
                 buildingId: this.buildingId,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody)
                 .then(response => {this.error = false
                     // window.location.href = "building.html"
                     this.room = response.data;
@@ -111,30 +102,16 @@ var addRoom = new Vue({
                         roomId: this.room.id,
                     };
                     axios
-                        .post('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers', requestBody2, {
-                            headers: {
-                                "Accept": "application/json",
-                                "Content-Type": "application/json;charset=UTF-8",
-                                "access-control-allow-origin": "*",
-                                "access-control-allow-credentials": "true",
-                                "Access-Control-Allow-Methods": "GET, POST",
-                                "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                            }
-                        })
-                        .then(response => {this.error = false
-                            // window.location.href = "building.html"
-                        })
+                        .post('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers', requestBody2)
+                        .then(response => {this.error = false})
                         .catch(error => {
-                            console.log(error)
                             this.error = true
                         });
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.error = true
                 });
-
         },
     }
 })

@@ -28,21 +28,9 @@ var addroom = new Vue({
                 roomsIds: this.roomsList,
             };
             axios
-                .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
-                .then(response => {this.error = false
-                    // window.location.href = "building.html"
-                })
+                .post('https://walid-ouchtiti.cleverapps.io/api/buildings', requestBody)
+                .then(response => {this.error = false})
                 .catch(error => {
-                    console.log(error)
                     this.error = true
                 });
         }

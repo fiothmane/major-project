@@ -50,7 +50,6 @@ var app = new Vue({
                     this.thermostats = response.data
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
                 .finally(() => this.loading = false);
@@ -84,9 +83,6 @@ var app = new Vue({
             }
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + id + '/switch')
-                .then((response) => {
-                    // console.log(response.data)
-                });
         },
         changeThermostatLevel(thermostatId) {
             var thermostatLevel = document.getElementById("thermostatLevel" + thermostatId).value;
@@ -95,22 +91,11 @@ var app = new Vue({
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId + '/level', restApiBody)
-                .then((response) => {
-                    // console.log(response.data)
-                });
+                .then((response) => {});
         },
         deleteThermostat(thermostatId) {
             axios
-                .delete('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId, {
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=UTF-8",
-                        "access-control-allow-origin": "*",
-                        "access-control-allow-credentials": "true",
-                        "Access-Control-Allow-Methods": "GET, POST, DELETE",
-                        "access-control-allow-headers": "Origin,Accept,X-Requested-With,Content-Type,X-Auth-Token,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-                    }
-                })
+                .delete('https://walid-ouchtiti.cleverapps.io/api/thermostats/' + thermostatId)
                 .then(
                     roomId = this.roomId,
                     document.getElementById('loading').hidden = false,
@@ -131,7 +116,6 @@ var app = new Vue({
 
                 )
                 .catch(error => {
-                    console.log(error)
                     this.deleteMessage = "problem"
                 })
         },
@@ -164,9 +148,6 @@ var app = new Vue({
                                         /* Switch the state of the auto controller */
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/switchThermostat')
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
 
                                         /* Change sunset and sunrise info */
                                         const requestBody = {
@@ -177,9 +158,7 @@ var app = new Vue({
                                         };
                                         axios
                                             .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/sunset-sunrise', requestBody)
-                                            .then((response) => {
-                                                // console.log(response.data)
-                                            });
+                                            .then((response) => {});
                                     }
                                 }
                             })
@@ -201,13 +180,10 @@ var app = new Vue({
                             };
                             axios
                                 .put('https://walid-ouchtiti.cleverapps.io/api/autoLightControllers/' + autoLightControlers[i].id + '/minTemperature', requestBody)
-                                .then((response) => {
-                                    // console.log(response.data)
-                                });
+                                .then((response) => {});
                         }
                     }
                 })
-
         }
     }
 })
