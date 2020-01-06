@@ -131,7 +131,7 @@ var app = new Vue({
 
             /* Change philips hue light level */
             const philipsHueRequestBody = {
-                bri: parseInt(lightLevel),
+                level: parseInt(lightLevel),
             };
             axios
                 .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightLevelMqtt', philipsHueRequestBody)
@@ -155,11 +155,11 @@ var app = new Vue({
 
             /* Change philips hue light color */
             const philipsHueRequestBody = {
-                hue: parseInt(lightColor),
+                color: parseInt(lightColor),
             };
             console.log(philipsHueRequestBody)
             axios
-                .put('http://localhost:8080/api/lights/' + lightId + '/lightColorMqtt', philipsHueRequestBody)
+                .put('https://walid-ouchtiti.cleverapps.io/api/lights/' + lightId + '/lightColorMqtt', philipsHueRequestBody)
                 .then(response => console.log(response.status))
 
 

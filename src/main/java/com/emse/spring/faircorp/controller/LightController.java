@@ -62,6 +62,26 @@ public class LightController {
         return new LightDto(light);
     }
 
+    @PutMapping(path = "/{id}/switchLightArduino")
+    public LightDto switchLightArduino(@PathVariable Long id, HttpServletResponse response) {
+        addHeaders(response);
+        Light light = lightDao.findById(id);
+        Status currentStatus = light.getStatus();
+        if (currentStatus.equals(Status.ON)) {
+            light.setStatus(Status.OFF);
+            Mqtt mqtt = new Mqtt();
+            String publishMessage = "off::" + String.valueOf(id);
+            mqtt.mqttClient(publishMessage);
+        }
+        else {
+            light.setStatus(Status.ON);
+            Mqtt mqtt = new Mqtt();
+            String publishMessage = "on::" + String.valueOf(id);
+            mqtt.mqttClient(publishMessage);
+        }
+        return new LightDto(light);
+    }
+
     @PutMapping(path = "/{id}/switchOn")
     public LightDto turnOnLight(@PathVariable Long id, HttpServletResponse response) {
         addHeaders(response);
