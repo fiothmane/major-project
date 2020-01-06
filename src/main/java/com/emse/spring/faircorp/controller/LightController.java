@@ -8,7 +8,14 @@ import com.emse.spring.faircorp.model.Room;
 import com.emse.spring.faircorp.model.Status;
 import com.emse.spring.faircorp.mqtt.Mqtt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -16,10 +23,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/lights")
 @Transactional
 public class LightController {
+    @Bean
+    public WebMvcConfigurer corsConfigurer()
+    {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*")
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowCredentials(true)
+                .exposedHeaders(HttpHeaders.AUTHORIZATION);
+            }
+        };
+    }
+
     @Autowired
     private LightDao lightDao;
     @Autowired
@@ -176,7 +197,7 @@ public class LightController {
 
     @PostMapping
     public LightDto createLight(@RequestBody LightDto lightDto, HttpServletResponse response) {
-//        addHeaders(response);
+        addHeaders(response);
         Room room = null;
         if (lightDto.getRoomId() != null) {
             room = roomDao.findRoomById(lightDto.getRoomId());
