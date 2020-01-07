@@ -37,6 +37,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="addRinger.html">Add ringer<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="addThermostat.html">Add thermostat<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -84,6 +87,13 @@
         <select class="browser-default custom-select mb-4" id="ringer" v-model="ringerId">
             <option value="" disabled selected>Choose a ringer</option>
             <option v-for="ringer in ringers" v-bind:value="ringer.id">{{ringer.id}}</option>
+        </select>
+
+        <!-- Thermostat -->
+        <label class="float-left">Thermostat</label>
+        <select class="browser-default custom-select mb-4" id="thermostat" v-model="thermostatId">
+            <option value="" disabled selected>Choose a thermostat</option>
+            <option v-for="thermostat in thermostats" v-bind:value="thermostat.id">{{thermostat.id}}</option>
         </select>
 
         <!-- Send button -->

@@ -37,6 +37,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="addRinger.html">Add ringer<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="addThermostat.html">Add thermostat<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -67,23 +70,11 @@
         <label class="float-left">Light id</label>
         <input type="number" id="lightId" class="form-control mb-4" v-model="lightId" required>
 
-<!--        &lt;!&ndash; Light level &ndash;&gt;-->
-<!--        <label class="float-left">Light level</label>-->
-<!--        <input type="number" min="0" max="999" id="lightLevel" class="form-control mb-4" v-model="lightLevel" required>-->
-
-<!--        &lt;!&ndash; Light status &ndash;&gt;-->
-<!--        <label class="float-left">Light status</label>-->
-<!--        <select class="browser-default custom-select mb-4" id="lightStatus" v-model="lightStatus" required>-->
-<!--            <option value="" disabled selected>Choose light status</option>-->
-<!--            <option value="ON">ON</option>-->
-<!--            <option value="OFF">OFF</option>-->
-<!--        </select>-->
-
         <!-- Room -->
         <label class="float-left">Room</label>
         <select class="browser-default custom-select mb-4" id="room" v-model="roomId">
             <option value="" disabled>Choose room</option>
-            <option v-for="room in rooms" v-bind:value="room.id">{{room.id}}</option>
+            <option v-for="room in rooms" v-bind:value="room.id">{{room.name}}</option>
         </select>
 
         <!-- Send button -->

@@ -1,6 +1,6 @@
 package com.emse.spring.faircorp.autoControlThread;
 
-import com.emse.spring.faircorp.DTO.AutoLightDto;
+import com.emse.spring.faircorp.DTO.AutoControllerDto;
 import com.emse.spring.faircorp.model.Status;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -104,7 +104,7 @@ public class AutoLightThread extends Thread {
             httpCon.getInputStream();
 
             /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
+            URL url1 = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/lightOffMqtt");
             HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
             httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
             httpCon1.setDoOutput(true);
@@ -137,14 +137,14 @@ public class AutoLightThread extends Thread {
             httpCon.getInputStream();
 
             /* Philips hue */
-            URL url1 = new URL("192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + lightId + "/state");
+            URL url1 = new URL("https://walid-ouchtiti.cleverapps.io/api/lights/" + lightId + "/lightOnMqtt");
             HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-            httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+            httpCon1.setRequestProperty("Content-Type", "application/json");
             httpCon1.setDoOutput(true);
             httpCon1.setRequestMethod("PUT");
             OutputStreamWriter out1 = new OutputStreamWriter(
                     httpCon1.getOutputStream());
-            out1.write("{\"on\": true}");
+            out1.write("");
             out1.close();
             httpCon1.getInputStream();
 
@@ -176,7 +176,7 @@ public class AutoLightThread extends Thread {
                 for (int i = 0; i < obj.size(); i++) {
                     /* Retrieve the auto light controller and create object */
                     JSONObject lightController = (JSONObject) obj.get(i);
-                    AutoLightDto autoLight = new AutoLightDto();
+                    AutoControllerDto autoLight = new AutoControllerDto();
                     autoLight.setRoomId((Long) lightController.get("roomId"));
                     if (lightController.get("autoLightControlState") == "ON") {
                         autoLight.setAutoLightControlState(Status.ON);
@@ -184,11 +184,18 @@ public class AutoLightThread extends Thread {
                     else {
                         autoLight.setAutoLightControlState(Status.OFF);
                     }
+                    if (lightController.get("autoThermostatControlState") == "ON") {
+                        autoLight.setAutoThermostatControlState(Status.ON);
+                    }
+                    else {
+                        autoLight.setAutoThermostatControlState(Status.OFF);
+                    }
                     autoLight.setId((Long) lightController.get("id"));
                     autoLight.setSunriseTime(lightController.get("sunriseTime").toString());
                     autoLight.setSunsetTime(lightController.get("sunsetTime").toString());
                     autoLight.setLatitude(lightController.get("latitude").toString());
                     autoLight.setLongitude(lightController.get("longitude").toString());
+                    autoLight.setMinTemperature(lightController.get("minTemperature").toString());
 
                     /* Get current time */
                     DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");

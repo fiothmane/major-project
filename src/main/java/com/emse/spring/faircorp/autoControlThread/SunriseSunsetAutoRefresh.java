@@ -1,6 +1,6 @@
 package com.emse.spring.faircorp.autoControlThread;
 
-import com.emse.spring.faircorp.DTO.AutoLightDto;
+import com.emse.spring.faircorp.DTO.AutoControllerDto;
 import com.emse.spring.faircorp.model.Status;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -131,7 +131,7 @@ public class SunriseSunsetAutoRefresh extends Thread {
                 for (int i = 0; i < obj.size(); i++) {
                     /* Retrieve the auto light controller and create object */
                     JSONObject lightController = (JSONObject) obj.get(i);
-                    AutoLightDto autoLight = new AutoLightDto();
+                    AutoControllerDto autoLight = new AutoControllerDto();
                     autoLight.setRoomId((Long) lightController.get("roomId"));
                     if (lightController.get("autoLightControlState") == "ON") {
                         autoLight.setAutoLightControlState(Status.ON);

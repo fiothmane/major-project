@@ -37,6 +37,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="addRinger.html">Add ringer<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="addThermostat.html">Add thermostat<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -89,7 +92,7 @@
                     <th class="text-center"><b>Light Status</b></th>
                     <th class="text-center"><b>Light Level</b></th>
                     <th class="text-center"><b>Light Color</b></th>
-                    <th class="text-center"><b>Light Status</b></th>
+                    <th class="text-center"><b>Switch Light</b></th>
                     <th class="text-center"><b>Control With Arduino</b></th>
                     <th class="text-center"><b>Delete Light</b></th>
                 </tr>
@@ -100,7 +103,7 @@
                     <td v-if="light.status === 'ON'" class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x on"></i></td>
                     <td v-else class="text-center"><i :id="'bulb'+light.id" class="fas fa-lightbulb fa-2x off"></i></td>
                     <td class="text-center">
-                        <input type="number" min="0" max="999" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
+                        <input type="number" min="1" max="254" v-bind:value="light.level" class="form-control mb-4" v-bind:id="'lightLevel'+light.id">
                         <button type="button" class="btn btn-success" v-on:click="changeLightLevel(light.id)">Change light level</button>
                     </td>
                     <td class="text-center">
