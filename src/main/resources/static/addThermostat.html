@@ -62,7 +62,7 @@
         <label class="float-left">Room</label>
         <select class="browser-default custom-select mb-4" id="room" v-model="roomId">
             <option value="" disabled>Choose room</option>
-            <option v-for="room in rooms" v-bind:value="room.id">{{room.id}}</option>
+            <option v-for="room in rooms" v-bind:value="room.id">{{room.name}}</option>
         </select>
 
         <!-- Send button -->

@@ -23,109 +23,109 @@ public class Mqtt implements MqttCallback {
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        System.out.println("Message arrived");
-        System.out.println("Topic: " + topic);
-        System.out.println("Message: " + message.toString());
-
-        /* Switch philips hue light */
-        String[] topicSplit = message.toString().split("::");
-        /* Philips hue on */
-        if (topicSplit[0].equals("on")) {
-            System.out.println("Turning philips hue on");
-            try {
-                /* Philips hue */
-                String url = "http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state/";
-                URL url1 = new URL(url);
-                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-                httpCon1.setRequestProperty("content-type", "application/json");
-                httpCon1.setDoOutput(true);
-                httpCon1.setRequestMethod("PUT");
-                OutputStreamWriter out1 = new OutputStreamWriter(
-                        httpCon1.getOutputStream());
-                out1.write("{\"on\": true}");
-                out1.close();
-                httpCon1.getInputStream();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        /* Philips hue off */
-        else if (topicSplit[0].equals("off")) {
-            System.out.println("Turning philips hue on");
-            try {
-                /* Philips hue */
-                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state");
-                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-                httpCon1.setDoOutput(true);
-                httpCon1.setRequestMethod("PUT");
-                OutputStreamWriter out1 = new OutputStreamWriter(
-                        httpCon1.getOutputStream());
-                out1.write("{\"on\": false}");
-                out1.close();
-                httpCon1.getInputStream();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        /* Change level */
-        else if (topicSplit[0].equals("level")) {
-            System.out.println("Change philips hue level");
-            try {
-                /* Philips hue */
-                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[2] + "/state");
-                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-                httpCon1.setDoOutput(true);
-                httpCon1.setRequestMethod("PUT");
-                OutputStreamWriter out1 = new OutputStreamWriter(
-                        httpCon1.getOutputStream());
-                out1.write("{\"bri\": " + topicSplit[1] + "}");
-                out1.close();
-                httpCon1.getInputStream();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        /* Change color */
-        else if (topicSplit[0].equals("color")) {
-            System.out.println("Change philips hue color");
-            try {
-                /* Philips hue */
-                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[2] + "/state");
-                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
-                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
-                httpCon1.setDoOutput(true);
-                httpCon1.setRequestMethod("PUT");
-                OutputStreamWriter out1 = new OutputStreamWriter(
-                        httpCon1.getOutputStream());
-                out1.write("{\"hue\": " + topicSplit[1] + "}");
-                out1.close();
-                httpCon1.getInputStream();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        System.out.println("Message arrived");
+//        System.out.println("Topic: " + topic);
+//        System.out.println("Message: " + message.toString());
+//
+//        /* Switch philips hue light */
+//        String[] topicSplit = message.toString().split("::");
+//        /* Philips hue on */
+//        if (topicSplit[0].equals("on")) {
+//            System.out.println("Turning philips hue on");
+//            try {
+//                /* Philips hue */
+//                String url = "http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state/";
+//                URL url1 = new URL(url);
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("content-type", "application/json");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"on\": true}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        /* Philips hue off */
+//        else if (topicSplit[0].equals("off")) {
+//            System.out.println("Turning philips hue on");
+//            try {
+//                /* Philips hue */
+//                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[1] + "/state");
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"on\": false}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        /* Change level */
+//        else if (topicSplit[0].equals("level")) {
+//            System.out.println("Change philips hue level");
+//            try {
+//                /* Philips hue */
+//                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[2] + "/state");
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"bri\": " + topicSplit[1] + "}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        /* Change color */
+//        else if (topicSplit[0].equals("color")) {
+//            System.out.println("Change philips hue color");
+//            try {
+//                /* Philips hue */
+//                URL url1 = new URL("http://192.168.1.131/api/TwKkhAqEICM5i2W4d1wnEEjhHaR1ZDmMAUlGnZ7a/lights/" + topicSplit[2] + "/state");
+//                HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
+//                httpCon1.setRequestProperty("Content-Type", "application/json; charset=utf8");
+//                httpCon1.setDoOutput(true);
+//                httpCon1.setRequestMethod("PUT");
+//                OutputStreamWriter out1 = new OutputStreamWriter(
+//                        httpCon1.getOutputStream());
+//                out1.write("{\"hue\": " + topicSplit[1] + "}");
+//                out1.close();
+//                httpCon1.getInputStream();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (ProtocolException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
