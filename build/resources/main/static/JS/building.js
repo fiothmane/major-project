@@ -150,7 +150,7 @@ var app = new Vue({
                         };
                         /* Send the http request to change the data */
                         axios
-                            .post('http://localhost:8080/api/rooms', requestBody)
+                            .post('https://walid-ouchtiti.cleverapps.io/api/rooms', requestBody)
                             .then(response => {this.editMessage = "success";
 
                                 /* Timer before reloading page */

@@ -70,7 +70,7 @@
         <label class="float-left">Rooms</label>
         <select multiple class="browser-default custom-select mb-4" id="rooms" v-model="roomsList">
             <option value="" disabled>Choose rooms (Use Ctrl to choose multiple values)</option>
-            <option v-for="room in rooms" v-bind:value="room.id">{{room.id}}</option>
+            <option v-for="room in rooms" v-bind:value="room.id">{{room.name}}</option>
         </select>
 
         <!-- Send button -->
