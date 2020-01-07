@@ -139,6 +139,10 @@ public class LightController {
 
     @PutMapping(path = "/{id}/lightColorMqtt")
     public void lightColorMqtt(@PathVariable Long id, @RequestBody LightDto body, HttpServletResponse response) {
+        /* REST Api */
+        Light light = lightDao.findById(id);
+        light.setColor(body.getColor());
+        /* Philips hue */
         Mqtt mqtt = new Mqtt();
         String color = String.valueOf(body.getColor());
         String publishMessage = "color::" + color + "::" + String.valueOf(id);
