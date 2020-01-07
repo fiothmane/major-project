@@ -8,18 +8,23 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         style="@style/action_bar_style">
-        
+
+        <!-- Btn menu -->
+        <ImageButton
+            android:id="@+id/btn_back_lights"
+            style="@style/actionbar_back_buttons"
+            />
 
         <TextView
             android:id="@+id/invent_prod_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/buildings"
+            android:text="Lights"
             style="@style/actionbar_title" />
 
         <!-- Btn menu -->
         <ImageButton
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_add_light"
             style="@style/actionbar_add_buttons"
             />
 
@@ -32,32 +37,9 @@
         android:orientation="vertical"
         android:focusableInTouchMode="true">
 
-        <!-- Search view -->
-
-
-        <!-- Search view -->
-        <SearchView
-            android:id="@+id/searchB"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#fff"
-            android:queryHint="Search"
-            android:theme="@style/search_text_style"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"
-            android:gravity="center"
-            android:layout_gravity="center" />
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#acc5dd"
-            android:alpha="0.53"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+            android:id="@+id/swipeRefreshLayoutLights"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -72,7 +54,7 @@
                     <!-- Recycler view -->
                     <!--Recycler view for items-->
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/buildings_recyclerview"
+                        android:id="@+id/lights_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scrollbars="vertical"

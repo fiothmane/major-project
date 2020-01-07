@@ -8,20 +8,20 @@ public class Light {
 
     private Integer color;
 
-    private Status status;
+    private String status;
 
-    private Room room;
+    private Long roomId;
 
     public Light() {
 
     }
 
-    public Light(Long id, Integer level, Integer color, Status status, Room room) {
+    public Light(Long id, Integer level, Integer color, String status, Long roomId) {
         this.id = id;
         this.level = level;
         this.color = color;
         this.status = status;
-        this.room = room;
+        this.roomId = roomId;
     }
 
     public Long getId() {
@@ -48,19 +48,19 @@ public class Light {
         this.color = color;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Room getRoom() {
-        return room;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 }

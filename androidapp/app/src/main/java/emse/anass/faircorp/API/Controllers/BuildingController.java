@@ -29,4 +29,8 @@ public class BuildingController {
     public Call<HashMap<String, Object>> deleteBuilding(long id){
         return buildingAPI.deleteBuilding(OperatingApiClient.getHeader(), id);
     }
+
+    public Call<Building> getBuilding(long id){
+        return buildingAPI.getBuilding(OperatingApiClient.getHeader(), id);
+    }
 }

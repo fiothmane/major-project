@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -15,30 +17,39 @@ import java.util.HashMap;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import emse.anass.faircorp.API.Controllers.BuildingController;
+import emse.anass.faircorp.API.Controllers.LightController;
 import emse.anass.faircorp.ContextManagementActivity;
 import emse.anass.faircorp.Helper.Utils;
 import emse.anass.faircorp.R;
-import emse.anass.faircorp.models.Building;
+import emse.anass.faircorp.models.Light;
+import emse.anass.faircorp.models.Room;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddBuildingFragment extends Fragment {
+public class AddLightFragment extends Fragment {
 
     ContextManagementActivity activity;
 
-    @Bind(R.id.et_building_name)
-    public EditText buildingName;
+    @Bind(R.id.add_light_level)
+    public SeekBar lightLevel;
 
-    @Bind(R.id.et_nbr_floors)
-    public EditText nbrFloors;
+    @Bind(R.id.add_light_color)
+    public SeekBar lightColor;
 
-    private Call<HashMap<String, Object>> buildingCall;
+    @Bind(R.id.switch_light)
+    public Switch switchLight;
 
-    public static AddBuildingFragment newInstance() {
-        AddBuildingFragment fragment = new AddBuildingFragment();
+    @Bind(R.id.et_id_light)
+    public EditText idLight;
+
+    private Call<HashMap<String, Object>> lightCall;
+    private Room room;
+
+    public static AddLightFragment newInstance(Room room) {
+        AddLightFragment fragment = new AddLightFragment();
         Bundle args = new Bundle();
+        args.putSerializable("room",room);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +57,7 @@ public class AddBuildingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_building, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_light, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -55,16 +66,17 @@ public class AddBuildingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = (ContextManagementActivity) getActivity();
+        this.room = (Room) getArguments().getSerializable("room");
 
     }
 
-    private void sendData(Building building) {
+    private void sendData(Light light) {
 
         if(Utils.isNetworkAvailable(activity)){
 
-            BuildingController buildingController = new BuildingController();
-            buildingCall = buildingController.addbuilding(building);
-            buildingCall.enqueue(new Callback<HashMap<String, Object>>() {
+            LightController lightController = new LightController();
+            lightCall = lightController.addLight(light);
+            lightCall.enqueue(new Callback<HashMap<String, Object>>() {
                 @Override
                 public void onResponse(Call<HashMap<String, Object>> call, Response<HashMap<String, Object>> response) {
 
@@ -87,17 +99,20 @@ public class AddBuildingFragment extends Fragment {
     }
 
     @Nullable
-    @OnClick(R.id.btn_save_building)
-    public void saveBuilding(){
-        Log.i("saveBuilding","saveBuilding");
-
-        if(!buildingName.getText().toString().isEmpty() && !nbrFloors.getText().toString().isEmpty()){
-            Building building = new Building();
-
-            building.setNbOfFloors(Integer.parseInt(nbrFloors.getText().toString()));
-            building.setName(buildingName.getText().toString());
-            sendData(building);
+    @OnClick(R.id.save_light)
+    public void saveLight(){
+        Log.i("saveLight","saveLight-"+room.getName());
+        if(!idLight.getText().toString().isEmpty()){
+            Light light = new Light();
+            light.setColor(lightColor.getProgress());
+            light.setLevel(lightLevel.getProgress());
+            String status = switchLight.isChecked() ? "ON" : "OFF";
+            light.setRoomId(room.getId());
+            light.setStatus(status);
+            light.setId(Long.parseLong(idLight.getText().toString()));
+            sendData(light);
         }
+
 
     }
 

@@ -10,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import emse.anass.faircorp.ContextManagementActivity;
 import emse.anass.faircorp.R;
+import emse.anass.faircorp.fragments.EditRoomFragment;
 import emse.anass.faircorp.models.Room;
 import emse.anass.faircorp.models.Status;
 
@@ -25,7 +29,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ItemViewHolder
 
 
     public RoomAdapter(ContextManagementActivity activity, List<Room> itemsData) {
-        this.itemsData = itemsData;
+        this.itemsData = new ArrayList<>(itemsData);
         this.activity = activity;
     }
 
@@ -40,16 +44,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ItemViewHolder
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Room item = itemsData.get(position);
         holder.nameTxt.setText(item.getName());
-        if(item.getLights() != null){
-            if(item.getLights().get(0).getStatus() == Status.ON){
-                holder.imageView.setImageResource(R.drawable.ic_bulb_on);
-            }else{
-                holder.imageView.setImageResource(R.drawable.ic_bulb_off);
-            }
-        }else{
-            holder.imageView.setImageResource(R.drawable.ic_bulb_off);
-        }
-
+        holder.nbFloor.setText(item.getFloor()+" Floor");
     }
 
 
@@ -88,13 +83,13 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ItemViewHolder
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView nameTxt;
-        public ImageView imageView;
+        public TextView nbFloor;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             nameTxt = itemView.findViewById(R.id.room_name);
-            imageView = itemView.findViewById(R.id.iv_room);
+            nbFloor = itemView.findViewById(R.id.tv_nb_floor);
         }
 
         @Override
@@ -105,6 +100,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ItemViewHolder
 
             Log.i("Room", "" + room.getName());
             highlight(view);
+            activity.navigateTo(EditRoomFragment.newInstance(room));
         }
 
         private void highlight(final View view) {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import emse.anass.faircorp.ContextManagementActivity;
@@ -26,7 +27,7 @@ public class BuildingsAdapter extends RecyclerView.Adapter<BuildingsAdapter.Item
 
 
     public BuildingsAdapter(ContextManagementActivity activity, List<Building> itemsData) {
-        this.itemsData = itemsData;
+        this.itemsData = new ArrayList<>(itemsData);
         this.activity = activity;
     }
 
@@ -98,7 +99,7 @@ public class BuildingsAdapter extends RecyclerView.Adapter<BuildingsAdapter.Item
 
             Log.i("Building", "" + building.getName());
             highlight(view);
-            activity.navigateTo(RoomsFragment.newInstance());
+            activity.navigateTo(RoomsFragment.newInstance(itemsData.get(position)));
         }
 
         private void highlight(final View view) {

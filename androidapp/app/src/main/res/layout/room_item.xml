@@ -46,14 +46,18 @@
             android:fontFamily="@font/montserrat_semi_bold"
             android:text="John llflfllfmmlllf"/>
 
-        <ImageView
-            android:id="@+id/iv_room"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <TextView
+            android:id="@+id/tv_nb_floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="1 Floor"
             android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="14dp"
-            android:src="@drawable/ic_bulb_on"/>
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:textColor="@color/grey_dark"/>
 
     </RelativeLayout>
     <View

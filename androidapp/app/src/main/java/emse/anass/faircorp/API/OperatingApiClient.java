@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OperatingApiClient {
 
-    public static final String IP_SERVER = "http://walid-ouchtiti.cleverapps.io/";
+    public static final String IP_SERVER = "https://walid-ouchtiti.cleverapps.io/";
 
     public static final String BASE_URL = IP_SERVER;
 

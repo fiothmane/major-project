@@ -1,24 +1,26 @@
 package emse.anass.faircorp.models;
 
-public class Ringer {
+import java.io.Serializable;
+
+public class Ringer implements Serializable{
 
     private Long id;
 
     private Integer level;
 
-    private Status status;
+    private String status;
 
-    private Room room;
+    private Long roomId;
 
     public Ringer() {
 
     }
 
-    public Ringer(Long id, Integer level, Status status, Room room) {
+    public Ringer(Long id, Integer level, String status, Long roomId) {
         this.id = id;
         this.level = level;
         this.status = status;
-        this.room = room;
+        this.roomId = roomId;
     }
 
     public Long getId() {
@@ -37,19 +39,19 @@ public class Ringer {
         this.level = level;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Room getRoom() {
-        return room;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 }

@@ -1,8 +1,9 @@
 package emse.anass.faircorp.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Room {
+public class Room implements Serializable{
 
     private Long id;
 
@@ -10,26 +11,30 @@ public class Room {
 
     private int floor;
 
-    private List<Light> lights;
+    private List<Long> lightsIds;
 
-    private Ringer ringer;
+    private Long ringerId;
 
-    private AutoLight autoLightControl;
+    private Long thermostatId;
 
-    private Building building;
+    private Long autoLightControlId;
+
+    private Long buildingId;
+
 
     public Room() {
 
     }
 
-    public Room(Long id, String name, int floor, AutoLight autoLightControl, List<Light> lights, Ringer ringer, Building building) {
+    public Room(Long id, String name, int floor, List<Long> lights, long ringerId, long autoLightControlId, long buildingId, long thermostatId) {
         this.id = id;
         this.name = name;
         this.floor = floor;
-        this.autoLightControl = autoLightControl;
-        this.lights = lights;
-        this.ringer = ringer;
-        this.building = building;
+        this.lightsIds = lightsIds;
+        this.ringerId = ringerId;
+        this.autoLightControlId = autoLightControlId;
+        this.buildingId = buildingId;
+        this.thermostatId = thermostatId;
     }
 
     public Long getId() {
@@ -44,7 +49,7 @@ public class Room {
         return name;
     }
 
-    public void setName(String Name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -56,35 +61,43 @@ public class Room {
         this.floor = floor;
     }
 
-    public List<Light> getLights() {
-        return lights;
+    public List<Long> getLightsIds() {
+        return lightsIds;
     }
 
-    public void setLights(List<Light> lights) {
-        this.lights = lights;
+    public void setLights(List<Long> lightsIds) {
+        this.lightsIds = lightsIds;
     }
 
-    public Ringer getRinger() {
-        return ringer;
+    public Long getRingerId() {
+        return ringerId;
     }
 
-    public void setRinger(Ringer ringer) {
-        this.ringer = ringer;
+    public void setRingerId(long ringerId) {
+        this.ringerId = ringerId;
     }
 
-    public AutoLight getAutoLightControl() {
-        return autoLightControl;
+    public long getAutoLightControlId() {
+        return autoLightControlId;
     }
 
-    public void setAutoLightControl(AutoLight autoLightControl) {
-        this.autoLightControl = autoLightControl;
+    public void setAutoLightControlId(long autoLightControlId) {
+        this.autoLightControlId = autoLightControlId;
     }
 
-    public Building getBuilding() {
-        return building;
+    public Long getBuildingId() {
+        return buildingId;
     }
 
-    public void setBuilding(Building building) {
-        this.building = building;
+    public void setBuildingId(long buildingId) {
+        this.buildingId = buildingId;
+    }
+
+    public long getThermostatId() {
+        return thermostatId;
+    }
+
+    public void setThermostatId(long thermostatId) {
+        this.thermostatId = thermostatId;
     }
 }

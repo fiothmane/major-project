@@ -25,4 +25,7 @@ public interface BuildingAPI {
     @DELETE("api/buildings/{id}")
     Call<HashMap<String, Object>> deleteBuilding(@HeaderMap Map<String, String> headers, @Path("id") long id);
 
+    @GET("api/buildings/{id}")
+    Call<Building> getBuilding(@HeaderMap Map<String, String> headers, @Path("id") long id);
+
 }

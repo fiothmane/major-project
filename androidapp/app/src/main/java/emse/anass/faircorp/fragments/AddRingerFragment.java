@@ -7,7 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -15,30 +16,33 @@ import java.util.HashMap;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import emse.anass.faircorp.API.Controllers.BuildingController;
+import emse.anass.faircorp.API.Controllers.RingerController;
 import emse.anass.faircorp.ContextManagementActivity;
 import emse.anass.faircorp.Helper.Utils;
 import emse.anass.faircorp.R;
-import emse.anass.faircorp.models.Building;
+import emse.anass.faircorp.models.Ringer;
+import emse.anass.faircorp.models.Room;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddBuildingFragment extends Fragment {
+public class AddRingerFragment extends Fragment {
 
     ContextManagementActivity activity;
 
-    @Bind(R.id.et_building_name)
-    public EditText buildingName;
+    @Bind(R.id.add_ringer_level)
+    public SeekBar ringerLevel;
 
-    @Bind(R.id.et_nbr_floors)
-    public EditText nbrFloors;
+    @Bind(R.id.ringer_status)
+    public Switch switchRinger;
 
-    private Call<HashMap<String, Object>> buildingCall;
+    private Call<HashMap<String, Object>> ringerCall;
+    private Room room;
 
-    public static AddBuildingFragment newInstance() {
-        AddBuildingFragment fragment = new AddBuildingFragment();
+    public static AddRingerFragment newInstance(Room room) {
+        AddRingerFragment fragment = new AddRingerFragment();
         Bundle args = new Bundle();
+        args.putSerializable("room",room);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +50,7 @@ public class AddBuildingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_building, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_ringer, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -55,16 +59,17 @@ public class AddBuildingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = (ContextManagementActivity) getActivity();
+        this.room = (Room) getArguments().getSerializable("room");
 
     }
 
-    private void sendData(Building building) {
+    private void sendData(Ringer ringer) {
 
         if(Utils.isNetworkAvailable(activity)){
 
-            BuildingController buildingController = new BuildingController();
-            buildingCall = buildingController.addbuilding(building);
-            buildingCall.enqueue(new Callback<HashMap<String, Object>>() {
+            RingerController ringerController = new RingerController();
+            ringerCall = ringerController.addRinger(ringer);
+            ringerCall.enqueue(new Callback<HashMap<String, Object>>() {
                 @Override
                 public void onResponse(Call<HashMap<String, Object>> call, Response<HashMap<String, Object>> response) {
 
@@ -87,17 +92,15 @@ public class AddBuildingFragment extends Fragment {
     }
 
     @Nullable
-    @OnClick(R.id.btn_save_building)
-    public void saveBuilding(){
-        Log.i("saveBuilding","saveBuilding");
-
-        if(!buildingName.getText().toString().isEmpty() && !nbrFloors.getText().toString().isEmpty()){
-            Building building = new Building();
-
-            building.setNbOfFloors(Integer.parseInt(nbrFloors.getText().toString()));
-            building.setName(buildingName.getText().toString());
-            sendData(building);
-        }
+    @OnClick(R.id.save_ringer)
+    public void saveRinger(){
+        Log.i("saveRinger","saveRinger");
+        Ringer ringer = new Ringer();
+        ringer.setLevel(ringerLevel.getProgress());
+        String sts = switchRinger.isChecked() ? "ON" : "OFF";
+        ringer.setStatus(sts);
+        ringer.setRoomId(room.getId());
+        sendData(ringer);
 
     }
 

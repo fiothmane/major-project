@@ -1,56 +1,54 @@
 package emse.anass.faircorp.fragments;
 
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import emse.anass.faircorp.API.Controllers.BuildingController;
-import emse.anass.faircorp.Adapters.BuildingsAdapter;
+import emse.anass.faircorp.API.Controllers.LightController;
+import emse.anass.faircorp.Adapters.LightAdapter;
 import emse.anass.faircorp.ContextManagementActivity;
-import emse.anass.faircorp.Helper.RecyclerItemTouchHelper;
 import emse.anass.faircorp.Helper.Utils;
 import emse.anass.faircorp.R;
-import emse.anass.faircorp.models.Building;
+import emse.anass.faircorp.models.Light;
+import emse.anass.faircorp.models.Room;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BuildingFragment extends Fragment {
+public class LightsFragment extends Fragment {
 
     ContextManagementActivity activity;
 
-    @Bind(R.id.searchB)
-    public SearchView searchView;
-
-    @Bind(R.id.buildings_recyclerview)
+    @Bind(R.id.lights_recyclerview)
     public RecyclerView mainRecycler;
 
-    @Bind(R.id.swipeRefreshLayout)
+    @Bind(R.id.swipeRefreshLayoutLights)
     public SwipeRefreshLayout swipeRefreshLayout;
 
-    private Call<List<Building>> buildingCall;
-    private List<Building> data;
-    BuildingsAdapter buildingsAdapter;
+    private Call<List<Light>> lightCall;
+    private List<Light> data;
+    private Room room;
+    LightAdapter lightAdapter;
 
-    public static BuildingFragment newInstance() {
-        BuildingFragment fragment = new BuildingFragment();
+    public static LightsFragment newInstance(Room room) {
+        LightsFragment fragment = new LightsFragment();
         Bundle args = new Bundle();
+        args.putSerializable("room",room);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +56,7 @@ public class BuildingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buildings, container, false);
+        View view = inflater.inflate(R.layout.fragment_lights, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -67,15 +65,15 @@ public class BuildingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         activity = (ContextManagementActivity) getActivity();
+        this.room = (Room) getArguments().getSerializable("room");
         initUI();
     }
 
     private void initUI() {
-        configSearchView();
         Utils.configureRecycleView(getActivity(),mainRecycler);
         getData();
         configSwipeRefreshLayout();
-
+/*
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback =  new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, final int position) {
@@ -98,6 +96,8 @@ public class BuildingFragment extends Fragment {
         });
 
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mainRecycler);
+
+        */
     }
 
 
@@ -106,26 +106,29 @@ public class BuildingFragment extends Fragment {
 
         if(Utils.isNetworkAvailable(activity)){
 
-            final BuildingController buildingController = new BuildingController();
-            buildingCall = buildingController.getBuildings();
-            buildingCall.enqueue(new Callback<List<Building>>() {
+            final LightController lightController = new LightController();
+            lightCall = lightController.getLights();
+            lightCall.enqueue(new Callback<List<Light>>() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
-                public void onResponse(Call<List<Building>> call, Response<List<Building>> response) {
+                public void onResponse(Call<List<Light>> call, Response<List<Light>> response) {
 
                     data = response.body();
 
-                    Log.i("buildingsResponses", "" +data);
+                    Log.i("lightsResponses", "" +data);
                     if(data != null){
-
-                        buildingsAdapter = new BuildingsAdapter(activity,data);
-                        mainRecycler.setAdapter(buildingsAdapter);
-                        buildingsAdapter.notifyDataSetChanged();
+                        data = data.stream()
+                                .filter(light->light.getRoomId() == room.getId())
+                                .collect(Collectors.toList());
+                        lightAdapter = new LightAdapter(activity,data);
+                        mainRecycler.setAdapter(lightAdapter);
+                        lightAdapter.notifyDataSetChanged();
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call<List<Building>> call, Throwable t) {
+                public void onFailure(Call<List<Light>> call, Throwable t) {
                     Log.w("Retrofit", "Failure-getCustomers");
                     Toast.makeText(activity, "An error has occured", Toast.LENGTH_SHORT).show();
                 }
@@ -135,24 +138,6 @@ public class BuildingFragment extends Fragment {
 
     }
 
-
-    private void configSearchView() {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                filterList(s);
-                searchView.clearFocus();
-                Utils.hideSoftKeyboard(getActivity());
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                filterList(s);
-                return false;
-            }
-        });
-    }
 
     private void configSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -165,28 +150,24 @@ public class BuildingFragment extends Fragment {
 
     }
 
-    public void filterList(String s){
-
-        List<Building> buildingList = new ArrayList<>(data);
-        if(buildingsAdapter != null){
-            buildingsAdapter.removeAllItems();
-            if (s.isEmpty()) {
-                buildingsAdapter.addAllItems(buildingList);
-            }else {
-                for (int i = 0; i < buildingList.size(); i++) {
-                    if (buildingList.get(i).getName().toLowerCase().contains(s.toLowerCase())){
-                        buildingsAdapter.addItem(buildingList.get(i));
-                    }
-                }
-            }
-        }
+    @Nullable
+    @OnClick(R.id.btn_back_lights)
+    public void backBtnClick(){
+        Utils.hideSoftKeyboard(getActivity());
+        activity.onBackPressed();
     }
 
 
     @Nullable
-    @OnClick(R.id.btn_add)
-    public void addNewBuilding(){
-        activity.navigateTo(AddBuildingFragment.newInstance());
+    @OnClick(R.id.btn_add_light)
+    public void addNewLight(){
+        activity.navigateTo(AddLightFragment.newInstance(room));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUI();
     }
 
 }

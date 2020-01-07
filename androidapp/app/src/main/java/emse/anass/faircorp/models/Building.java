@@ -1,26 +1,32 @@
 package emse.anass.faircorp.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Building {
+public class Building implements Serializable{
 
     private Long id;
 
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("nbOfFloors")
     private int nbOfFloors;
 
-    private List<Room> rooms;
+    @SerializedName("roomsIds")
+    private List<Long> roomsIds;
 
     public Building() {
 
     }
 
-    public Building(Long id, String name, int nbOfFloors, List<Room> rooms) {
+    public Building(Long id, String name, int nbOfFloors, List<Long> roomsIds) {
         this.id = id;
         this.name = name;
         this.nbOfFloors = nbOfFloors;
-        this.rooms = rooms;
+        this.roomsIds = roomsIds;
     }
 
     public Long getId() {
@@ -47,11 +53,7 @@ public class Building {
         this.nbOfFloors = nbOfFloors;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
-    }
+    public List<Long> getRoomsIds() { return roomsIds; }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
+    public void setRoomsIds(List<Long> roomsIds) { this.roomsIds = roomsIds; }
 }
